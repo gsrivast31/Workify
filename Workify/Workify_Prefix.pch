@@ -1,0 +1,20 @@
+//
+//  Workify_Prefix.pch
+//  Workify
+//
+//  Created by GAURAV SRIVASTAVA on 05/02/15.
+//  Copyright (c) 2015 GAURAV SRIVASTAVA. All rights reserved.
+//
+
+#ifndef Workify_Workify_Prefix_pch
+#define Workify_Workify_Prefix_pch
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "WFCommon.h"
+#import "WFHelper.h"
+#import "WFCoreDataStack.h"
+#import "FlatUIKit.h"
+#import "NSString+Icons.h"
+
+#endif

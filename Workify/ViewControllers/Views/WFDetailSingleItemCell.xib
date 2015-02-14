@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="93" id="KGk-i7-Jjw" customClass="WFDetailSingleItemCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ls-4T-GWH">
+                        <rect key="frame" x="58" y="8" width="244" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMU-MN-mk4">
+                        <rect key="frame" x="58" y="43" width="244" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gvk-Md-B0N">
+                        <rect key="frame" x="18" y="8" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="RiZ-Ty-Hne"/>
+                            <constraint firstAttribute="height" constant="30" id="gjH-8O-hmW"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="6ls-4T-GWH" firstAttribute="trailing" secondItem="bMU-MN-mk4" secondAttribute="trailing" id="8dO-n0-WNC"/>
+                    <constraint firstItem="6ls-4T-GWH" firstAttribute="leading" secondItem="Gvk-Md-B0N" secondAttribute="trailing" constant="10" id="AF7-DC-Kd2"/>
+                    <constraint firstAttribute="centerY" secondItem="Gvk-Md-B0N" secondAttribute="centerY" id="BcM-jd-rDm"/>
+                    <constraint firstItem="6ls-4T-GWH" firstAttribute="centerY" secondItem="Gvk-Md-B0N" secondAttribute="centerY" id="GR4-Mx-OlR"/>
+                    <constraint firstItem="Gvk-Md-B0N" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="NRQ-AA-acS"/>
+                    <constraint firstItem="Gvk-Md-B0N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="NjN-US-2Xx"/>
+                    <constraint firstItem="6ls-4T-GWH" firstAttribute="leading" secondItem="bMU-MN-mk4" secondAttribute="leading" id="bs5-E2-KvS"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="bMU-MN-mk4" secondAttribute="bottom" constant="5" id="gLS-x9-7eU"/>
+                    <constraint firstItem="Gvk-Md-B0N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="jVo-gr-ts4"/>
+                    <constraint firstItem="bMU-MN-mk4" firstAttribute="top" secondItem="6ls-4T-GWH" secondAttribute="bottom" constant="5" id="wFL-Uz-cHI"/>
+                    <constraint firstItem="6ls-4T-GWH" firstAttribute="height" secondItem="Gvk-Md-B0N" secondAttribute="height" id="y6i-Dv-NgE"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="6ls-4T-GWH" secondAttribute="trailing" constant="10" id="zFY-gq-D8A"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="BcM-jd-rDm"/>
+                        <exclude reference="NjN-US-2Xx"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imageButton" destination="Gvk-Md-B0N" id="ZFF-Iu-CT0"/>
+                <outlet property="titleLabel" destination="6ls-4T-GWH" id="MlO-ok-asN"/>
+                <outlet property="valueLabel" destination="bMU-MN-mk4" id="aI2-RD-5Mt"/>
+            </connections>
+            <point key="canvasLocation" x="229" y="309.5"/>
+        </tableViewCell>
+    </objects>
+</document>

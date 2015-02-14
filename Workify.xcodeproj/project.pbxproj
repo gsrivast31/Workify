@@ -1,0 +1,1136 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08FFB6E09191661466354047 /* libPods-Workify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF53158E0BF8C04C7B9D7EEC /* libPods-Workify.a */; };
+		F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DE71A873258000040B5 /* WFTwoColumnItem.m */; };
+		F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DEF1A87654A000040B5 /* WFDetailSingleItemCell.m */; };
+		F4261DF21A87654A000040B5 /* WFDetailSingleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4261DF01A87654A000040B5 /* WFDetailSingleItemCell.xib */; };
+		F4261DF61A87CE2E000040B5 /* WFTwoColumnViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DF41A87CE2E000040B5 /* WFTwoColumnViewCell.m */; };
+		F4261DF71A87CE2E000040B5 /* WFTwoColumnViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4261DF51A87CE2E000040B5 /* WFTwoColumnViewCell.xib */; };
+		F4261DFA1A88A8A1000040B5 /* WFReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DF91A88A8A1000040B5 /* WFReviewsViewController.m */; };
+		F4261DFD1A88C699000040B5 /* WFPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DFC1A88C699000040B5 /* WFPhotoViewController.m */; };
+		F4261E001A88C6CA000040B5 /* KRLCollectionViewGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DFF1A88C6CA000040B5 /* KRLCollectionViewGridLayout.m */; };
+		F4261E041A88C777000040B5 /* WFPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E031A88C777000040B5 /* WFPhotoCell.m */; };
+		F4261E481A88C96F000040B5 /* JTSAnimatedGIFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E291A88C96F000040B5 /* JTSAnimatedGIFUtility.m */; };
+		F4261E491A88C96F000040B5 /* JTSImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E2B1A88C96F000040B5 /* JTSImageInfo.m */; };
+		F4261E4A1A88C96F000040B5 /* JTSImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E2D1A88C96F000040B5 /* JTSImageViewController.m */; };
+		F4261E4B1A88C96F000040B5 /* JTSSimpleImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E2F1A88C96F000040B5 /* JTSSimpleImageDownloader.m */; };
+		F4261E4C1A88C96F000040B5 /* UIApplication+JTSImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E311A88C96F000040B5 /* UIApplication+JTSImageViewController.m */; };
+		F4261E4D1A88C96F000040B5 /* UIImage+JTSImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E331A88C96F000040B5 /* UIImage+JTSImageEffects.m */; };
+		F4261E5F1A88CEBA000040B5 /* SGActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E561A88CEBA000040B5 /* SGActionView.m */; };
+		F4261E601A88CEBA000040B5 /* SGAlertMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E581A88CEBA000040B5 /* SGAlertMenu.m */; };
+		F4261E611A88CEBA000040B5 /* SGBaseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E5A1A88CEBA000040B5 /* SGBaseMenu.m */; };
+		F4261E621A88CEBA000040B5 /* SGGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E5C1A88CEBA000040B5 /* SGGridMenu.m */; };
+		F4261E631A88CEBA000040B5 /* SGSheetMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E5E1A88CEBA000040B5 /* SGSheetMenu.m */; };
+		F4261E661A88D6C4000040B5 /* WFFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E651A88D6C4000040B5 /* WFFiltersViewController.m */; };
+		F4261E691A88F3F3000040B5 /* WFAddPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E681A88F3F3000040B5 /* WFAddPlaceViewController.m */; };
+		F4261E6C1A88F4C2000040B5 /* WFAddPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E6B1A88F4C2000040B5 /* WFAddPhotoViewController.m */; };
+		F4261E6F1A8926CE000040B5 /* WFMultilineTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E6E1A8926CE000040B5 /* WFMultilineTextItem.m */; };
+		F4261E721A892715000040B5 /* WFMultilineTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E711A892715000040B5 /* WFMultilineTextCell.m */; };
+		F4261E751A892C30000040B5 /* WFHourViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E741A892C30000040B5 /* WFHourViewCell.m */; };
+		F4261E7B1A89D603000040B5 /* WFInputViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E7A1A89D603000040B5 /* WFInputViewCell.m */; };
+		F4261E7E1A89E26A000040B5 /* WFInputItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E7D1A89E26A000040B5 /* WFInputItem.m */; };
+		F4261E811A89F050000040B5 /* WFOptionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E801A89F050000040B5 /* WFOptionViewCell.m */; };
+		F4261E841A89F077000040B5 /* WFOptionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E831A89F077000040B5 /* WFOptionItem.m */; };
+		F446F7601A8651AE0020EEA4 /* WFDetailedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F446F75F1A8651AE0020EEA4 /* WFDetailedItem.m */; };
+		F446F7661A86889B0020EEA4 /* WFDetailedViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F446F7651A86889B0020EEA4 /* WFDetailedViewItem.m */; };
+		F45C0B981A83D93400E221EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0B971A83D93400E221EE /* main.m */; };
+		F45C0B9B1A83D93400E221EE /* WFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0B9A1A83D93400E221EE /* WFAppDelegate.m */; };
+		F45C0BA11A83D93400E221EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F45C0B9F1A83D93400E221EE /* Main.storyboard */; };
+		F45C0BA31A83D93400E221EE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F45C0BA21A83D93400E221EE /* Images.xcassets */; };
+		F45C0BA61A83D93400E221EE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45C0BA41A83D93400E221EE /* LaunchScreen.xib */; };
+		F45C0BB21A83D93400E221EE /* WorkifyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BB11A83D93400E221EE /* WorkifyTests.m */; };
+		F45C0BC21A83DA5300E221EE /* WFHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BC11A83DA5300E221EE /* WFHelper.m */; };
+		F45C0BC51A83DA8200E221EE /* WFCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BC41A83DA8200E221EE /* WFCoreDataStack.m */; };
+		F45C0BC81A83DB0800E221EE /* WFPlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BC71A83DB0800E221EE /* WFPlacesTableViewController.m */; };
+		F45C0BD11A83DB5500E221EE /* WFLocationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BD01A83DB5500E221EE /* WFLocationDetailViewController.m */; };
+		F45C0BD51A83DB7900E221EE /* WFPlacesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BD41A83DB7900E221EE /* WFPlacesTableViewCell.m */; };
+		F45C0BD81A83DB8800E221EE /* WFLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BD71A83DB8800E221EE /* WFLocationTableViewCell.m */; };
+		F45C0C561A84791F00E221EE /* FUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BE31A84791E00E221EE /* FUIAlertView.m */; };
+		F45C0C571A84791F00E221EE /* FUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BE51A84791E00E221EE /* FUIButton.m */; };
+		F45C0C581A84791F00E221EE /* FUICellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BE71A84791E00E221EE /* FUICellBackgroundView.m */; };
+		F45C0C591A84791F00E221EE /* FUIPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BE91A84791E00E221EE /* FUIPopoverBackgroundView.m */; };
+		F45C0C5A1A84791F00E221EE /* FUISegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BEB1A84791E00E221EE /* FUISegmentedControl.m */; };
+		F45C0C5B1A84791F00E221EE /* FUISwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BED1A84791E00E221EE /* FUISwitch.m */; };
+		F45C0C5C1A84791F00E221EE /* FUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BEF1A84791E00E221EE /* FUITextField.m */; };
+		F45C0C5D1A84791F00E221EE /* NSString+Icons.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BF11A84791E00E221EE /* NSString+Icons.m */; };
+		F45C0C5E1A84791F00E221EE /* UIBarButtonItem+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BF31A84791E00E221EE /* UIBarButtonItem+FlatUI.m */; };
+		F45C0C5F1A84791F00E221EE /* UIColor+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BF51A84791E00E221EE /* UIColor+FlatUI.m */; };
+		F45C0C601A84791F00E221EE /* UIFont+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BF71A84791E00E221EE /* UIFont+FlatUI.m */; };
+		F45C0C611A84791F00E221EE /* UIImage+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BF91A84791E00E221EE /* UIImage+FlatUI.m */; };
+		F45C0C621A84791F00E221EE /* UINavigationBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BFB1A84791E00E221EE /* UINavigationBar+FlatUI.m */; };
+		F45C0C631A84791F00E221EE /* UIPopoverController+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BFD1A84791E00E221EE /* UIPopoverController+FlatUI.m */; };
+		F45C0C641A84791F00E221EE /* UIProgressView+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0BFF1A84791E00E221EE /* UIProgressView+FlatUI.m */; };
+		F45C0C651A84791F00E221EE /* UISlider+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0C011A84791E00E221EE /* UISlider+FlatUI.m */; };
+		F45C0C661A84791F00E221EE /* UIStepper+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0C031A84791E00E221EE /* UIStepper+FlatUI.m */; };
+		F45C0C671A84791F00E221EE /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0C051A84791E00E221EE /* UITabBar+FlatUI.m */; };
+		F45C0C681A84791F00E221EE /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0C071A84791E00E221EE /* UITableViewCell+FlatUI.m */; };
+		F45C0C691A84791F00E221EE /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0C091A84791E00E221EE /* UIToolbar+FlatUI.m */; };
+		F45C0C881A84791F00E221EE /* flat-ui-icons-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F45C0C351A84791F00E221EE /* flat-ui-icons-regular.ttf */; };
+		F45C0C891A84791F00E221EE /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F45C0C361A84791F00E221EE /* Lato-Bold.ttf */; };
+		F45C0C8A1A84791F00E221EE /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F45C0C371A84791F00E221EE /* Lato-Italic.ttf */; };
+		F45C0C8B1A84791F00E221EE /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F45C0C381A84791F00E221EE /* Lato-Light.ttf */; };
+		F45C0C8C1A84791F00E221EE /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F45C0C391A84791F00E221EE /* Lato-Regular.ttf */; };
+		F45C0CA71A847B6700E221EE /* WFMediaController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CA61A847B6700E221EE /* WFMediaController.m */; };
+		F45C0CAC1A84BC2700E221EE /* WFDaysTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CAA1A84BC2700E221EE /* WFDaysTableViewCell.m */; };
+		F45C0CAD1A84BC2700E221EE /* WFDaysTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45C0CAB1A84BC2700E221EE /* WFDaysTableViewCell.xib */; };
+		F45C0CB11A84C5EF00E221EE /* WFStepperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CAF1A84C5EF00E221EE /* WFStepperTableViewCell.m */; };
+		F45C0CB21A84C5EF00E221EE /* WFStepperTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45C0CB01A84C5EF00E221EE /* WFStepperTableViewCell.xib */; };
+		F45C0CB61A84DD8E00E221EE /* WFStepperItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CB51A84DD8E00E221EE /* WFStepperItem.m */; };
+		F45C0CB91A84DE9300E221EE /* WFDayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CB81A84DE9300E221EE /* WFDayItem.m */; };
+		F45C0CBD1A84E88F00E221EE /* WFRatingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CBB1A84E88F00E221EE /* WFRatingViewCell.m */; };
+		F45C0CBE1A84E88F00E221EE /* WFRatingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45C0CBC1A84E88F00E221EE /* WFRatingViewCell.xib */; };
+		F45C0CC11A84E8A900E221EE /* WFRatingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CC01A84E8A900E221EE /* WFRatingItem.m */; };
+		F45C0CC41A84F91100E221EE /* WFTagItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CC31A84F91100E221EE /* WFTagItem.m */; };
+		F45C0CC71A84F98100E221EE /* WFTagViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CC61A84F98100E221EE /* WFTagViewCell.m */; };
+		F45C0CE31A854C2A00E221EE /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CE21A854C2A00E221EE /* DWTagList.m */; };
+		F45C0CE61A85506300E221EE /* WFLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CE51A85506300E221EE /* WFLocationController.m */; };
+		F45C0CE91A85514100E221EE /* WFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CE81A85514100E221EE /* WFMapViewController.m */; };
+		F45C0CEC1A85515400E221EE /* WFMapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CEB1A85515400E221EE /* WFMapPin.m */; };
+		F45C0D051A85596D00E221EE /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CF81A85596C00E221EE /* ParallaxHeaderView.m */; };
+		F45C0D061A85596D00E221EE /* WFReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CFA1A85596C00E221EE /* WFReviewCell.m */; };
+		F45C0D081A85596D00E221EE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CFE1A85596C00E221EE /* UIImage+ImageEffects.m */; };
+		F45C0D0B1A85DA0900E221EE /* WFLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0D0A1A85DA0900E221EE /* WFLocationsViewController.m */; };
+		F45C0D391A85E99F00E221EE /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0D381A85E99F00E221EE /* TTUITableViewZoomController.m */; };
+		F45C0D3D1A85F9A300E221EE /* WFDetailsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0D3B1A85F9A300E221EE /* WFDetailsViewCell.m */; };
+		F45C0D3E1A85F9A300E221EE /* WFDetailsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45C0D3C1A85F9A300E221EE /* WFDetailsViewCell.xib */; };
+		F45C0D401A861C3600E221EE /* WFTagViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45C0D3F1A861C3600E221EE /* WFTagViewCell.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F45C0BAC1A83D93400E221EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F45C0B8A1A83D93400E221EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F45C0B911A83D93400E221EE;
+			remoteInfo = Workify;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		47422309BA50442679966331 /* Pods-Workify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.debug.xcconfig"; sourceTree = "<group>"; };
+		F4195F47C08CA42427BE3646 /* Pods-Workify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.release.xcconfig"; sourceTree = "<group>"; };
+		F4261DE61A873258000040B5 /* WFTwoColumnItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTwoColumnItem.h; path = ViewControllers/Models/WFTwoColumnItem.h; sourceTree = "<group>"; };
+		F4261DE71A873258000040B5 /* WFTwoColumnItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFTwoColumnItem.m; path = ViewControllers/Models/WFTwoColumnItem.m; sourceTree = "<group>"; };
+		F4261DEE1A87654A000040B5 /* WFDetailSingleItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFDetailSingleItemCell.h; path = ViewControllers/Views/WFDetailSingleItemCell.h; sourceTree = "<group>"; };
+		F4261DEF1A87654A000040B5 /* WFDetailSingleItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFDetailSingleItemCell.m; path = ViewControllers/Views/WFDetailSingleItemCell.m; sourceTree = "<group>"; };
+		F4261DF01A87654A000040B5 /* WFDetailSingleItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WFDetailSingleItemCell.xib; path = ViewControllers/Views/WFDetailSingleItemCell.xib; sourceTree = "<group>"; };
+		F4261DF31A87CE2D000040B5 /* WFTwoColumnViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTwoColumnViewCell.h; path = ViewControllers/Views/WFTwoColumnViewCell.h; sourceTree = "<group>"; };
+		F4261DF41A87CE2E000040B5 /* WFTwoColumnViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFTwoColumnViewCell.m; path = ViewControllers/Views/WFTwoColumnViewCell.m; sourceTree = "<group>"; };
+		F4261DF51A87CE2E000040B5 /* WFTwoColumnViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WFTwoColumnViewCell.xib; path = ViewControllers/Views/WFTwoColumnViewCell.xib; sourceTree = "<group>"; };
+		F4261DF81A88A8A1000040B5 /* WFReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFReviewsViewController.h; path = ViewControllers/WFReviewsViewController.h; sourceTree = "<group>"; };
+		F4261DF91A88A8A1000040B5 /* WFReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFReviewsViewController.m; path = ViewControllers/WFReviewsViewController.m; sourceTree = "<group>"; };
+		F4261DFB1A88C699000040B5 /* WFPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFPhotoViewController.h; path = ViewControllers/WFPhotoViewController.h; sourceTree = "<group>"; };
+		F4261DFC1A88C699000040B5 /* WFPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFPhotoViewController.m; path = ViewControllers/WFPhotoViewController.m; sourceTree = "<group>"; };
+		F4261DFE1A88C6CA000040B5 /* KRLCollectionViewGridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRLCollectionViewGridLayout.h; sourceTree = "<group>"; };
+		F4261DFF1A88C6CA000040B5 /* KRLCollectionViewGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRLCollectionViewGridLayout.m; sourceTree = "<group>"; };
+		F4261E021A88C777000040B5 /* WFPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFPhotoCell.h; path = ViewControllers/Cells/WFPhotoCell.h; sourceTree = "<group>"; };
+		F4261E031A88C777000040B5 /* WFPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFPhotoCell.m; path = ViewControllers/Cells/WFPhotoCell.m; sourceTree = "<group>"; };
+		F4261E281A88C96F000040B5 /* JTSAnimatedGIFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JTSAnimatedGIFUtility.h; path = Source/JTSAnimatedGIFUtility.h; sourceTree = "<group>"; };
+		F4261E291A88C96F000040B5 /* JTSAnimatedGIFUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JTSAnimatedGIFUtility.m; path = Source/JTSAnimatedGIFUtility.m; sourceTree = "<group>"; };
+		F4261E2A1A88C96F000040B5 /* JTSImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JTSImageInfo.h; path = Source/JTSImageInfo.h; sourceTree = "<group>"; };
+		F4261E2B1A88C96F000040B5 /* JTSImageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JTSImageInfo.m; path = Source/JTSImageInfo.m; sourceTree = "<group>"; };
+		F4261E2C1A88C96F000040B5 /* JTSImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JTSImageViewController.h; path = Source/JTSImageViewController.h; sourceTree = "<group>"; };
+		F4261E2D1A88C96F000040B5 /* JTSImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JTSImageViewController.m; path = Source/JTSImageViewController.m; sourceTree = "<group>"; };
+		F4261E2E1A88C96F000040B5 /* JTSSimpleImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JTSSimpleImageDownloader.h; path = Source/JTSSimpleImageDownloader.h; sourceTree = "<group>"; };
+		F4261E2F1A88C96F000040B5 /* JTSSimpleImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JTSSimpleImageDownloader.m; path = Source/JTSSimpleImageDownloader.m; sourceTree = "<group>"; };
+		F4261E301A88C96F000040B5 /* UIApplication+JTSImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication+JTSImageViewController.h"; path = "Source/UIApplication+JTSImageViewController.h"; sourceTree = "<group>"; };
+		F4261E311A88C96F000040B5 /* UIApplication+JTSImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+JTSImageViewController.m"; path = "Source/UIApplication+JTSImageViewController.m"; sourceTree = "<group>"; };
+		F4261E321A88C96F000040B5 /* UIImage+JTSImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+JTSImageEffects.h"; path = "Source/UIImage+JTSImageEffects.h"; sourceTree = "<group>"; };
+		F4261E331A88C96F000040B5 /* UIImage+JTSImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+JTSImageEffects.m"; path = "Source/UIImage+JTSImageEffects.m"; sourceTree = "<group>"; };
+		F4261E551A88CEBA000040B5 /* SGActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGActionView.h; sourceTree = "<group>"; };
+		F4261E561A88CEBA000040B5 /* SGActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGActionView.m; sourceTree = "<group>"; };
+		F4261E571A88CEBA000040B5 /* SGAlertMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAlertMenu.h; sourceTree = "<group>"; };
+		F4261E581A88CEBA000040B5 /* SGAlertMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAlertMenu.m; sourceTree = "<group>"; };
+		F4261E591A88CEBA000040B5 /* SGBaseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGBaseMenu.h; sourceTree = "<group>"; };
+		F4261E5A1A88CEBA000040B5 /* SGBaseMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGBaseMenu.m; sourceTree = "<group>"; };
+		F4261E5B1A88CEBA000040B5 /* SGGridMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGGridMenu.h; sourceTree = "<group>"; };
+		F4261E5C1A88CEBA000040B5 /* SGGridMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGGridMenu.m; sourceTree = "<group>"; };
+		F4261E5D1A88CEBA000040B5 /* SGSheetMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSheetMenu.h; sourceTree = "<group>"; };
+		F4261E5E1A88CEBA000040B5 /* SGSheetMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSheetMenu.m; sourceTree = "<group>"; };
+		F4261E641A88D6C4000040B5 /* WFFiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFFiltersViewController.h; path = ViewControllers/WFFiltersViewController.h; sourceTree = "<group>"; };
+		F4261E651A88D6C4000040B5 /* WFFiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFFiltersViewController.m; path = ViewControllers/WFFiltersViewController.m; sourceTree = "<group>"; };
+		F4261E671A88F3F3000040B5 /* WFAddPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFAddPlaceViewController.h; path = ViewControllers/WFAddPlaceViewController.h; sourceTree = "<group>"; };
+		F4261E681A88F3F3000040B5 /* WFAddPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFAddPlaceViewController.m; path = ViewControllers/WFAddPlaceViewController.m; sourceTree = "<group>"; };
+		F4261E6A1A88F4C2000040B5 /* WFAddPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFAddPhotoViewController.h; path = ViewControllers/WFAddPhotoViewController.h; sourceTree = "<group>"; };
+		F4261E6B1A88F4C2000040B5 /* WFAddPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFAddPhotoViewController.m; path = ViewControllers/WFAddPhotoViewController.m; sourceTree = "<group>"; };
+		F4261E6D1A8926CE000040B5 /* WFMultilineTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFMultilineTextItem.h; path = ViewControllers/Models/WFMultilineTextItem.h; sourceTree = "<group>"; };
+		F4261E6E1A8926CE000040B5 /* WFMultilineTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFMultilineTextItem.m; path = ViewControllers/Models/WFMultilineTextItem.m; sourceTree = "<group>"; };
+		F4261E701A892715000040B5 /* WFMultilineTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFMultilineTextCell.h; path = ViewControllers/Views/WFMultilineTextCell.h; sourceTree = "<group>"; };
+		F4261E711A892715000040B5 /* WFMultilineTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFMultilineTextCell.m; path = ViewControllers/Views/WFMultilineTextCell.m; sourceTree = "<group>"; };
+		F4261E731A892C30000040B5 /* WFHourViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFHourViewCell.h; path = ViewControllers/Views/WFHourViewCell.h; sourceTree = "<group>"; };
+		F4261E741A892C30000040B5 /* WFHourViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFHourViewCell.m; path = ViewControllers/Views/WFHourViewCell.m; sourceTree = "<group>"; };
+		F4261E791A89D603000040B5 /* WFInputViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFInputViewCell.h; path = ViewControllers/Cells/WFInputViewCell.h; sourceTree = "<group>"; };
+		F4261E7A1A89D603000040B5 /* WFInputViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFInputViewCell.m; path = ViewControllers/Cells/WFInputViewCell.m; sourceTree = "<group>"; };
+		F4261E7C1A89E26A000040B5 /* WFInputItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFInputItem.h; path = ViewControllers/Models/WFInputItem.h; sourceTree = "<group>"; };
+		F4261E7D1A89E26A000040B5 /* WFInputItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFInputItem.m; path = ViewControllers/Models/WFInputItem.m; sourceTree = "<group>"; };
+		F4261E7F1A89F050000040B5 /* WFOptionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFOptionViewCell.h; path = ViewControllers/Views/WFOptionViewCell.h; sourceTree = "<group>"; };
+		F4261E801A89F050000040B5 /* WFOptionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFOptionViewCell.m; path = ViewControllers/Views/WFOptionViewCell.m; sourceTree = "<group>"; };
+		F4261E821A89F077000040B5 /* WFOptionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFOptionItem.h; path = ViewControllers/Models/WFOptionItem.h; sourceTree = "<group>"; };
+		F4261E831A89F077000040B5 /* WFOptionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFOptionItem.m; path = ViewControllers/Models/WFOptionItem.m; sourceTree = "<group>"; };
+		F446F75E1A8651AE0020EEA4 /* WFDetailedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFDetailedItem.h; path = ViewControllers/Models/WFDetailedItem.h; sourceTree = "<group>"; };
+		F446F75F1A8651AE0020EEA4 /* WFDetailedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFDetailedItem.m; path = ViewControllers/Models/WFDetailedItem.m; sourceTree = "<group>"; };
+		F446F7641A86889B0020EEA4 /* WFDetailedViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFDetailedViewItem.h; path = ViewControllers/Models/WFDetailedViewItem.h; sourceTree = "<group>"; };
+		F446F7651A86889B0020EEA4 /* WFDetailedViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFDetailedViewItem.m; path = ViewControllers/Models/WFDetailedViewItem.m; sourceTree = "<group>"; };
+		F45C0B921A83D93400E221EE /* Workify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workify.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F45C0B961A83D93400E221EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F45C0B971A83D93400E221EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F45C0B991A83D93400E221EE /* WFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFAppDelegate.h; sourceTree = "<group>"; };
+		F45C0B9A1A83D93400E221EE /* WFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WFAppDelegate.m; sourceTree = "<group>"; };
+		F45C0BA01A83D93400E221EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F45C0BA21A83D93400E221EE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F45C0BA51A83D93400E221EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F45C0BAB1A83D93400E221EE /* WorkifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F45C0BB01A83D93400E221EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F45C0BB11A83D93400E221EE /* WorkifyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkifyTests.m; sourceTree = "<group>"; };
+		F45C0BBE1A83D96200E221EE /* Workify_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Workify_Prefix.pch; sourceTree = "<group>"; };
+		F45C0BBF1A83DA1500E221EE /* WFCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WFCommon.h; path = Common/WFCommon.h; sourceTree = "<group>"; };
+		F45C0BC01A83DA5300E221EE /* WFHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFHelper.h; path = Common/WFHelper.h; sourceTree = "<group>"; };
+		F45C0BC11A83DA5300E221EE /* WFHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFHelper.m; path = Common/WFHelper.m; sourceTree = "<group>"; };
+		F45C0BC31A83DA8200E221EE /* WFCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFCoreDataStack.h; path = CoreData/WFCoreDataStack.h; sourceTree = "<group>"; };
+		F45C0BC41A83DA8200E221EE /* WFCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFCoreDataStack.m; path = CoreData/WFCoreDataStack.m; sourceTree = "<group>"; };
+		F45C0BC61A83DB0800E221EE /* WFPlacesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFPlacesTableViewController.h; path = ViewControllers/WFPlacesTableViewController.h; sourceTree = "<group>"; };
+		F45C0BC71A83DB0800E221EE /* WFPlacesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFPlacesTableViewController.m; path = ViewControllers/WFPlacesTableViewController.m; sourceTree = "<group>"; };
+		F45C0BCF1A83DB5500E221EE /* WFLocationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFLocationDetailViewController.h; path = ViewControllers/WFLocationDetailViewController.h; sourceTree = "<group>"; };
+		F45C0BD01A83DB5500E221EE /* WFLocationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFLocationDetailViewController.m; path = ViewControllers/WFLocationDetailViewController.m; sourceTree = "<group>"; };
+		F45C0BD31A83DB7900E221EE /* WFPlacesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFPlacesTableViewCell.h; path = ViewControllers/Cells/WFPlacesTableViewCell.h; sourceTree = "<group>"; };
+		F45C0BD41A83DB7900E221EE /* WFPlacesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFPlacesTableViewCell.m; path = ViewControllers/Cells/WFPlacesTableViewCell.m; sourceTree = "<group>"; };
+		F45C0BD61A83DB8800E221EE /* WFLocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFLocationTableViewCell.h; path = ViewControllers/Cells/WFLocationTableViewCell.h; sourceTree = "<group>"; };
+		F45C0BD71A83DB8800E221EE /* WFLocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFLocationTableViewCell.m; path = ViewControllers/Cells/WFLocationTableViewCell.m; sourceTree = "<group>"; };
+		F45C0BE11A84791E00E221EE /* FlatUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatUIKit.h; sourceTree = "<group>"; };
+		F45C0BE21A84791E00E221EE /* FUIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAlertView.h; sourceTree = "<group>"; };
+		F45C0BE31A84791E00E221EE /* FUIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAlertView.m; sourceTree = "<group>"; };
+		F45C0BE41A84791E00E221EE /* FUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIButton.h; sourceTree = "<group>"; };
+		F45C0BE51A84791E00E221EE /* FUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIButton.m; sourceTree = "<group>"; };
+		F45C0BE61A84791E00E221EE /* FUICellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICellBackgroundView.h; sourceTree = "<group>"; };
+		F45C0BE71A84791E00E221EE /* FUICellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICellBackgroundView.m; sourceTree = "<group>"; };
+		F45C0BE81A84791E00E221EE /* FUIPopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPopoverBackgroundView.h; sourceTree = "<group>"; };
+		F45C0BE91A84791E00E221EE /* FUIPopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPopoverBackgroundView.m; sourceTree = "<group>"; };
+		F45C0BEA1A84791E00E221EE /* FUISegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISegmentedControl.h; sourceTree = "<group>"; };
+		F45C0BEB1A84791E00E221EE /* FUISegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISegmentedControl.m; sourceTree = "<group>"; };
+		F45C0BEC1A84791E00E221EE /* FUISwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISwitch.h; sourceTree = "<group>"; };
+		F45C0BED1A84791E00E221EE /* FUISwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISwitch.m; sourceTree = "<group>"; };
+		F45C0BEE1A84791E00E221EE /* FUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUITextField.h; sourceTree = "<group>"; };
+		F45C0BEF1A84791E00E221EE /* FUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUITextField.m; sourceTree = "<group>"; };
+		F45C0BF01A84791E00E221EE /* NSString+Icons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Icons.h"; sourceTree = "<group>"; };
+		F45C0BF11A84791E00E221EE /* NSString+Icons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Icons.m"; sourceTree = "<group>"; };
+		F45C0BF21A84791E00E221EE /* UIBarButtonItem+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0BF31A84791E00E221EE /* UIBarButtonItem+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0BF41A84791E00E221EE /* UIColor+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0BF51A84791E00E221EE /* UIColor+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0BF61A84791E00E221EE /* UIFont+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0BF71A84791E00E221EE /* UIFont+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0BF81A84791E00E221EE /* UIImage+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0BF91A84791E00E221EE /* UIImage+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0BFA1A84791E00E221EE /* UINavigationBar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0BFB1A84791E00E221EE /* UINavigationBar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0BFC1A84791E00E221EE /* UIPopoverController+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverController+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0BFD1A84791E00E221EE /* UIPopoverController+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0BFE1A84791E00E221EE /* UIProgressView+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0BFF1A84791E00E221EE /* UIProgressView+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0C001A84791E00E221EE /* UISlider+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISlider+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0C011A84791E00E221EE /* UISlider+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISlider+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0C021A84791E00E221EE /* UIStepper+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStepper+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0C031A84791E00E221EE /* UIStepper+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStepper+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0C041A84791E00E221EE /* UITabBar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0C051A84791E00E221EE /* UITabBar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0C061A84791E00E221EE /* UITableViewCell+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0C071A84791E00E221EE /* UITableViewCell+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0C081A84791E00E221EE /* UIToolbar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+FlatUI.h"; sourceTree = "<group>"; };
+		F45C0C091A84791E00E221EE /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
+		F45C0C351A84791F00E221EE /* flat-ui-icons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "flat-ui-icons-regular.ttf"; sourceTree = "<group>"; };
+		F45C0C361A84791F00E221EE /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		F45C0C371A84791F00E221EE /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
+		F45C0C381A84791F00E221EE /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		F45C0C391A84791F00E221EE /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		F45C0CA51A847B6700E221EE /* WFMediaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFMediaController.h; path = Controllers/WFMediaController.h; sourceTree = "<group>"; };
+		F45C0CA61A847B6700E221EE /* WFMediaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFMediaController.m; path = Controllers/WFMediaController.m; sourceTree = "<group>"; };
+		F45C0CA91A84BC2700E221EE /* WFDaysTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFDaysTableViewCell.h; path = ViewControllers/Views/WFDaysTableViewCell.h; sourceTree = "<group>"; };
+		F45C0CAA1A84BC2700E221EE /* WFDaysTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFDaysTableViewCell.m; path = ViewControllers/Views/WFDaysTableViewCell.m; sourceTree = "<group>"; };
+		F45C0CAB1A84BC2700E221EE /* WFDaysTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WFDaysTableViewCell.xib; path = ViewControllers/Views/WFDaysTableViewCell.xib; sourceTree = "<group>"; };
+		F45C0CAE1A84C5EF00E221EE /* WFStepperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFStepperTableViewCell.h; path = ViewControllers/Views/WFStepperTableViewCell.h; sourceTree = "<group>"; };
+		F45C0CAF1A84C5EF00E221EE /* WFStepperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFStepperTableViewCell.m; path = ViewControllers/Views/WFStepperTableViewCell.m; sourceTree = "<group>"; };
+		F45C0CB01A84C5EF00E221EE /* WFStepperTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WFStepperTableViewCell.xib; path = ViewControllers/Views/WFStepperTableViewCell.xib; sourceTree = "<group>"; };
+		F45C0CB41A84DD8E00E221EE /* WFStepperItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFStepperItem.h; path = ViewControllers/Models/WFStepperItem.h; sourceTree = "<group>"; };
+		F45C0CB51A84DD8E00E221EE /* WFStepperItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFStepperItem.m; path = ViewControllers/Models/WFStepperItem.m; sourceTree = "<group>"; };
+		F45C0CB71A84DE9300E221EE /* WFDayItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFDayItem.h; path = ViewControllers/Models/WFDayItem.h; sourceTree = "<group>"; };
+		F45C0CB81A84DE9300E221EE /* WFDayItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFDayItem.m; path = ViewControllers/Models/WFDayItem.m; sourceTree = "<group>"; };
+		F45C0CBA1A84E88F00E221EE /* WFRatingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFRatingViewCell.h; path = ViewControllers/Views/WFRatingViewCell.h; sourceTree = "<group>"; };
+		F45C0CBB1A84E88F00E221EE /* WFRatingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFRatingViewCell.m; path = ViewControllers/Views/WFRatingViewCell.m; sourceTree = "<group>"; };
+		F45C0CBC1A84E88F00E221EE /* WFRatingViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WFRatingViewCell.xib; path = ViewControllers/Views/WFRatingViewCell.xib; sourceTree = "<group>"; };
+		F45C0CBF1A84E8A900E221EE /* WFRatingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFRatingItem.h; path = ViewControllers/Models/WFRatingItem.h; sourceTree = "<group>"; };
+		F45C0CC01A84E8A900E221EE /* WFRatingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFRatingItem.m; path = ViewControllers/Models/WFRatingItem.m; sourceTree = "<group>"; };
+		F45C0CC21A84F91100E221EE /* WFTagItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTagItem.h; path = ViewControllers/Models/WFTagItem.h; sourceTree = "<group>"; };
+		F45C0CC31A84F91100E221EE /* WFTagItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFTagItem.m; path = ViewControllers/Models/WFTagItem.m; sourceTree = "<group>"; };
+		F45C0CC51A84F98100E221EE /* WFTagViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTagViewCell.h; path = ViewControllers/Views/WFTagViewCell.h; sourceTree = "<group>"; };
+		F45C0CC61A84F98100E221EE /* WFTagViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFTagViewCell.m; path = ViewControllers/Views/WFTagViewCell.m; sourceTree = "<group>"; };
+		F45C0CE11A854C2A00E221EE /* DWTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWTagList.h; sourceTree = "<group>"; };
+		F45C0CE21A854C2A00E221EE /* DWTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWTagList.m; sourceTree = "<group>"; };
+		F45C0CE41A85506300E221EE /* WFLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFLocationController.h; sourceTree = "<group>"; };
+		F45C0CE51A85506300E221EE /* WFLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFLocationController.m; sourceTree = "<group>"; };
+		F45C0CE71A85514100E221EE /* WFMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFMapViewController.h; sourceTree = "<group>"; };
+		F45C0CE81A85514100E221EE /* WFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFMapViewController.m; sourceTree = "<group>"; };
+		F45C0CEA1A85515400E221EE /* WFMapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFMapPin.h; sourceTree = "<group>"; };
+		F45C0CEB1A85515400E221EE /* WFMapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFMapPin.m; sourceTree = "<group>"; };
+		F45C0CF71A85596C00E221EE /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxHeaderView.h; sourceTree = "<group>"; };
+		F45C0CF81A85596C00E221EE /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
+		F45C0CF91A85596C00E221EE /* WFReviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFReviewCell.h; path = Vendors/ParallaxTableViewHeader/WFReviewCell.h; sourceTree = "<group>"; };
+		F45C0CFA1A85596C00E221EE /* WFReviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFReviewCell.m; path = Vendors/ParallaxTableViewHeader/WFReviewCell.m; sourceTree = "<group>"; };
+		F45C0CFD1A85596C00E221EE /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		F45C0CFE1A85596C00E221EE /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		F45C0D091A85DA0900E221EE /* WFLocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFLocationsViewController.h; path = ViewControllers/WFLocationsViewController.h; sourceTree = "<group>"; };
+		F45C0D0A1A85DA0900E221EE /* WFLocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFLocationsViewController.m; path = ViewControllers/WFLocationsViewController.m; sourceTree = "<group>"; };
+		F45C0D371A85E99F00E221EE /* TTUITableViewZoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUITableViewZoomController.h; sourceTree = "<group>"; };
+		F45C0D381A85E99F00E221EE /* TTUITableViewZoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUITableViewZoomController.m; sourceTree = "<group>"; };
+		F45C0D3A1A85F9A300E221EE /* WFDetailsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFDetailsViewCell.h; path = ViewControllers/Cells/WFDetailsViewCell.h; sourceTree = "<group>"; };
+		F45C0D3B1A85F9A300E221EE /* WFDetailsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFDetailsViewCell.m; path = ViewControllers/Cells/WFDetailsViewCell.m; sourceTree = "<group>"; };
+		F45C0D3C1A85F9A300E221EE /* WFDetailsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WFDetailsViewCell.xib; path = ViewControllers/Cells/WFDetailsViewCell.xib; sourceTree = "<group>"; };
+		F45C0D3F1A861C3600E221EE /* WFTagViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WFTagViewCell.xib; path = ViewControllers/Views/WFTagViewCell.xib; sourceTree = "<group>"; };
+		FF53158E0BF8C04C7B9D7EEC /* libPods-Workify.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Workify.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F45C0B8F1A83D93400E221EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08FFB6E09191661466354047 /* libPods-Workify.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F45C0BA81A83D93400E221EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A6F8593FA028ADD27982BE0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				47422309BA50442679966331 /* Pods-Workify.debug.xcconfig */,
+				F4195F47C08CA42427BE3646 /* Pods-Workify.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		53FA32878600D597530C5080 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF53158E0BF8C04C7B9D7EEC /* libPods-Workify.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4261E011A88C6D1000040B5 /* KRLCollectionViewGridLayout */ = {
+			isa = PBXGroup;
+			children = (
+				F4261DFE1A88C6CA000040B5 /* KRLCollectionViewGridLayout.h */,
+				F4261DFF1A88C6CA000040B5 /* KRLCollectionViewGridLayout.m */,
+			);
+			name = KRLCollectionViewGridLayout;
+			sourceTree = "<group>";
+		};
+		F4261E051A88C96F000040B5 /* JTSImageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F4261E281A88C96F000040B5 /* JTSAnimatedGIFUtility.h */,
+				F4261E291A88C96F000040B5 /* JTSAnimatedGIFUtility.m */,
+				F4261E2A1A88C96F000040B5 /* JTSImageInfo.h */,
+				F4261E2B1A88C96F000040B5 /* JTSImageInfo.m */,
+				F4261E2C1A88C96F000040B5 /* JTSImageViewController.h */,
+				F4261E2D1A88C96F000040B5 /* JTSImageViewController.m */,
+				F4261E2E1A88C96F000040B5 /* JTSSimpleImageDownloader.h */,
+				F4261E2F1A88C96F000040B5 /* JTSSimpleImageDownloader.m */,
+				F4261E301A88C96F000040B5 /* UIApplication+JTSImageViewController.h */,
+				F4261E311A88C96F000040B5 /* UIApplication+JTSImageViewController.m */,
+				F4261E321A88C96F000040B5 /* UIImage+JTSImageEffects.h */,
+				F4261E331A88C96F000040B5 /* UIImage+JTSImageEffects.m */,
+			);
+			path = JTSImageViewController;
+			sourceTree = "<group>";
+		};
+		F4261E541A88CEBA000040B5 /* SGActionView */ = {
+			isa = PBXGroup;
+			children = (
+				F4261E551A88CEBA000040B5 /* SGActionView.h */,
+				F4261E561A88CEBA000040B5 /* SGActionView.m */,
+				F4261E571A88CEBA000040B5 /* SGAlertMenu.h */,
+				F4261E581A88CEBA000040B5 /* SGAlertMenu.m */,
+				F4261E591A88CEBA000040B5 /* SGBaseMenu.h */,
+				F4261E5A1A88CEBA000040B5 /* SGBaseMenu.m */,
+				F4261E5B1A88CEBA000040B5 /* SGGridMenu.h */,
+				F4261E5C1A88CEBA000040B5 /* SGGridMenu.m */,
+				F4261E5D1A88CEBA000040B5 /* SGSheetMenu.h */,
+				F4261E5E1A88CEBA000040B5 /* SGSheetMenu.m */,
+			);
+			path = SGActionView;
+			sourceTree = "<group>";
+		};
+		F45C0B891A83D93400E221EE = {
+			isa = PBXGroup;
+			children = (
+				F45C0B941A83D93400E221EE /* Workify */,
+				F45C0BAE1A83D93400E221EE /* WorkifyTests */,
+				F45C0B931A83D93400E221EE /* Products */,
+				2A6F8593FA028ADD27982BE0 /* Pods */,
+				53FA32878600D597530C5080 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F45C0B931A83D93400E221EE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0B921A83D93400E221EE /* Workify.app */,
+				F45C0BAB1A83D93400E221EE /* WorkifyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F45C0B941A83D93400E221EE /* Workify */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0CA41A847B5000E221EE /* Controllers */,
+				F45C0BDB1A84791E00E221EE /* Vendors */,
+				F45C0BBD1A83D94C00E221EE /* ViewControllers */,
+				F45C0BBC1A83D94600E221EE /* Common */,
+				F45C0BBB1A83D93C00E221EE /* CoreData */,
+				F45C0B991A83D93400E221EE /* WFAppDelegate.h */,
+				F45C0B9A1A83D93400E221EE /* WFAppDelegate.m */,
+				F45C0B9F1A83D93400E221EE /* Main.storyboard */,
+				F45C0BA21A83D93400E221EE /* Images.xcassets */,
+				F45C0BA41A83D93400E221EE /* LaunchScreen.xib */,
+				F45C0B951A83D93400E221EE /* Supporting Files */,
+			);
+			path = Workify;
+			sourceTree = "<group>";
+		};
+		F45C0B951A83D93400E221EE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0B961A83D93400E221EE /* Info.plist */,
+				F45C0B971A83D93400E221EE /* main.m */,
+				F45C0BBE1A83D96200E221EE /* Workify_Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F45C0BAE1A83D93400E221EE /* WorkifyTests */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0BB11A83D93400E221EE /* WorkifyTests.m */,
+				F45C0BAF1A83D93400E221EE /* Supporting Files */,
+			);
+			path = WorkifyTests;
+			sourceTree = "<group>";
+		};
+		F45C0BAF1A83D93400E221EE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0BB01A83D93400E221EE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F45C0BBB1A83D93C00E221EE /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0BC31A83DA8200E221EE /* WFCoreDataStack.h */,
+				F45C0BC41A83DA8200E221EE /* WFCoreDataStack.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		F45C0BBC1A83D94600E221EE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0BBF1A83DA1500E221EE /* WFCommon.h */,
+				F45C0BC01A83DA5300E221EE /* WFHelper.h */,
+				F45C0BC11A83DA5300E221EE /* WFHelper.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		F45C0BBD1A83D94C00E221EE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0CB31A84DD4D00E221EE /* Models */,
+				F45C0CA81A84BB0600E221EE /* Views */,
+				F45C0BD21A83DB6100E221EE /* Cells */,
+				F45C0CE71A85514100E221EE /* WFMapViewController.h */,
+				F45C0CE81A85514100E221EE /* WFMapViewController.m */,
+				F45C0BC61A83DB0800E221EE /* WFPlacesTableViewController.h */,
+				F45C0BC71A83DB0800E221EE /* WFPlacesTableViewController.m */,
+				F45C0BCF1A83DB5500E221EE /* WFLocationDetailViewController.h */,
+				F45C0BD01A83DB5500E221EE /* WFLocationDetailViewController.m */,
+				F45C0D091A85DA0900E221EE /* WFLocationsViewController.h */,
+				F45C0D0A1A85DA0900E221EE /* WFLocationsViewController.m */,
+				F4261DF81A88A8A1000040B5 /* WFReviewsViewController.h */,
+				F4261DF91A88A8A1000040B5 /* WFReviewsViewController.m */,
+				F4261DFB1A88C699000040B5 /* WFPhotoViewController.h */,
+				F4261DFC1A88C699000040B5 /* WFPhotoViewController.m */,
+				F4261E641A88D6C4000040B5 /* WFFiltersViewController.h */,
+				F4261E651A88D6C4000040B5 /* WFFiltersViewController.m */,
+				F4261E671A88F3F3000040B5 /* WFAddPlaceViewController.h */,
+				F4261E681A88F3F3000040B5 /* WFAddPlaceViewController.m */,
+				F4261E6A1A88F4C2000040B5 /* WFAddPhotoViewController.h */,
+				F4261E6B1A88F4C2000040B5 /* WFAddPhotoViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F45C0BD21A83DB6100E221EE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0CF91A85596C00E221EE /* WFReviewCell.h */,
+				F45C0CFA1A85596C00E221EE /* WFReviewCell.m */,
+				F45C0BD31A83DB7900E221EE /* WFPlacesTableViewCell.h */,
+				F45C0BD41A83DB7900E221EE /* WFPlacesTableViewCell.m */,
+				F45C0BD61A83DB8800E221EE /* WFLocationTableViewCell.h */,
+				F45C0BD71A83DB8800E221EE /* WFLocationTableViewCell.m */,
+				F4261E021A88C777000040B5 /* WFPhotoCell.h */,
+				F4261E031A88C777000040B5 /* WFPhotoCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		F45C0BDB1A84791E00E221EE /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				F4261E541A88CEBA000040B5 /* SGActionView */,
+				F4261E051A88C96F000040B5 /* JTSImageViewController */,
+				F4261E011A88C6D1000040B5 /* KRLCollectionViewGridLayout */,
+				F45C0D0C1A85E92400E221EE /* UITableViewZoomController */,
+				F45C0CED1A85596C00E221EE /* ParallaxTableViewHeader */,
+				F45C0CC81A854BC400E221EE /* DWTagList */,
+				F45C0BDC1A84791E00E221EE /* FlatUIKit */,
+			);
+			path = Vendors;
+			sourceTree = "<group>";
+		};
+		F45C0BDC1A84791E00E221EE /* FlatUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0BDF1A84791E00E221EE /* Classes */,
+				F45C0C341A84791F00E221EE /* Resources */,
+			);
+			path = FlatUIKit;
+			sourceTree = "<group>";
+		};
+		F45C0BDF1A84791E00E221EE /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0BE01A84791E00E221EE /* ios */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		F45C0BE01A84791E00E221EE /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0BE11A84791E00E221EE /* FlatUIKit.h */,
+				F45C0BE21A84791E00E221EE /* FUIAlertView.h */,
+				F45C0BE31A84791E00E221EE /* FUIAlertView.m */,
+				F45C0BE41A84791E00E221EE /* FUIButton.h */,
+				F45C0BE51A84791E00E221EE /* FUIButton.m */,
+				F45C0BE61A84791E00E221EE /* FUICellBackgroundView.h */,
+				F45C0BE71A84791E00E221EE /* FUICellBackgroundView.m */,
+				F45C0BE81A84791E00E221EE /* FUIPopoverBackgroundView.h */,
+				F45C0BE91A84791E00E221EE /* FUIPopoverBackgroundView.m */,
+				F45C0BEA1A84791E00E221EE /* FUISegmentedControl.h */,
+				F45C0BEB1A84791E00E221EE /* FUISegmentedControl.m */,
+				F45C0BEC1A84791E00E221EE /* FUISwitch.h */,
+				F45C0BED1A84791E00E221EE /* FUISwitch.m */,
+				F45C0BEE1A84791E00E221EE /* FUITextField.h */,
+				F45C0BEF1A84791E00E221EE /* FUITextField.m */,
+				F45C0BF01A84791E00E221EE /* NSString+Icons.h */,
+				F45C0BF11A84791E00E221EE /* NSString+Icons.m */,
+				F45C0BF21A84791E00E221EE /* UIBarButtonItem+FlatUI.h */,
+				F45C0BF31A84791E00E221EE /* UIBarButtonItem+FlatUI.m */,
+				F45C0BF41A84791E00E221EE /* UIColor+FlatUI.h */,
+				F45C0BF51A84791E00E221EE /* UIColor+FlatUI.m */,
+				F45C0BF61A84791E00E221EE /* UIFont+FlatUI.h */,
+				F45C0BF71A84791E00E221EE /* UIFont+FlatUI.m */,
+				F45C0BF81A84791E00E221EE /* UIImage+FlatUI.h */,
+				F45C0BF91A84791E00E221EE /* UIImage+FlatUI.m */,
+				F45C0BFA1A84791E00E221EE /* UINavigationBar+FlatUI.h */,
+				F45C0BFB1A84791E00E221EE /* UINavigationBar+FlatUI.m */,
+				F45C0BFC1A84791E00E221EE /* UIPopoverController+FlatUI.h */,
+				F45C0BFD1A84791E00E221EE /* UIPopoverController+FlatUI.m */,
+				F45C0BFE1A84791E00E221EE /* UIProgressView+FlatUI.h */,
+				F45C0BFF1A84791E00E221EE /* UIProgressView+FlatUI.m */,
+				F45C0C001A84791E00E221EE /* UISlider+FlatUI.h */,
+				F45C0C011A84791E00E221EE /* UISlider+FlatUI.m */,
+				F45C0C021A84791E00E221EE /* UIStepper+FlatUI.h */,
+				F45C0C031A84791E00E221EE /* UIStepper+FlatUI.m */,
+				F45C0C041A84791E00E221EE /* UITabBar+FlatUI.h */,
+				F45C0C051A84791E00E221EE /* UITabBar+FlatUI.m */,
+				F45C0C061A84791E00E221EE /* UITableViewCell+FlatUI.h */,
+				F45C0C071A84791E00E221EE /* UITableViewCell+FlatUI.m */,
+				F45C0C081A84791E00E221EE /* UIToolbar+FlatUI.h */,
+				F45C0C091A84791E00E221EE /* UIToolbar+FlatUI.m */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		F45C0C341A84791F00E221EE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0C351A84791F00E221EE /* flat-ui-icons-regular.ttf */,
+				F45C0C361A84791F00E221EE /* Lato-Bold.ttf */,
+				F45C0C371A84791F00E221EE /* Lato-Italic.ttf */,
+				F45C0C381A84791F00E221EE /* Lato-Light.ttf */,
+				F45C0C391A84791F00E221EE /* Lato-Regular.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F45C0CA41A847B5000E221EE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0CE41A85506300E221EE /* WFLocationController.h */,
+				F45C0CE51A85506300E221EE /* WFLocationController.m */,
+				F45C0CA51A847B6700E221EE /* WFMediaController.h */,
+				F45C0CA61A847B6700E221EE /* WFMediaController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F45C0CA81A84BB0600E221EE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0CA91A84BC2700E221EE /* WFDaysTableViewCell.h */,
+				F45C0CAA1A84BC2700E221EE /* WFDaysTableViewCell.m */,
+				F45C0CAB1A84BC2700E221EE /* WFDaysTableViewCell.xib */,
+				F45C0CAE1A84C5EF00E221EE /* WFStepperTableViewCell.h */,
+				F45C0CAF1A84C5EF00E221EE /* WFStepperTableViewCell.m */,
+				F45C0CB01A84C5EF00E221EE /* WFStepperTableViewCell.xib */,
+				F45C0CBA1A84E88F00E221EE /* WFRatingViewCell.h */,
+				F45C0CBB1A84E88F00E221EE /* WFRatingViewCell.m */,
+				F45C0CBC1A84E88F00E221EE /* WFRatingViewCell.xib */,
+				F45C0CC51A84F98100E221EE /* WFTagViewCell.h */,
+				F45C0CC61A84F98100E221EE /* WFTagViewCell.m */,
+				F45C0D3F1A861C3600E221EE /* WFTagViewCell.xib */,
+				F45C0D3A1A85F9A300E221EE /* WFDetailsViewCell.h */,
+				F45C0D3B1A85F9A300E221EE /* WFDetailsViewCell.m */,
+				F45C0D3C1A85F9A300E221EE /* WFDetailsViewCell.xib */,
+				F4261DEE1A87654A000040B5 /* WFDetailSingleItemCell.h */,
+				F4261DEF1A87654A000040B5 /* WFDetailSingleItemCell.m */,
+				F4261DF01A87654A000040B5 /* WFDetailSingleItemCell.xib */,
+				F4261DF31A87CE2D000040B5 /* WFTwoColumnViewCell.h */,
+				F4261DF41A87CE2E000040B5 /* WFTwoColumnViewCell.m */,
+				F4261DF51A87CE2E000040B5 /* WFTwoColumnViewCell.xib */,
+				F4261E701A892715000040B5 /* WFMultilineTextCell.h */,
+				F4261E711A892715000040B5 /* WFMultilineTextCell.m */,
+				F4261E731A892C30000040B5 /* WFHourViewCell.h */,
+				F4261E741A892C30000040B5 /* WFHourViewCell.m */,
+				F4261E791A89D603000040B5 /* WFInputViewCell.h */,
+				F4261E7A1A89D603000040B5 /* WFInputViewCell.m */,
+				F4261E7F1A89F050000040B5 /* WFOptionViewCell.h */,
+				F4261E801A89F050000040B5 /* WFOptionViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F45C0CB31A84DD4D00E221EE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0CEA1A85515400E221EE /* WFMapPin.h */,
+				F45C0CEB1A85515400E221EE /* WFMapPin.m */,
+				F45C0CB41A84DD8E00E221EE /* WFStepperItem.h */,
+				F45C0CB51A84DD8E00E221EE /* WFStepperItem.m */,
+				F45C0CB71A84DE9300E221EE /* WFDayItem.h */,
+				F45C0CB81A84DE9300E221EE /* WFDayItem.m */,
+				F45C0CBF1A84E8A900E221EE /* WFRatingItem.h */,
+				F45C0CC01A84E8A900E221EE /* WFRatingItem.m */,
+				F45C0CC21A84F91100E221EE /* WFTagItem.h */,
+				F45C0CC31A84F91100E221EE /* WFTagItem.m */,
+				F446F75E1A8651AE0020EEA4 /* WFDetailedItem.h */,
+				F446F75F1A8651AE0020EEA4 /* WFDetailedItem.m */,
+				F446F7641A86889B0020EEA4 /* WFDetailedViewItem.h */,
+				F446F7651A86889B0020EEA4 /* WFDetailedViewItem.m */,
+				F4261DE61A873258000040B5 /* WFTwoColumnItem.h */,
+				F4261DE71A873258000040B5 /* WFTwoColumnItem.m */,
+				F4261E6D1A8926CE000040B5 /* WFMultilineTextItem.h */,
+				F4261E6E1A8926CE000040B5 /* WFMultilineTextItem.m */,
+				F4261E7C1A89E26A000040B5 /* WFInputItem.h */,
+				F4261E7D1A89E26A000040B5 /* WFInputItem.m */,
+				F4261E821A89F077000040B5 /* WFOptionItem.h */,
+				F4261E831A89F077000040B5 /* WFOptionItem.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		F45C0CC81A854BC400E221EE /* DWTagList */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0CE11A854C2A00E221EE /* DWTagList.h */,
+				F45C0CE21A854C2A00E221EE /* DWTagList.m */,
+			);
+			path = DWTagList;
+			sourceTree = "<group>";
+		};
+		F45C0CED1A85596C00E221EE /* ParallaxTableViewHeader */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0CF71A85596C00E221EE /* ParallaxHeaderView.h */,
+				F45C0CF81A85596C00E221EE /* ParallaxHeaderView.m */,
+				F45C0CFD1A85596C00E221EE /* UIImage+ImageEffects.h */,
+				F45C0CFE1A85596C00E221EE /* UIImage+ImageEffects.m */,
+			);
+			path = ParallaxTableViewHeader;
+			sourceTree = "<group>";
+		};
+		F45C0D0C1A85E92400E221EE /* UITableViewZoomController */ = {
+			isa = PBXGroup;
+			children = (
+				F45C0D371A85E99F00E221EE /* TTUITableViewZoomController.h */,
+				F45C0D381A85E99F00E221EE /* TTUITableViewZoomController.m */,
+			);
+			path = UITableViewZoomController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F45C0B911A83D93400E221EE /* Workify */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F45C0BB51A83D93400E221EE /* Build configuration list for PBXNativeTarget "Workify" */;
+			buildPhases = (
+				1C2C08CBB5D5BF29C065934E /* Check Pods Manifest.lock */,
+				F45C0B8E1A83D93400E221EE /* Sources */,
+				F45C0B8F1A83D93400E221EE /* Frameworks */,
+				F45C0B901A83D93400E221EE /* Resources */,
+				6AF3A1B5E8C38293117714E2 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Workify;
+			productName = Workify;
+			productReference = F45C0B921A83D93400E221EE /* Workify.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F45C0BAA1A83D93400E221EE /* WorkifyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F45C0BB81A83D93400E221EE /* Build configuration list for PBXNativeTarget "WorkifyTests" */;
+			buildPhases = (
+				F45C0BA71A83D93400E221EE /* Sources */,
+				F45C0BA81A83D93400E221EE /* Frameworks */,
+				F45C0BA91A83D93400E221EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F45C0BAD1A83D93400E221EE /* PBXTargetDependency */,
+			);
+			name = WorkifyTests;
+			productName = WorkifyTests;
+			productReference = F45C0BAB1A83D93400E221EE /* WorkifyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F45C0B8A1A83D93400E221EE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "GAURAV SRIVASTAVA";
+				TargetAttributes = {
+					F45C0B911A83D93400E221EE = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					F45C0BAA1A83D93400E221EE = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = F45C0B911A83D93400E221EE;
+					};
+				};
+			};
+			buildConfigurationList = F45C0B8D1A83D93400E221EE /* Build configuration list for PBXProject "Workify" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F45C0B891A83D93400E221EE;
+			productRefGroup = F45C0B931A83D93400E221EE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F45C0B911A83D93400E221EE /* Workify */,
+				F45C0BAA1A83D93400E221EE /* WorkifyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F45C0B901A83D93400E221EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F45C0C8B1A84791F00E221EE /* Lato-Light.ttf in Resources */,
+				F45C0BA11A83D93400E221EE /* Main.storyboard in Resources */,
+				F45C0CAD1A84BC2700E221EE /* WFDaysTableViewCell.xib in Resources */,
+				F45C0BA61A83D93400E221EE /* LaunchScreen.xib in Resources */,
+				F45C0C881A84791F00E221EE /* flat-ui-icons-regular.ttf in Resources */,
+				F45C0C891A84791F00E221EE /* Lato-Bold.ttf in Resources */,
+				F45C0CB21A84C5EF00E221EE /* WFStepperTableViewCell.xib in Resources */,
+				F45C0BA31A83D93400E221EE /* Images.xcassets in Resources */,
+				F4261DF71A87CE2E000040B5 /* WFTwoColumnViewCell.xib in Resources */,
+				F45C0D401A861C3600E221EE /* WFTagViewCell.xib in Resources */,
+				F45C0D3E1A85F9A300E221EE /* WFDetailsViewCell.xib in Resources */,
+				F45C0CBE1A84E88F00E221EE /* WFRatingViewCell.xib in Resources */,
+				F4261DF21A87654A000040B5 /* WFDetailSingleItemCell.xib in Resources */,
+				F45C0C8A1A84791F00E221EE /* Lato-Italic.ttf in Resources */,
+				F45C0C8C1A84791F00E221EE /* Lato-Regular.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F45C0BA91A83D93400E221EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1C2C08CBB5D5BF29C065934E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6AF3A1B5E8C38293117714E2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Workify/Pods-Workify-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F45C0B8E1A83D93400E221EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F45C0C5F1A84791F00E221EE /* UIColor+FlatUI.m in Sources */,
+				F45C0CB91A84DE9300E221EE /* WFDayItem.m in Sources */,
+				F45C0CA71A847B6700E221EE /* WFMediaController.m in Sources */,
+				F45C0C5A1A84791F00E221EE /* FUISegmentedControl.m in Sources */,
+				F4261E621A88CEBA000040B5 /* SGGridMenu.m in Sources */,
+				F45C0CC41A84F91100E221EE /* WFTagItem.m in Sources */,
+				F45C0C671A84791F00E221EE /* UITabBar+FlatUI.m in Sources */,
+				F4261E611A88CEBA000040B5 /* SGBaseMenu.m in Sources */,
+				F4261DFA1A88A8A1000040B5 /* WFReviewsViewController.m in Sources */,
+				F45C0B9B1A83D93400E221EE /* WFAppDelegate.m in Sources */,
+				F45C0B981A83D93400E221EE /* main.m in Sources */,
+				F4261E041A88C777000040B5 /* WFPhotoCell.m in Sources */,
+				F45C0C631A84791F00E221EE /* UIPopoverController+FlatUI.m in Sources */,
+				F4261E721A892715000040B5 /* WFMultilineTextCell.m in Sources */,
+				F45C0C581A84791F00E221EE /* FUICellBackgroundView.m in Sources */,
+				F4261E631A88CEBA000040B5 /* SGSheetMenu.m in Sources */,
+				F45C0CB11A84C5EF00E221EE /* WFStepperTableViewCell.m in Sources */,
+				F45C0CB61A84DD8E00E221EE /* WFStepperItem.m in Sources */,
+				F45C0CC71A84F98100E221EE /* WFTagViewCell.m in Sources */,
+				F4261E481A88C96F000040B5 /* JTSAnimatedGIFUtility.m in Sources */,
+				F4261E7B1A89D603000040B5 /* WFInputViewCell.m in Sources */,
+				F45C0C571A84791F00E221EE /* FUIButton.m in Sources */,
+				F4261E811A89F050000040B5 /* WFOptionViewCell.m in Sources */,
+				F45C0BC51A83DA8200E221EE /* WFCoreDataStack.m in Sources */,
+				F4261E661A88D6C4000040B5 /* WFFiltersViewController.m in Sources */,
+				F45C0C5D1A84791F00E221EE /* NSString+Icons.m in Sources */,
+				F45C0C601A84791F00E221EE /* UIFont+FlatUI.m in Sources */,
+				F4261E841A89F077000040B5 /* WFOptionItem.m in Sources */,
+				F45C0D391A85E99F00E221EE /* TTUITableViewZoomController.m in Sources */,
+				F45C0C591A84791F00E221EE /* FUIPopoverBackgroundView.m in Sources */,
+				F45C0C5E1A84791F00E221EE /* UIBarButtonItem+FlatUI.m in Sources */,
+				F45C0C641A84791F00E221EE /* UIProgressView+FlatUI.m in Sources */,
+				F4261E491A88C96F000040B5 /* JTSImageInfo.m in Sources */,
+				F4261E5F1A88CEBA000040B5 /* SGActionView.m in Sources */,
+				F45C0CEC1A85515400E221EE /* WFMapPin.m in Sources */,
+				F4261E691A88F3F3000040B5 /* WFAddPlaceViewController.m in Sources */,
+				F45C0CC11A84E8A900E221EE /* WFRatingItem.m in Sources */,
+				F4261E4D1A88C96F000040B5 /* UIImage+JTSImageEffects.m in Sources */,
+				F4261E601A88CEBA000040B5 /* SGAlertMenu.m in Sources */,
+				F45C0D081A85596D00E221EE /* UIImage+ImageEffects.m in Sources */,
+				F45C0BD51A83DB7900E221EE /* WFPlacesTableViewCell.m in Sources */,
+				F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */,
+				F45C0C681A84791F00E221EE /* UITableViewCell+FlatUI.m in Sources */,
+				F45C0CE91A85514100E221EE /* WFMapViewController.m in Sources */,
+				F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */,
+				F446F7661A86889B0020EEA4 /* WFDetailedViewItem.m in Sources */,
+				F45C0C651A84791F00E221EE /* UISlider+FlatUI.m in Sources */,
+				F4261DFD1A88C699000040B5 /* WFPhotoViewController.m in Sources */,
+				F4261E6F1A8926CE000040B5 /* WFMultilineTextItem.m in Sources */,
+				F4261E7E1A89E26A000040B5 /* WFInputItem.m in Sources */,
+				F45C0D3D1A85F9A300E221EE /* WFDetailsViewCell.m in Sources */,
+				F45C0BC81A83DB0800E221EE /* WFPlacesTableViewController.m in Sources */,
+				F45C0BC21A83DA5300E221EE /* WFHelper.m in Sources */,
+				F4261E001A88C6CA000040B5 /* KRLCollectionViewGridLayout.m in Sources */,
+				F45C0CE61A85506300E221EE /* WFLocationController.m in Sources */,
+				F4261E4A1A88C96F000040B5 /* JTSImageViewController.m in Sources */,
+				F45C0D051A85596D00E221EE /* ParallaxHeaderView.m in Sources */,
+				F45C0BD11A83DB5500E221EE /* WFLocationDetailViewController.m in Sources */,
+				F4261E4C1A88C96F000040B5 /* UIApplication+JTSImageViewController.m in Sources */,
+				F45C0C5B1A84791F00E221EE /* FUISwitch.m in Sources */,
+				F45C0C621A84791F00E221EE /* UINavigationBar+FlatUI.m in Sources */,
+				F45C0C561A84791F00E221EE /* FUIAlertView.m in Sources */,
+				F45C0C5C1A84791F00E221EE /* FUITextField.m in Sources */,
+				F45C0CE31A854C2A00E221EE /* DWTagList.m in Sources */,
+				F45C0CBD1A84E88F00E221EE /* WFRatingViewCell.m in Sources */,
+				F4261E4B1A88C96F000040B5 /* JTSSimpleImageDownloader.m in Sources */,
+				F45C0C691A84791F00E221EE /* UIToolbar+FlatUI.m in Sources */,
+				F45C0C611A84791F00E221EE /* UIImage+FlatUI.m in Sources */,
+				F45C0C661A84791F00E221EE /* UIStepper+FlatUI.m in Sources */,
+				F45C0CAC1A84BC2700E221EE /* WFDaysTableViewCell.m in Sources */,
+				F45C0BD81A83DB8800E221EE /* WFLocationTableViewCell.m in Sources */,
+				F45C0D061A85596D00E221EE /* WFReviewCell.m in Sources */,
+				F446F7601A8651AE0020EEA4 /* WFDetailedItem.m in Sources */,
+				F4261DF61A87CE2E000040B5 /* WFTwoColumnViewCell.m in Sources */,
+				F4261E751A892C30000040B5 /* WFHourViewCell.m in Sources */,
+				F4261E6C1A88F4C2000040B5 /* WFAddPhotoViewController.m in Sources */,
+				F45C0D0B1A85DA0900E221EE /* WFLocationsViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F45C0BA71A83D93400E221EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F45C0BB21A83D93400E221EE /* WorkifyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F45C0BAD1A83D93400E221EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F45C0B911A83D93400E221EE /* Workify */;
+			targetProxy = F45C0BAC1A83D93400E221EE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F45C0B9F1A83D93400E221EE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F45C0BA01A83D93400E221EE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F45C0BA41A83D93400E221EE /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F45C0BA51A83D93400E221EE /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F45C0BB31A83D93400E221EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F45C0BB41A83D93400E221EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F45C0BB61A83D93400E221EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47422309BA50442679966331 /* Pods-Workify.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Workify/Workify_Prefix.pch;
+				INFOPLIST_FILE = Workify/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F45C0BB71A83D93400E221EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4195F47C08CA42427BE3646 /* Pods-Workify.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Workify/Workify_Prefix.pch;
+				INFOPLIST_FILE = Workify/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F45C0BB91A83D93400E221EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WorkifyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workify.app/Workify";
+			};
+			name = Debug;
+		};
+		F45C0BBA1A83D93400E221EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WorkifyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workify.app/Workify";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F45C0B8D1A83D93400E221EE /* Build configuration list for PBXProject "Workify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F45C0BB31A83D93400E221EE /* Debug */,
+				F45C0BB41A83D93400E221EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F45C0BB51A83D93400E221EE /* Build configuration list for PBXNativeTarget "Workify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F45C0BB61A83D93400E221EE /* Debug */,
+				F45C0BB71A83D93400E221EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F45C0BB81A83D93400E221EE /* Build configuration list for PBXNativeTarget "WorkifyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F45C0BB91A83D93400E221EE /* Debug */,
+				F45C0BBA1A83D93400E221EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F45C0B8A1A83D93400E221EE /* Project object */;
+}
