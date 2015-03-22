@@ -38,7 +38,10 @@
 		2D3A184E1ABDF8C000D6A0B5 /* WFIntroductionTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A184A1ABDF8C000D6A0B5 /* WFIntroductionTooltipView.m */; };
 		2D3A184F1ABDF8C000D6A0B5 /* WFTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A184C1ABDF8C000D6A0B5 /* WFTooltipView.m */; };
 		2D3A18531ABED44D00D6A0B5 /* WFAddReviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A18521ABED44D00D6A0B5 /* WFAddReviewController.m */; };
-		2D3A18581ABF461A00D6A0B5 /* WFStringStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A18571ABF461A00D6A0B5 /* WFStringStore.m */; };
+		2D3A185B1ABF5E2100D6A0B5 /* WFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A185A1ABF5E2100D6A0B5 /* WFMapViewController.m */; };
+		2D3A185E1ABF5E2F00D6A0B5 /* WFMapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A185D1ABF5E2F00D6A0B5 /* WFMapPin.m */; };
+		2D3A18611ABF5E4000D6A0B5 /* WFLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A18601ABF5E4000D6A0B5 /* WFLocationController.m */; };
+		2D3A18661ABF5E4F00D6A0B5 /* WFStringStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A18651ABF5E4F00D6A0B5 /* WFStringStore.m */; };
 		F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DE71A873258000040B5 /* WFTwoColumnItem.m */; };
 		F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DEF1A87654A000040B5 /* WFDetailSingleItemCell.m */; };
 		F4261DF21A87654A000040B5 /* WFDetailSingleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4261DF01A87654A000040B5 /* WFDetailSingleItemCell.xib */; };
@@ -119,9 +122,6 @@
 		F45C0CC41A84F91100E221EE /* WFTagItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CC31A84F91100E221EE /* WFTagItem.m */; };
 		F45C0CC71A84F98100E221EE /* WFTagViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CC61A84F98100E221EE /* WFTagViewCell.m */; };
 		F45C0CE31A854C2A00E221EE /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CE21A854C2A00E221EE /* DWTagList.m */; };
-		F45C0CE61A85506300E221EE /* WFLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CE51A85506300E221EE /* WFLocationController.m */; };
-		F45C0CE91A85514100E221EE /* WFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CE81A85514100E221EE /* WFMapViewController.m */; };
-		F45C0CEC1A85515400E221EE /* WFMapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CEB1A85515400E221EE /* WFMapPin.m */; };
 		F45C0D051A85596D00E221EE /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CF81A85596C00E221EE /* ParallaxHeaderView.m */; };
 		F45C0D061A85596D00E221EE /* WFReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CFA1A85596C00E221EE /* WFReviewCell.m */; };
 		F45C0D081A85596D00E221EE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CFE1A85596C00E221EE /* UIImage+ImageEffects.m */; };
@@ -188,10 +188,16 @@
 		2D3A184C1ABDF8C000D6A0B5 /* WFTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFTooltipView.m; sourceTree = "<group>"; };
 		2D3A18511ABED44D00D6A0B5 /* WFAddReviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFAddReviewController.h; path = ViewControllers/WFAddReviewController.h; sourceTree = "<group>"; };
 		2D3A18521ABED44D00D6A0B5 /* WFAddReviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFAddReviewController.m; path = ViewControllers/WFAddReviewController.m; sourceTree = "<group>"; };
-		2D3A18541ABEF25100D6A0B5 /* WFStringConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFStringConstants.h; sourceTree = "<group>"; };
-		2D3A18551ABF3EBE00D6A0B5 /* WFEnumConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFEnumConstants.h; sourceTree = "<group>"; };
-		2D3A18561ABF461A00D6A0B5 /* WFStringStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFStringStore.h; sourceTree = "<group>"; };
-		2D3A18571ABF461A00D6A0B5 /* WFStringStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFStringStore.m; sourceTree = "<group>"; };
+		2D3A18591ABF5E2100D6A0B5 /* WFMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFMapViewController.h; path = ViewControllers/WFMapViewController.h; sourceTree = "<group>"; };
+		2D3A185A1ABF5E2100D6A0B5 /* WFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFMapViewController.m; path = ViewControllers/WFMapViewController.m; sourceTree = "<group>"; };
+		2D3A185C1ABF5E2F00D6A0B5 /* WFMapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFMapPin.h; path = ViewControllers/Models/WFMapPin.h; sourceTree = "<group>"; };
+		2D3A185D1ABF5E2F00D6A0B5 /* WFMapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFMapPin.m; path = ViewControllers/Models/WFMapPin.m; sourceTree = "<group>"; };
+		2D3A185F1ABF5E4000D6A0B5 /* WFLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFLocationController.h; path = Controllers/WFLocationController.h; sourceTree = "<group>"; };
+		2D3A18601ABF5E4000D6A0B5 /* WFLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFLocationController.m; path = Controllers/WFLocationController.m; sourceTree = "<group>"; };
+		2D3A18621ABF5E4F00D6A0B5 /* WFEnumConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFEnumConstants.h; path = Common/WFEnumConstants.h; sourceTree = "<group>"; };
+		2D3A18631ABF5E4F00D6A0B5 /* WFStringConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFStringConstants.h; path = Common/WFStringConstants.h; sourceTree = "<group>"; };
+		2D3A18641ABF5E4F00D6A0B5 /* WFStringStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFStringStore.h; path = Common/WFStringStore.h; sourceTree = "<group>"; };
+		2D3A18651ABF5E4F00D6A0B5 /* WFStringStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFStringStore.m; path = Common/WFStringStore.m; sourceTree = "<group>"; };
 		47422309BA50442679966331 /* Pods-Workify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.debug.xcconfig"; sourceTree = "<group>"; };
 		F4195F47C08CA42427BE3646 /* Pods-Workify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.release.xcconfig"; sourceTree = "<group>"; };
 		F4261DE61A873258000040B5 /* WFTwoColumnItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTwoColumnItem.h; path = ViewControllers/Models/WFTwoColumnItem.h; sourceTree = "<group>"; };
@@ -347,12 +353,6 @@
 		F45C0CC61A84F98100E221EE /* WFTagViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFTagViewCell.m; path = ViewControllers/Views/WFTagViewCell.m; sourceTree = "<group>"; };
 		F45C0CE11A854C2A00E221EE /* DWTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWTagList.h; sourceTree = "<group>"; };
 		F45C0CE21A854C2A00E221EE /* DWTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWTagList.m; sourceTree = "<group>"; };
-		F45C0CE41A85506300E221EE /* WFLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFLocationController.h; sourceTree = "<group>"; };
-		F45C0CE51A85506300E221EE /* WFLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFLocationController.m; sourceTree = "<group>"; };
-		F45C0CE71A85514100E221EE /* WFMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFMapViewController.h; sourceTree = "<group>"; };
-		F45C0CE81A85514100E221EE /* WFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFMapViewController.m; sourceTree = "<group>"; };
-		F45C0CEA1A85515400E221EE /* WFMapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFMapPin.h; sourceTree = "<group>"; };
-		F45C0CEB1A85515400E221EE /* WFMapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFMapPin.m; sourceTree = "<group>"; };
 		F45C0CF71A85596C00E221EE /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxHeaderView.h; sourceTree = "<group>"; };
 		F45C0CF81A85596C00E221EE /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
 		F45C0CF91A85596C00E221EE /* WFReviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFReviewCell.h; path = Vendors/ParallaxTableViewHeader/WFReviewCell.h; sourceTree = "<group>"; };
@@ -599,13 +599,13 @@
 		F45C0BBC1A83D94600E221EE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2D3A18621ABF5E4F00D6A0B5 /* WFEnumConstants.h */,
+				2D3A18631ABF5E4F00D6A0B5 /* WFStringConstants.h */,
+				2D3A18641ABF5E4F00D6A0B5 /* WFStringStore.h */,
+				2D3A18651ABF5E4F00D6A0B5 /* WFStringStore.m */,
 				F45C0BBF1A83DA1500E221EE /* WFCommon.h */,
 				F45C0BC01A83DA5300E221EE /* WFHelper.h */,
 				F45C0BC11A83DA5300E221EE /* WFHelper.m */,
-				2D3A18541ABEF25100D6A0B5 /* WFStringConstants.h */,
-				2D3A18551ABF3EBE00D6A0B5 /* WFEnumConstants.h */,
-				2D3A18561ABF461A00D6A0B5 /* WFStringStore.h */,
-				2D3A18571ABF461A00D6A0B5 /* WFStringStore.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -618,10 +618,10 @@
 				F45C0BD21A83DB6100E221EE /* Cells */,
 				2D18532E1ABAF6F800404108 /* WFNavigationController.h */,
 				2D18532F1ABAF6F800404108 /* WFNavigationController.m */,
-				F45C0CE71A85514100E221EE /* WFMapViewController.h */,
-				F45C0CE81A85514100E221EE /* WFMapViewController.m */,
 				F45C0BC61A83DB0800E221EE /* WFPlacesTableViewController.h */,
 				F45C0BC71A83DB0800E221EE /* WFPlacesTableViewController.m */,
+				2D3A18591ABF5E2100D6A0B5 /* WFMapViewController.h */,
+				2D3A185A1ABF5E2100D6A0B5 /* WFMapViewController.m */,
 				F45C0BCF1A83DB5500E221EE /* WFLocationDetailViewController.h */,
 				F45C0BD01A83DB5500E221EE /* WFLocationDetailViewController.m */,
 				F45C0D091A85DA0900E221EE /* WFLocationsViewController.h */,
@@ -761,8 +761,8 @@
 		F45C0CA41A847B5000E221EE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F45C0CE41A85506300E221EE /* WFLocationController.h */,
-				F45C0CE51A85506300E221EE /* WFLocationController.m */,
+				2D3A185F1ABF5E4000D6A0B5 /* WFLocationController.h */,
+				2D3A18601ABF5E4000D6A0B5 /* WFLocationController.m */,
 				F45C0CA51A847B6700E221EE /* WFMediaController.h */,
 				F45C0CA61A847B6700E221EE /* WFMediaController.m */,
 			);
@@ -811,8 +811,8 @@
 		F45C0CB31A84DD4D00E221EE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F45C0CEA1A85515400E221EE /* WFMapPin.h */,
-				F45C0CEB1A85515400E221EE /* WFMapPin.m */,
+				2D3A185C1ABF5E2F00D6A0B5 /* WFMapPin.h */,
+				2D3A185D1ABF5E2F00D6A0B5 /* WFMapPin.m */,
 				F45C0CB41A84DD8E00E221EE /* WFStepperItem.h */,
 				F45C0CB51A84DD8E00E221EE /* WFStepperItem.m */,
 				F45C0CB71A84DE9300E221EE /* WFDayItem.h */,
@@ -1046,10 +1046,12 @@
 				F4261E481A88C96F000040B5 /* JTSAnimatedGIFUtility.m in Sources */,
 				F4261E7B1A89D603000040B5 /* WFInputViewCell.m in Sources */,
 				2D18532D1ABAF56A00404108 /* WFSideMenuViewController.m in Sources */,
+				2D3A185B1ABF5E2100D6A0B5 /* WFMapViewController.m in Sources */,
 				F45C0C571A84791F00E221EE /* FUIButton.m in Sources */,
 				F4261E811A89F050000040B5 /* WFOptionViewCell.m in Sources */,
 				F45C0BC51A83DA8200E221EE /* WFCoreDataStack.m in Sources */,
 				F4261E661A88D6C4000040B5 /* WFFiltersViewController.m in Sources */,
+				2D3A18611ABF5E4000D6A0B5 /* WFLocationController.m in Sources */,
 				F45C0C5D1A84791F00E221EE /* NSString+Icons.m in Sources */,
 				2D1853241AB96E3E00404108 /* WFRatingCell.m in Sources */,
 				F45C0C601A84791F00E221EE /* UIFont+FlatUI.m in Sources */,
@@ -1062,7 +1064,6 @@
 				2D3A18441ABDEB0300D6A0B5 /* WFLoginViewController.m in Sources */,
 				F4261E491A88C96F000040B5 /* JTSImageInfo.m in Sources */,
 				F4261E5F1A88CEBA000040B5 /* SGActionView.m in Sources */,
-				F45C0CEC1A85515400E221EE /* WFMapPin.m in Sources */,
 				F4261E691A88F3F3000040B5 /* WFAddPlaceViewController.m in Sources */,
 				F45C0CC11A84E8A900E221EE /* WFRatingItem.m in Sources */,
 				2D1853271ABAA61F00404108 /* WFButtonCell.m in Sources */,
@@ -1073,7 +1074,6 @@
 				F45C0BD51A83DB7900E221EE /* WFPlacesTableViewCell.m in Sources */,
 				F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */,
 				F45C0C681A84791F00E221EE /* UITableViewCell+FlatUI.m in Sources */,
-				F45C0CE91A85514100E221EE /* WFMapViewController.m in Sources */,
 				F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */,
 				F446F7661A86889B0020EEA4 /* WFDetailedViewItem.m in Sources */,
 				F45C0C651A84791F00E221EE /* UISlider+FlatUI.m in Sources */,
@@ -1085,7 +1085,6 @@
 				F45C0BC81A83DB0800E221EE /* WFPlacesTableViewController.m in Sources */,
 				F45C0BC21A83DA5300E221EE /* WFHelper.m in Sources */,
 				F4261E001A88C6CA000040B5 /* KRLCollectionViewGridLayout.m in Sources */,
-				F45C0CE61A85506300E221EE /* WFLocationController.m in Sources */,
 				2D3A18531ABED44D00D6A0B5 /* WFAddReviewController.m in Sources */,
 				F4261E4A1A88C96F000040B5 /* JTSImageViewController.m in Sources */,
 				F45C0D051A85596D00E221EE /* ParallaxHeaderView.m in Sources */,
@@ -1099,8 +1098,8 @@
 				F45C0C5C1A84791F00E221EE /* FUITextField.m in Sources */,
 				F45C0CE31A854C2A00E221EE /* DWTagList.m in Sources */,
 				F4261E4B1A88C96F000040B5 /* JTSSimpleImageDownloader.m in Sources */,
-				2D3A18581ABF461A00D6A0B5 /* WFStringStore.m in Sources */,
 				F45C0C691A84791F00E221EE /* UIToolbar+FlatUI.m in Sources */,
+				2D3A18661ABF5E4F00D6A0B5 /* WFStringStore.m in Sources */,
 				F45C0C611A84791F00E221EE /* UIImage+FlatUI.m in Sources */,
 				F45C0C661A84791F00E221EE /* UIStepper+FlatUI.m in Sources */,
 				F45C0CAC1A84BC2700E221EE /* WFDaysTableViewCell.m in Sources */,
@@ -1112,6 +1111,7 @@
 				F4261E751A892C30000040B5 /* WFHourViewCell.m in Sources */,
 				F4261E6C1A88F4C2000040B5 /* WFAddPhotoViewController.m in Sources */,
 				F45C0D0B1A85DA0900E221EE /* WFLocationsViewController.m in Sources */,
+				2D3A185E1ABF5E2F00D6A0B5 /* WFMapPin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
