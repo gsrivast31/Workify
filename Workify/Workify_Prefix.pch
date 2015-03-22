@@ -16,5 +16,6 @@
 #import "WFCoreDataStack.h"
 #import "FlatUIKit.h"
 #import "NSString+Icons.h"
+#import "WFStringStore.h"
 
 #endif

@@ -9,16 +9,16 @@
 #import "WFHourViewCell.h"
 #import "RETableViewManager.h"
 #import "NSString+RETableViewManagerAdditions.h"
+#import "WFDayItem.h"
 
 static const CGFloat kHorizontalMargin = 10.0;
 static const CGFloat kVerticalMargin = 5.0;
 static const CGFloat kPadding = 5.0f;
+static const CGFloat kRowHeight = 40.0f;
 
 @interface WFSingleDayCell()
 
 @property (nonatomic, strong) UILabel* dayLabel;
-@property (nonatomic, strong) UITextField* startHourTextField;
-@property (nonatomic, strong) UITextField* endHourTextField;
 @property (nonatomic, strong) UIButton* closedButton;
 
 @property (nonatomic, strong) UILabel* startHoursLabel;
@@ -34,10 +34,19 @@ static const CGFloat kPadding = 5.0f;
         self.dayLabel = [[UILabel alloc] init];
         self.startHourTextField = [[UITextField alloc] init];
         self.endHourTextField = [[UITextField alloc] init];
+        
+        [self.startHourTextField setBorderStyle:UITextBorderStyleBezel];
+        [self.startHourTextField setKeyboardType:UIKeyboardTypeNumberPad];
+        [self.endHourTextField setBorderStyle:UITextBorderStyleBezel];
+        [self.endHourTextField setKeyboardType:UIKeyboardTypeNumberPad];
+
         self.closedButton = [[UIButton alloc] init];
         
-        [self.closedButton setTitle:@"Open" forState:UIControlStateNormal];
+        [self.closedButton setTitle:@"Closed" forState:UIControlStateNormal];
+        
+        [self.closedButton.titleLabel setFont:[UIFont flatFontOfSize:14]];
         [self.closedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.closedButton setBackgroundColor:[UIColor turquoiseColor]];
         [self.closedButton setTitle:@"Closed" forState:UIControlStateDisabled];
         [self.closedButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         [self.closedButton addTarget:self action:@selector(toggleState:) forControlEvents:UIControlEventTouchUpInside];
@@ -58,6 +67,7 @@ static const CGFloat kPadding = 5.0f;
         [self addSubview:self.dayLabel];
         [self addSubview:self.startHourTextField];
         [self addSubview:self.startHoursLabel];
+        [self addSubview:self.dashLabel];
         [self addSubview:self.endHourTextField];
         [self addSubview:self.endHoursLabel];
         [self addSubview:self.closedButton];
@@ -77,21 +87,21 @@ static const CGFloat kPadding = 5.0f;
     CGFloat startX = self.frame.size.width - endHourWidth - kHorizontalMargin;
     
     self.endHoursLabel.frame = CGRectMake(startX, 0, endHourWidth, self.frame.size.height);
-    startX -= 40.0f + kPadding;
+    startX -= 60.0f + kPadding;
     
-    self.endHourTextField.frame = CGRectMake(startX, 0, 40.0f, self.frame.size.height);
+    self.endHourTextField.frame = CGRectMake(startX, 0, 60.0f, self.frame.size.height);
     startX -= dashWidth + kPadding;
     
     self.dashLabel.frame = CGRectMake(startX, 0, dashWidth, self.frame.size.height);
     startX -= startHourWidth + kPadding;
     
     self.startHoursLabel.frame = CGRectMake(startX, 0, startHourWidth, self.frame.size.height);
-    startX -= 40.0f + kPadding;
+    startX -= 60.0f + kPadding;
     
-    self.startHourTextField.frame = CGRectMake(startX, 0, 40.0f, self.frame.size.height);
+    self.startHourTextField.frame = CGRectMake(startX, 0, 60.0f, self.frame.size.height);
     startX -= 100.0f + kPadding;
     
-    self.closedButton.frame = CGRectMake(startX, 0, 100.0f, self.frame.size.height);
+    self.closedButton.frame = CGRectMake(startX, 4.0, 60.0f, self.frame.size.height - 8.0f);
 }
 
 - (void)setState:(BOOL)isClosed {
@@ -133,19 +143,36 @@ static const CGFloat kPadding = 5.0f;
 
 @interface WFHourViewCell()
 
+@property (nonatomic, strong) NSMutableArray* rows;
+
 @end
 
 @implementation WFHourViewCell
 
+@synthesize rows;
+
++ (BOOL)canFocusWithItem:(WFDayItem *)item {
+    return YES;
+}
+
+- (UIResponder *)responder {
+    return ((WFSingleDayCell*)rows[0]).startHourTextField;
+}
+
 - (void)cellDidLoad {
     [super cellDidLoad];
-    [self addSubview:[[WFSingleDayCell alloc] initWithDay:@"Mon"]];
-    [self addSubview:[[WFSingleDayCell alloc] initWithDay:@"Tue"]];
-    [self addSubview:[[WFSingleDayCell alloc] initWithDay:@"Wed"]];
-    [self addSubview:[[WFSingleDayCell alloc] initWithDay:@"Thu"]];
-    [self addSubview:[[WFSingleDayCell alloc] initWithDay:@"Fri"]];
-    [self addSubview:[[WFSingleDayCell alloc] initWithDay:@"Sat"]];
-    [self addSubview:[[WFSingleDayCell alloc] initWithDay:@"Sun"]];
+    
+    rows = [[NSMutableArray alloc] initWithCapacity:7];
+    
+    NSArray* dayArray = @[@"Mon", @"Tue", @"Wed", @"Thu", @"Fri", @"Sat", @"Sun"];
+    for (NSInteger i=0; i<[dayArray count]; i++) {
+        WFSingleDayCell* cell = [[WFSingleDayCell alloc] initWithDay:[dayArray objectAtIndex:i]];
+        cell.tag = i+1;
+        cell.startHourTextField.inputAccessoryView = self.actionBar;
+        cell.endHourTextField.inputAccessoryView = self.actionBar;
+        [self addSubview:cell];
+        [rows addObject:cell];
+    }
 }
 
 - (void)cellWillAppear {
@@ -163,13 +190,14 @@ static const CGFloat kPadding = 5.0f;
     CGFloat startY = frame.origin.y;
     for (UIView* view in self.subviews) {
         if ([view isKindOfClass:[WFSingleDayCell class]]) {
-            [(WFSingleDayCell*)view setContentFrame:CGRectMake(frame.origin.x, startY, frame.size.width, 30.0f)];
-            startY += 30.0f + kVerticalMargin;
+            [(WFSingleDayCell*)view setContentFrame:CGRectMake(frame.origin.x, startY, frame.size.width, kRowHeight)];
+            startY += kRowHeight + kVerticalMargin;
         }
     }
 }
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
-    return 210.0f + 2*kVerticalMargin + 6*kVerticalMargin;
+    return 7*kRowHeight + 2*kVerticalMargin + 6*kVerticalMargin;
 }
+
 @end

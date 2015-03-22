@@ -13,8 +13,12 @@
 #import "WFDetailedViewItem.h"
 #import "WFTwoColumnItem.h"
 #import "WFTwoColumnViewCell.h"
+#import "WFFullTextView.h"
 
-@interface WFLocationDetailViewController () <RETableViewManagerDelegate>
+#import "WFMapViewController.h"
+#import <MessageUI/MessageUI.h>
+
+@interface WFLocationDetailViewController () <RETableViewManagerDelegate, WFDetailDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *reviewsButton;
@@ -40,12 +44,45 @@
     self.manager[@"WFDetailedViewItem"] = @"WFDetailsViewCell";
     self.manager[@"WFTwoColumnItem"] = @"WFTwoColumnViewCell";
 
+    self.bottomView.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8];
+    [self.reviewsButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
+    [self.reviewsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.reviewsButton setTintColor:[UIColor whiteColor]];
+    [self.reviewsButton setImage:[UIImage imageNamed:@"reviews"] forState:UIControlStateNormal];
+    [self.photosButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
+    [self.photosButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.photosButton setTintColor:[UIColor whiteColor]];
+    [self.photosButton setImage:[UIImage imageNamed:@"photos"] forState:UIControlStateNormal];
+
     [self addTableEntries];
+    
+    if(!self.navigationItem.leftBarButtonItem) {
+        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [backButton setImage:[[UIImage imageNamed:@"NavBarIconBack.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [backButton setTitle:self.navigationItem.backBarButtonItem.title forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(dismissSelf:) forControlEvents:UIControlEventTouchUpInside];
+        [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -10.0f, 0, 0)];
+        [backButton setAdjustsImageWhenHighlighted:NO];
+        
+        UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        [self.navigationItem setLeftBarButtonItem:backBarButtonItem];
+    }
+    
+    UIBarButtonItem* shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
+    self.navigationItem.rightBarButtonItem = shareItem;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [(ParallaxHeaderView*)self.tableView.tableHeaderView refreshBlurViewForNewImage];
     [super viewDidAppear:animated];
+}
+
+- (void)dismissSelf:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)share:(id)sender {
+    
 }
 
 #pragma mark -
@@ -61,6 +98,7 @@
 
 - (void)addTableEntries {
     [self addGeneralSection];
+    [self addInfoSection];
     [self addHoursSection];
     [self addAmenitiesSection];
 }
@@ -69,10 +107,34 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@""];
     [self.manager addSection:section];
     
-    [section addItem:[WFDetailedViewItem itemWithName:@"Cafe Zoe" ratings:[NSNumber numberWithInteger:4] phone:@"+91-9717961964" email:@"gaurav.sri87@gmail.com" address:@"12/105, VikasNagar, Lucknow, U.P. - 226022" latitude:nil longitude:nil]];
-    [section addItem:[WFDetailedItem itemWithTitle:@"About" subTitle:@"" imageName:nil]];
+    WFDetailedViewItem* item = [WFDetailedViewItem itemWithName:@"Cafe Zoe" delegate:self];
+    item.ratings = [NSNumber numberWithInteger:4];
+    item.phone = @"+91-9717961964";
+    item.email = @"gaurav.sri87@gmail.com";
+    item.address = @"12/105, VikasNagar, Lucknow, U.P. - 226022";
+    item.longitude = nil;
+    item.latitude = nil;
+    item.website = @"http://www.google.com";
+    item.facebookUrl = @"http://www.facebook.com/";
+    item.twitterUrl = @"http://www.twitter.com/";
+    
+    [section addItem:item];
+}
+
+- (void)addInfoSection {
+    RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@""];
+    [self.manager addSection:section];
+    
+    NSString* aboutText = @"";
+    
+    __typeof (&*self) __weak weakSelf = self;
+    [section addItem:[WFDetailedItem itemWithTitle:@"About" subTitle:aboutText imageName:@"about" selectionHandler:^(RETableViewItem *item) {
+        [weakSelf.tableView deselectRowAtIndexPath:item.indexPath animated:NO];
+        [WFFullTextView presentInView:self.view withText:aboutText];
+    }]];
+    [section addItem:[WFDetailedItem itemWithTitle:@"Location Type" subTitle:@"Co-Working space" imageName:@"locationtype"]];
     [section addItem:[WFDetailedItem itemWithTitle:@"WiFi" subTitle:@"Reliable - 4Mbps download speed, 2Mbps upload speed" imageName:@"wifi"]];
-    [section addItem:[WFDetailedItem itemWithTitle:@"Pricing" subTitle:@"Rs. 200" imageName:@"wifi"]];
+    [section addItem:[WFDetailedItem itemWithTitle:@"Pricing" subTitle:@"Rs. 200" imageName:@"pricing"]];
     [section addItem:[WFDetailedItem itemWithTitle:@"Power" subTitle:@"1/2 per table" imageName:@"power"]];
     [section addItem:[WFDetailedItem itemWithTitle:@"Food" subTitle:@"Tea, Coffee, Snacks, Dinner, Alcohol, Desserts" imageName:@"food"]];
     [section addItem:[WFDetailedItem itemWithTitle:@"Noise" subTitle:@"Average Noisy" imageName:@"noise"]];
@@ -108,6 +170,117 @@
             [(WFTwoColumnViewCell*)cell setItemCount:[[item contents] count]];
         }
     }
+}
+
+#pragma mark UITableViewDelegate
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return (indexPath.section == 1 && indexPath.row == 0) ? YES : NO;
+}
+
+#pragma mark WFDetailViewDelegate
+
+- (void)phoneTapped:(RETableViewItem *)item {
+    WFDetailedViewItem* _item = (WFDetailedViewItem*)item;
+    NSURL* phoneURL = [NSURL URLWithString:[@"tel://" stringByAppendingString:_item.phone]];
+    if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
+        [[UIApplication sharedApplication] openURL:phoneURL];
+    }
+}
+
+- (void)emailTapped:(RETableViewItem*)item {
+    WFDetailedViewItem* _item = (WFDetailedViewItem*)item;
+    if([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+        [mailController setMailComposeDelegate:self];
+        [mailController setModalPresentationStyle:UIModalPresentationFormSheet];
+        [mailController setToRecipients:@[_item.email]];
+        if(mailController) {
+            [self presentViewController:mailController animated:YES completion:nil];
+        }
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Uh oh!", nil)
+                                                            message:NSLocalizedString(@"This device hasn't been setup to send emails.", nil)
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Okay", nil)
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+    
+}
+
+- (void)mapTapped:(RETableViewItem*)item {
+    WFDetailedViewItem* _item = (WFDetailedViewItem*)item;
+    WFMapViewController* vc = [[WFMapViewController alloc] initWithLocation:[[CLLocation alloc] initWithLatitude:[_item.latitude doubleValue] longitude:[_item.longitude doubleValue]]];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)websiteTapped:(RETableViewItem*)item {
+    WFDetailedViewItem* _item = (WFDetailedViewItem*)item;
+    NSString* website = _item.website;
+    NSURL* webURL = [NSURL URLWithString:website];
+    if ([[UIApplication sharedApplication] canOpenURL:webURL]) {
+        [[UIApplication sharedApplication] openURL:webURL];
+    }
+}
+
+- (void)facebookTapped:(RETableViewItem*)item {
+    WFDetailedViewItem* _item = (WFDetailedViewItem*)item;
+    NSString* facebookUrl = _item.facebookUrl;
+    if ([facebookUrl hasSuffix:@"/"]) {
+        facebookUrl = [facebookUrl substringToIndex:[facebookUrl length] - 1];
+    }
+    
+    NSArray* components = [facebookUrl componentsSeparatedByString:@"/"];
+    if (components.count) {
+        __typeof (&*self) __weak weakSelf = self;
+
+        NSString* pageName = [components lastObject];
+        NSString* graphURLString = [@"https://graph.facebook.com/" stringByAppendingString:pageName];
+        NSURL* graphURL = [NSURL URLWithString:graphURLString];
+        [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:graphURL] queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (connectionError == nil) {
+                NSError* error = nil;
+                NSDictionary* parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                if (error != nil) {
+                    NSString* identifier = [parsedObject valueForKey:@"id"];
+                    [weakSelf openPage:[NSString stringWithFormat:@"fb:///profile/%@", identifier] withURL:facebookUrl];
+                }
+            }
+        }];
+    }
+}
+
+- (void)twitterTapped:(RETableViewItem*)item {
+    WFDetailedViewItem* _item = (WFDetailedViewItem*)item;
+    NSString* twitterUrl = _item.twitterUrl;
+    if ([twitterUrl hasSuffix:@"/"]) {
+        twitterUrl = [twitterUrl substringToIndex:[twitterUrl length] - 1];
+    }
+    
+    NSArray* components = [twitterUrl componentsSeparatedByString:@"/"];
+    if (components.count) {
+        NSString* identifier = [components lastObject];
+        [self openPage:[NSString stringWithFormat:@"twitter:///user?screen_name=%@", identifier] withURL:twitterUrl];
+    }
+}
+
+- (void)openPage:(NSString*)scheme withURL:(NSString*)url {
+    NSURL* schemeURL = [NSURL URLWithString:scheme];
+    if ([[UIApplication sharedApplication] canOpenURL:schemeURL]) {
+        [[UIApplication sharedApplication] openURL:schemeURL];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
+}
+
+#pragma mark MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    if (result == MFMailComposeResultSent) {
+    }
+    
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

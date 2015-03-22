@@ -20,8 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
 
 @property (nonatomic, strong, readwrite) RETableViewManager *manager;
+@property (nonatomic, strong, readwrite) RETableViewSection *spaceSection;
 @property (nonatomic, strong, readwrite) RETableViewSection *daysSection;
-@property (nonatomic, strong, readwrite) RETableViewSection *hoursSection;
 @property (nonatomic, strong, readwrite) RETableViewSection *ratingSection;
 @property (nonatomic, strong, readwrite) RETableViewSection *wifiSection;
 @property (nonatomic, strong, readwrite) RETableViewSection *noiseSection;
@@ -40,9 +40,10 @@
     self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView delegate:self];
     self.manager[@"WFDayItem"] = @"WFDaysTableViewCell";
     self.manager[@"WFStepperItem"] = @"WFStepperTableViewCell";
-    self.manager[@"WFRatingItem"] = @"WFRatingViewCell";
+    self.manager[@"WFRatingItem"] = @"WFRatingCell";
     self.manager[@"WFTagItem"] = @"WFTagViewCell";
     self.manager[@"WFDetailedItem"] = @"RETableViewCell";
+    self.spaceSection = [self addSpaceTypeControls];
     self.daysSection = [self addDaysControls];
     self.ratingSection = [self addRatingControls];
     self.wifiSection = [self addWifiControls];
@@ -53,8 +54,10 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconCancel"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconSave"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
-    self.navigationItem.leftBarButtonItem.tintColor = [UIColor turquoiseColor];
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor turquoiseColor];
+    
+    self.clearButton.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8];
+    [self.clearButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
+    [self.clearButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (void)cancel:(id)sender {
@@ -67,6 +70,29 @@
 
 - (void)clear:(id)sender {
     
+}
+
+- (RETableViewSection*)addSpaceTypeControls {
+    RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Space Type"];
+    [self.manager addSection:section];
+    
+    __typeof (&*self) __weak weakSelf = self;
+    void (^changeState)(RETableViewItem *item) = ^(RETableViewItem *item){
+        UITableViewCell* cell = [weakSelf.tableView cellForRowAtIndexPath:item.indexPath];
+        [weakSelf.tableView deselectRowAtIndexPath:item.indexPath animated:NO];
+        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+    };
+
+    for (NSString* value in [WFStringStore spaceTypeStrings]) {
+        [section addItem:[RETableViewItem itemWithTitle:value accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
+            changeState(item);
+        }]];
+    }
+    return section;
 }
 
 - (RETableViewSection*)addDaysControls {
@@ -89,7 +115,8 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Minimum Wifi Speed"];
     [self.manager addSection:section];
     
-    [section addItem:[WFStepperItem itemWithValue:@"2 Mbps" andRange:@[@"256 Kbps", @"512 Kbps", @"1 Mbps", @"2 Mbps", @"4 Mbps", @"10 Mbps"]]];
+    [section addItem:[WFStepperItem itemWithValue:[WFStringStore wifiSpeedString:WFWifiSpeed1Mbps] andRange:[WFStringStore wifiSpeedStrings]]];
+
     return section;
 }
 
@@ -97,9 +124,11 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Noise level"];
     [self.manager addSection:section];
     
-    [section addItem:[RESegmentedItem itemWithTitle:nil segmentedControlTitles:@[@"Silence", @"Avg. Noisy", @"Noisy"] value:0 switchValueChangeHandler:^(RESegmentedItem *item) {
-        
-    }]];
+    RESegmentedItem* item = [RESegmentedItem itemWithTitle:nil segmentedControlTitles:[WFStringStore noiseStrings] value:0 switchValueChangeHandler:^(RESegmentedItem *item) {
+    }];
+
+    item.tintColor = [UIColor turquoiseColor];
+    [section addItem:item];
     return section;
 }
 
@@ -107,17 +136,22 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Dining Options"];
     [self.manager addSection:section];
     
-    [section addItem:[RETableViewItem itemWithTitle:@"Coffee/Tea" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Alcohol" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Snacks" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Lunch" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Dinner" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
+    __typeof (&*self) __weak weakSelf = self;
+    void (^changeState)(RETableViewItem *item) = ^(RETableViewItem *item){
+        UITableViewCell* cell = [weakSelf.tableView cellForRowAtIndexPath:item.indexPath];
+        [weakSelf.tableView deselectRowAtIndexPath:item.indexPath animated:NO];
+        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+    };
     
+    for (NSString* key in [WFStringStore foodStrings]) {
+        [section addItem:[RETableViewItem itemWithTitle:key accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
+            changeState(item);
+        }]];
+    }
     return section;
 }
 
@@ -125,19 +159,23 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Seating Options"];
     [self.manager addSection:section];
     
-    [section addItem:[RETableViewItem itemWithTitle:@"Indoor" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"OutDoor" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Separate Room" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Standing Desk" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Table for 1-4" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Table for 5>" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
+    __typeof (&*self) __weak weakSelf = self;
+    void (^changeState)(RETableViewItem *item) = ^(RETableViewItem *item){
+        UITableViewCell* cell = [weakSelf.tableView cellForRowAtIndexPath:item.indexPath];
+        [weakSelf.tableView deselectRowAtIndexPath:item.indexPath animated:NO];
+        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+    };
     
+    for (NSString* key in [WFStringStore seatingStrings]) {
+        [section addItem:[RETableViewItem itemWithTitle:key accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
+            changeState(item);
+        }]];
+    }
+
     return section;
 }
 
@@ -145,15 +183,23 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Power Options"];
     [self.manager addSection:section];
     
-    [section addItem:[RETableViewItem itemWithTitle:@"None" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Limited(less than 1/4 tables)" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Good(Between 1/4 - 1/2 tables)" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    [section addItem:[RETableViewItem itemWithTitle:@"Enough(More than 1/2 tables)" accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-    }]];
-    
+    __typeof (&*self) __weak weakSelf = self;
+    void (^changeState)(RETableViewItem *item) = ^(RETableViewItem *item){
+        UITableViewCell* cell = [weakSelf.tableView cellForRowAtIndexPath:item.indexPath];
+        [weakSelf.tableView deselectRowAtIndexPath:item.indexPath animated:NO];
+        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+    };
+
+    for (NSString* key in [WFStringStore powerStrings]) {
+        [section addItem:[RETableViewItem itemWithTitle:key accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
+            changeState(item);
+        }]];
+    }
+
     return section;
 }
 

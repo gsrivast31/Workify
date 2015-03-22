@@ -10,6 +10,9 @@
 
 @interface WFSingleDayCell : UIView
 
+@property (nonatomic, strong) UITextField* startHourTextField;
+@property (nonatomic, strong) UITextField* endHourTextField;
+
 - (id)initWithDay:(NSString*)day;
 - (void)setContentFrame:(CGRect)frame;
 - (void)setContent:(NSDictionary*)dict;

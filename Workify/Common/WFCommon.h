@@ -9,7 +9,12 @@
 #ifndef Workify_WFCommon_h
 #define Workify_WFCommon_h
 
+#import "WFStringConstants.h"
+#import "WFEnumConstants.h"
+
 static NSString* const APP_NAME = @"Workify";
 static NSString* const kErrorDomain = @"com.memoir.workify";
+
+static NSString * const kHasSeenStarterTooltip = @"kHasSeenStarterTooltip";
 
 #endif

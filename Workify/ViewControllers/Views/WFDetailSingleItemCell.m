@@ -53,11 +53,10 @@ static const CGFloat kVerticalMargin = 10.0;
     
     self.imageButton.frame = CGRectMake(frame.origin.x, frame.origin.y, 30.0f, 30.0f);
     self.titleLabel.frame = CGRectMake(frame.origin.x + 40.0f, frame.origin.y, frame.size.width - 40.0f, 30.0f);
-    self.valueLabel.frame = CGRectMake(frame.origin.x + 40.0f,
-                                       frame.origin.y + 30.0f + kVerticalMargin,
-                                       frame.size.width - 40.0f,
-                                       [self.item.value re_sizeWithFont:[UIFont flatFontOfSize:16]
-                                                      constrainedToSize:CGSizeMake(frame.size.width - 40.0f, INFINITY)].height);
+    CGRect valueRect = CGRectMake(frame.origin.x + 40.0f,
+                                  frame.origin.y + 30.0f + kVerticalMargin,
+                                  frame.size.width - 40.0f, frame.size.height - 30.0f - kVerticalMargin);
+    self.valueLabel.frame = valueRect;
 }
 
 + (CGFloat)heightWithItem:(RETableViewItem *)item tableViewManager:(RETableViewManager *)tableViewManager {
@@ -71,8 +70,10 @@ static const CGFloat kVerticalMargin = 10.0;
     if (detailItem.value) {
         height += [detailItem.value re_sizeWithFont:[UIFont flatFontOfSize:16] constrainedToSize:CGSizeMake(width - 40.0f, INFINITY)].height + kVerticalMargin;
     }
-    return height;
+    
+    return MIN(200.0f, height);
 }
+
 @end
 
 

@@ -6,10 +6,6 @@
 //  Copyright (c) 2014 GAURAV SRIVASTAVA. All rights reserved.
 //
 
-static NSString *kReviewsKey   = @"Reviews";
-static NSString *kReviewKey    = @"Review";
-static NSString *kTimeKey       = @"Time";
-
 static NSString *kCellIdentifier = @"reviewCellId";
 
 @interface WFReviewCell : UITableViewCell

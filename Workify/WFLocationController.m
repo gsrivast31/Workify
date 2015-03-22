@@ -73,6 +73,18 @@
     [self.locationManager startUpdatingLocation];
 }
 
+- (void)geocodeString:(NSString*)string
+          withSuccess:(IMGeolocateSuccessCallback)successCallback
+              failure:(IMGeolocateFailureCallback)failureCallback {
+    [self.geocoder geocodeAddressString:string completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (!error) {
+            successCallback(placemarks);
+        } else {
+            failureCallback(error);
+        }
+    }];
+}
+
 - (void)reverseGeocodeLocation:(CLLocation *)location
                    withSuccess:(IMReverseGeolocateSuccessCallback)successCallback
                        failure:(IMReverseGeolocateFailureCallback)failureCallback {
@@ -152,7 +164,7 @@
     if(!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     }
     
     return _locationManager;

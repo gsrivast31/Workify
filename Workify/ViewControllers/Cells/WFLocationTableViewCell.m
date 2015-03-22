@@ -59,6 +59,8 @@
     self.nameLabel.text = @"CAFE COFFEE DAY";
     self.addressLabel.text = @"Indiranagar, Colaba, Mumbai";
     
+    self.nameLabel.font = [UIFont flatFontOfSize:18];
+    self.addressLabel.font = [UIFont flatFontOfSize:16];
 }
 
 @end

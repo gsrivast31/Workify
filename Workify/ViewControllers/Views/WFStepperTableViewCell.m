@@ -25,9 +25,10 @@
     [super cellDidLoad];
     [self.minusButton setImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
     [self.plusButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
-    
+    [self.minusButton setTintColor:[UIColor turquoiseColor]];
+    [self.plusButton setTintColor:[UIColor turquoiseColor]];
     [self.valueButton.titleLabel setFont:[UIFont flatFontOfSize:16]];
-    [self.valueButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.valueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     [self.minusButton addTarget:self action:@selector(decreaseValue:) forControlEvents:UIControlEventTouchUpInside];
     [self.plusButton addTarget:self action:@selector(increaseValue:) forControlEvents:UIControlEventTouchUpInside];

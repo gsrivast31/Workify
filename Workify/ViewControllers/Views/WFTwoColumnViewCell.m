@@ -84,6 +84,8 @@ static const CGFloat kHorizSpacing = 5.0f;
     [super cellWillAppear];
     
     [self.label setText:self.item.name];
+    [self.label setFont:[UIFont flatFontOfSize:14.0f]];
+
     [self.button setImage:[UIImage imageNamed:self.item.imagename] forState:UIControlStateNormal];
     [self.button setContentMode:UIViewContentModeCenter];
     

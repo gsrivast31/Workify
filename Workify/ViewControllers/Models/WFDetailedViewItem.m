@@ -10,15 +10,10 @@
 
 @implementation WFDetailedViewItem
 
-+ (WFDetailedViewItem*)itemWithName:(NSString*)name ratings:(NSNumber*)ratings phone:(NSString*)phone email:(NSString*)email address:(NSString*)address latitude:(NSNumber*)lat longitude:(NSNumber*)lon {
++ (WFDetailedViewItem*)itemWithName:(NSString*)name delegate:(id<WFDetailDelegate>)delegate {
     WFDetailedViewItem* item = [[WFDetailedViewItem alloc] init];
     item.name = name;
-    item.phone = phone;
-    item.email = email;
-    item.ratings = ratings;
-    item.address = address;
-    item.latitude = lat;
-    item.longitude = lon;
+    item.delegate = delegate;
     return item;
 }
 

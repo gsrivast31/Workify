@@ -8,8 +8,11 @@
 
 #import "WFReviewsViewController.h"
 #import "WFReviewCell.h"
+#import "WFAddReviewController.h"
+#import "WFLoginViewController.h"
+#import "MZFormSheetPresentationController.h"
 
-@interface WFReviewsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface WFReviewsViewController () <UITableViewDataSource, UITableViewDelegate, WFAddReviewDelegate, WFLoginDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSArray *reviewsArray;
@@ -29,15 +32,38 @@
     [WFReviewCell setTableViewWidth:self.tableView.frame.size.width];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconCancel"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconAdd"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
-    self.navigationItem.leftBarButtonItem.tintColor = [UIColor turquoiseColor];
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor turquoiseColor];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconAdd"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(addReview:)];
     
     self.title = @"Reviews";
 }
 
 - (void)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)addReview:(id)sender {
+    if ([WFHelper isLoggedIn]) {
+        WFAddReviewController* vc = [[WFAddReviewController alloc] init];
+        vc.delegate = self;
+        UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:navVC animated:YES completion:nil];
+    } else {
+        WFLoginViewController* vc = [[WFLoginViewController alloc] init];
+        vc.loginDelegate = self;
+        UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:vc];
+        navVC.view.layer.cornerRadius = 6.0;
+        
+        MZFormSheetPresentationController *controller = [[MZFormSheetPresentationController alloc] initWithContentViewController:navVC];
+        controller.contentViewControllerTransitionStyle = MZFormSheetTransitionStyleDropDown;
+        controller.shouldCenterVertically = YES;
+        controller.shouldDismissOnBackgroundViewTap = YES;
+        controller.movementActionWhenKeyboardAppears = MZFormSheetActionWhenKeyboardAppearsMoveToTop;
+        controller.shouldApplyBackgroundBlurEffect = YES;
+        
+        navVC.navigationBarHidden = YES;
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,5 +121,40 @@
     return cell;
 }
 
+#pragma mark WFAddReviewDelegate
+- (void)reviewAdded:(NSDictionary *)reviewDictionary {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)reviewCanceled {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark WFLoginDelegate
+
+- (void)loggedInWithUser:(PFUser *)user error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if (!user) {
+        NSString *errorMessage = nil;
+        if (!error) {
+            NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            errorMessage = @"Uh oh. The user cancelled the Facebook login.";
+        } else {
+            NSLog(@"Uh oh. An error occurred: %@", error);
+            errorMessage = [error localizedDescription];
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In Error"
+                                                        message:errorMessage
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"Dismiss", nil];
+        [alert show];
+    } else {
+        WFAddReviewController* vc = [[WFAddReviewController alloc] init];
+        vc.delegate = self;
+        UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:navVC animated:YES completion:nil];
+    }
+}
 
 @end

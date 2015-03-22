@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol WFAddPhotoDelegate <NSObject>
+
+- (void) photosAdded:(NSArray*)photos;
+
+@end
+
 @interface WFAddPhotoViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, readwrite, nonatomic) id<WFAddPhotoDelegate> delegate;
 
 @end

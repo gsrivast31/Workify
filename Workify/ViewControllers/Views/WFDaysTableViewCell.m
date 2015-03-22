@@ -25,14 +25,48 @@
 
 - (void)cellDidLoad {
     [super cellDidLoad];
+    [self setTintColor:[UIColor clearColor]];
+    [self.anyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.monButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.tueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.wedButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.thursButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.friButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.satButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.sunButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+
+    [self.anyButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
+    [self.monButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
+    [self.tueButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
+    [self.wedButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
+    [self.thursButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
+    [self.friButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
+    [self.satButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
+    [self.sunButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
+    
+    [self.anyButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
+    [self.monButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
+    [self.tueButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
+    [self.wedButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
+    [self.thursButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
+    [self.friButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
+    [self.satButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
+    [self.sunButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)cellWillAppear {
     [super cellWillAppear];
+    [self.anyButton setSelected:YES];
+    [self.thursButton setSelected:YES];
 }
 
 - (void)cellDidDisappear {
     [super cellDidDisappear];
+}
+
+- (void)changeState:(id)sender {
+    UIButton* button = (UIButton*)sender;
+    button.selected = !button.selected;
 }
 
 @end

@@ -8,4 +8,6 @@
 
 @interface WFHelper : NSObject
 
++ (BOOL) isLoggedIn;
+
 @end

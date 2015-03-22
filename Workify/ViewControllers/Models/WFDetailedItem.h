@@ -16,5 +16,7 @@
 
 + (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle imageName:(NSString*)imageName;
 
++ (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle imageName:(NSString*)imageName selectionHandler:(void(^)(RETableViewItem *item))selectionHandler ;
+
 @end
 

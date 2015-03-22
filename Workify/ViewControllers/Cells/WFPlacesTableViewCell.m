@@ -36,6 +36,7 @@
     self.backgroundImageView.image = [UIImage imageNamed:@"bkgnd1"];
     
     self.nameLabel.text = @"MUMBAI";
+    self.nameLabel.font = [UIFont flatFontOfSize:17];
 }
 
 @end

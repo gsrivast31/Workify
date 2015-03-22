@@ -28,13 +28,17 @@ static const CGFloat kVerticalMargin = 5.0f;
         self.button = [[UIButton alloc] init];
         self.label = [[UILabel alloc] init];
         
-        [self.button setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
-        [self.button setImage:[UIImage imageNamed:@"check"] forState:UIControlStateDisabled];
-
+        [self.button setImage:[UIImage imageNamed:@"check"] forState:UIControlStateSelected];
+        [self.button setImage:[UIImage imageNamed:@"check-disabled"] forState:UIControlStateNormal];
+        [self.button addTarget:self action:@selector(changeState) forControlEvents:UIControlEventTouchUpInside];
         [self.label setFont:[UIFont flatFontOfSize:14]];
+        [self.label setUserInteractionEnabled:YES];
         
         [self addSubview:self.button];
         [self addSubview:self.label];
+        
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeState)];
+        [self.label addGestureRecognizer:gesture];
     }
     return self;
 }
@@ -46,6 +50,10 @@ static const CGFloat kVerticalMargin = 5.0f;
 
 - (void)setContent:(NSString*)value {
     self.label.text = value;
+}
+
+- (void)changeState {
+    self.button.selected = !self.button.selected;
 }
 
 @end

@@ -18,4 +18,13 @@
     return item;
 }
 
++ (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle imageName:(NSString*)imageName selectionHandler:(void(^)(RETableViewItem *item))selectionHandler {
+    WFDetailedItem* item = [[WFDetailedItem alloc] init];
+    item.name = title;
+    item.imagename = imageName;
+    item.value = subtitle;
+    item.selectionHandler = selectionHandler;
+    return item;
+}
+
 @end

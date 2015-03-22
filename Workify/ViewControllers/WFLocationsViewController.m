@@ -46,16 +46,35 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    self.title = @"Mumbai";
+    
     [self.sortButton addTarget:self action:@selector(showSortMenu:) forControlEvents:UIControlEventTouchUpInside];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconAdd"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(add:)];
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor turquoiseColor];
-
+    if(!self.navigationItem.leftBarButtonItem) {
+        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [backButton setImage:[[UIImage imageNamed:@"NavBarIconBack.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [backButton setTitle:self.navigationItem.backBarButtonItem.title forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(dismissSelf:) forControlEvents:UIControlEventTouchUpInside];
+        [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -10.0f, 0, 0)];
+        [backButton setAdjustsImageWhenHighlighted:NO];
+        
+        UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        [self.navigationItem setLeftBarButtonItem:backBarButtonItem];
+    }
+    
+    self.footerView.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8];
+    [self.filterButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
+    [self.filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.filterButton setTintColor:[UIColor whiteColor]];
+    [self.filterButton setImage:[UIImage imageNamed:@"filter"] forState:UIControlStateNormal];
+    [self.sortButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
+    [self.sortButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.sortButton setImage:[UIImage imageNamed:@"sort"] forState:UIControlStateNormal];
+    [self.sortButton setTintColor:[UIColor whiteColor]];
 }
 
-- (void)add:(id)sender {
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    [self presentViewController:[storyboard instantiateViewControllerWithIdentifier:@"addNavController"] animated:YES completion:nil];
+- (void)dismissSelf:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source

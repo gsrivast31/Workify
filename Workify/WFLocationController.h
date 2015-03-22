@@ -11,6 +11,8 @@
 
 typedef void (^IMCurrentLocationSuccessCallback)(CLLocation*);
 typedef void (^IMCurrentLocationFailureCallback)(NSError*);
+typedef void (^IMGeolocateSuccessCallback)(NSArray*);
+typedef void (^IMGeolocateFailureCallback)(NSError*);
 typedef void (^IMReverseGeolocateSuccessCallback)(NSArray*);
 typedef void (^IMReverseGeolocateFailureCallback)(NSError*);
 
@@ -22,6 +24,9 @@ typedef void (^IMReverseGeolocateFailureCallback)(NSError*);
 // Logic
 - (void)fetchUserLocationWithSuccess:(IMCurrentLocationSuccessCallback)successCallback
                              failure:(IMCurrentLocationFailureCallback)failureCallback;
+- (void)geocodeString:(NSString*)string
+          withSuccess:(IMGeolocateSuccessCallback)successCallback
+              failure:(IMGeolocateFailureCallback)failureCallback;
 - (void)reverseGeocodeLocation:(CLLocation *)location
                    withSuccess:(IMReverseGeolocateSuccessCallback)successCallback
                        failure:(IMReverseGeolocateFailureCallback)failureCallback;
