@@ -13,6 +13,7 @@
 
 - (id)init;
 - (void)setContent:(NSDictionary*)dict;
++ (CGFloat)heightWithText:(NSString*)text constrainedToWidth:(CGFloat)width;
 
 @end
 

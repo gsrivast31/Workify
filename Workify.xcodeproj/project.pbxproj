@@ -42,6 +42,8 @@
 		2D3A185E1ABF5E2F00D6A0B5 /* WFMapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A185D1ABF5E2F00D6A0B5 /* WFMapPin.m */; };
 		2D3A18611ABF5E4000D6A0B5 /* WFLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A18601ABF5E4000D6A0B5 /* WFLocationController.m */; };
 		2D3A18661ABF5E4F00D6A0B5 /* WFStringStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A18651ABF5E4F00D6A0B5 /* WFStringStore.m */; };
+		2D3A18691ABF893C00D6A0B5 /* WFSubTitleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A18681ABF893C00D6A0B5 /* WFSubTitleItem.m */; };
+		2D3A186C1ABF895500D6A0B5 /* WFSubTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A186B1ABF895500D6A0B5 /* WFSubTitleCell.m */; };
 		F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DE71A873258000040B5 /* WFTwoColumnItem.m */; };
 		F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DEF1A87654A000040B5 /* WFDetailSingleItemCell.m */; };
 		F4261DF21A87654A000040B5 /* WFDetailSingleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4261DF01A87654A000040B5 /* WFDetailSingleItemCell.xib */; };
@@ -198,6 +200,10 @@
 		2D3A18631ABF5E4F00D6A0B5 /* WFStringConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFStringConstants.h; path = Common/WFStringConstants.h; sourceTree = "<group>"; };
 		2D3A18641ABF5E4F00D6A0B5 /* WFStringStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFStringStore.h; path = Common/WFStringStore.h; sourceTree = "<group>"; };
 		2D3A18651ABF5E4F00D6A0B5 /* WFStringStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFStringStore.m; path = Common/WFStringStore.m; sourceTree = "<group>"; };
+		2D3A18671ABF893C00D6A0B5 /* WFSubTitleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFSubTitleItem.h; path = ViewControllers/Models/WFSubTitleItem.h; sourceTree = "<group>"; };
+		2D3A18681ABF893C00D6A0B5 /* WFSubTitleItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFSubTitleItem.m; path = ViewControllers/Models/WFSubTitleItem.m; sourceTree = "<group>"; };
+		2D3A186A1ABF895500D6A0B5 /* WFSubTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFSubTitleCell.h; path = ViewControllers/Views/WFSubTitleCell.h; sourceTree = "<group>"; };
+		2D3A186B1ABF895500D6A0B5 /* WFSubTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFSubTitleCell.m; path = ViewControllers/Views/WFSubTitleCell.m; sourceTree = "<group>"; };
 		47422309BA50442679966331 /* Pods-Workify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.debug.xcconfig"; sourceTree = "<group>"; };
 		F4195F47C08CA42427BE3646 /* Pods-Workify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.release.xcconfig"; sourceTree = "<group>"; };
 		F4261DE61A873258000040B5 /* WFTwoColumnItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTwoColumnItem.h; path = ViewControllers/Models/WFTwoColumnItem.h; sourceTree = "<group>"; };
@@ -804,6 +810,8 @@
 				2D1853231AB96E3E00404108 /* WFRatingCell.m */,
 				2D1853251ABAA61F00404108 /* WFButtonCell.h */,
 				2D1853261ABAA61F00404108 /* WFButtonCell.m */,
+				2D3A186A1ABF895500D6A0B5 /* WFSubTitleCell.h */,
+				2D3A186B1ABF895500D6A0B5 /* WFSubTitleCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -835,6 +843,8 @@
 				F4261E831A89F077000040B5 /* WFOptionItem.m */,
 				2D1853281ABAAE7A00404108 /* WFButtonItem.h */,
 				2D1853291ABAAE7A00404108 /* WFButtonItem.m */,
+				2D3A18671ABF893C00D6A0B5 /* WFSubTitleItem.h */,
+				2D3A18681ABF893C00D6A0B5 /* WFSubTitleItem.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1074,6 +1084,7 @@
 				F45C0BD51A83DB7900E221EE /* WFPlacesTableViewCell.m in Sources */,
 				F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */,
 				F45C0C681A84791F00E221EE /* UITableViewCell+FlatUI.m in Sources */,
+				2D3A186C1ABF895500D6A0B5 /* WFSubTitleCell.m in Sources */,
 				F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */,
 				F446F7661A86889B0020EEA4 /* WFDetailedViewItem.m in Sources */,
 				F45C0C651A84791F00E221EE /* UISlider+FlatUI.m in Sources */,
@@ -1092,6 +1103,7 @@
 				F45C0BD11A83DB5500E221EE /* WFLocationDetailViewController.m in Sources */,
 				F4261E4C1A88C96F000040B5 /* UIApplication+JTSImageViewController.m in Sources */,
 				F45C0C5B1A84791F00E221EE /* FUISwitch.m in Sources */,
+				2D3A18691ABF893C00D6A0B5 /* WFSubTitleItem.m in Sources */,
 				F45C0C621A84791F00E221EE /* UINavigationBar+FlatUI.m in Sources */,
 				F45C0C561A84791F00E221EE /* FUIAlertView.m in Sources */,
 				2D3A16351ABBFFE400D6A0B5 /* WFAddressViewController.m in Sources */,

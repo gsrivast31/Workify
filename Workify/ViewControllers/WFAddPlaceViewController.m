@@ -14,6 +14,7 @@
 #import "WFOptionItem.h"
 #import "WFOptionViewCell.h"
 #import "WFButtonItem.h"
+#import "WFSubTitleItem.h"
 
 #import "WFAddPhotoViewController.h"
 #import "WFLocationSearchViewController.h"
@@ -30,7 +31,7 @@
 @property (strong, readwrite, nonatomic) RETextItem *nameItem;
 @property (strong, readwrite, nonatomic) RETextItem *emailItem;
 @property (strong, readwrite, nonatomic) RETextItem *phoneItem;
-@property (strong, readwrite, nonatomic) RETableViewItem *addressItem;
+@property (strong, readwrite, nonatomic) WFSubTitleItem *addressItem;
 @property (strong, readwrite, nonatomic) RETextItem *websiteItem;
 @property (strong, readwrite, nonatomic) RETextItem *facebookItem;
 @property (strong, readwrite, nonatomic) RETextItem *twitterItem;
@@ -56,6 +57,7 @@
     self.manager[@"WFInputItem"] = @"WFInputViewCell";
     self.manager[@"WFOptionItem"] = @"WFOptionViewCell";
     self.manager[@"WFButtonItem"] = @"WFButtonCell";
+    self.manager[@"WFSubTitleItem"] = @"WFSubTitleCell";
     [self addTableEntries];
     
     self.saveButton.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8];
@@ -91,14 +93,14 @@
     [self addAddressSection];
     [self addSocialWebSection];
     [self addDescriptionSection];
-    [self addLocationTypeSection];
     [self addHoursSection];
     [self addWifiSection];
     [self addPricingSection];
+    [self addNoiseSection];
+    [self addLocationTypeSection];
     [self addFoodSection];
     [self addPowerSection];
     [self addSeatingSection];
-    [self addNoiseSection];
     [self addAmenitiesSection];
     [self addPhotosButton];
 }
@@ -128,16 +130,13 @@
     [self.manager addSection:section];
 
     __typeof (&*self) __weak weakSelf = self;
-    self.addressItem = [RETableViewItem itemWithTitle:@"No address added" accessoryType:  UITableViewCellAccessoryDisclosureIndicator selectionHandler:^(RETableViewItem *item) {
+    self.addressItem = [WFSubTitleItem itemWithTitle:@"No address added" subTitle:@"Tap to find it" accessoryType:UITableViewCellAccessoryNone selectionHandler:^(RETableViewItem *item) {
         WFLocationSearchViewController* vc = [[WFLocationSearchViewController alloc] init];
         vc.delegate = self;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
-    self.addressItem.style = UITableViewCellStyleSubtitle;
     self.addressItem.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.addressItem.detailLabelText = @"Tap to find it.";
-    self.addressItem.cellHeight = 60.0f;
-    
+
     [section addItem:self.addressItem];
 }
 
@@ -289,22 +288,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark -
-
-- (NSString*)addressString:(NSDictionary*)dict {
-    NSDictionary* addrDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              [dict objectForKey:kAddressStreet], kABPersonAddressStreetKey,
-                              [dict objectForKey:kAddressCity], kABPersonAddressCityKey,
-                              [dict objectForKey:kAddressState], kABPersonAddressStateKey,
-                              [dict objectForKey:kAddressZIP], kABPersonAddressZIPKey,
-                              [dict objectForKey:kAddressCountry], kABPersonAddressCountryKey,
-                              nil];
-    //NSString* addrString = CFBridgingRelease(CFBridgingRetain(ABCreateStringWithAddressDictionary(addrDict, NO)));
-    NSString* addrString = [[addrDict allValues] componentsJoinedByString:@","];
-    return addrString;
-}
-
-#pragma mark WFAddAddressDelegate 
+#pragma mark WFAddAddressDelegate
 
 - (void)addressAdded:(NSDictionary *)addressDictionary {
     double latitude, longitude;
@@ -312,8 +296,14 @@
     NSNumber* lon = (NSNumber*)[addressDictionary objectForKey:kAddressLongitude];
     if (lat) latitude = [lat doubleValue];
     if (lon) longitude = [lon doubleValue];
-    
-    self.addressItem.title = [self addressString:addressDictionary];
+
+    NSString* addrString  = [@[[addressDictionary objectForKey:kAddressStreet],
+                               [addressDictionary objectForKey:kAddressCity],
+                               [addressDictionary objectForKey:kAddressState],
+                               [addressDictionary objectForKey:kAddressZIP],
+                               [addressDictionary objectForKey:kAddressCountry]] componentsJoinedByString:@", "];
+
+    self.addressItem.title = addrString;
     self.addressItem.detailLabelText = @"Tap to change";
     
     [self.tableView reloadRowsAtIndexPaths:@[self.addressItem.indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
