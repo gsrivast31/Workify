@@ -44,6 +44,7 @@
 		2D3A18661ABF5E4F00D6A0B5 /* WFStringStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A18651ABF5E4F00D6A0B5 /* WFStringStore.m */; };
 		2D3A18691ABF893C00D6A0B5 /* WFSubTitleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A18681ABF893C00D6A0B5 /* WFSubTitleItem.m */; };
 		2D3A186C1ABF895500D6A0B5 /* WFSubTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A186B1ABF895500D6A0B5 /* WFSubTitleCell.m */; };
+		2D550F271AC03B01004A27AA /* WFAddURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D550F261AC03B01004A27AA /* WFAddURLViewController.m */; };
 		F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DE71A873258000040B5 /* WFTwoColumnItem.m */; };
 		F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DEF1A87654A000040B5 /* WFDetailSingleItemCell.m */; };
 		F4261DF21A87654A000040B5 /* WFDetailSingleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4261DF01A87654A000040B5 /* WFDetailSingleItemCell.xib */; };
@@ -204,6 +205,8 @@
 		2D3A18681ABF893C00D6A0B5 /* WFSubTitleItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFSubTitleItem.m; path = ViewControllers/Models/WFSubTitleItem.m; sourceTree = "<group>"; };
 		2D3A186A1ABF895500D6A0B5 /* WFSubTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFSubTitleCell.h; path = ViewControllers/Views/WFSubTitleCell.h; sourceTree = "<group>"; };
 		2D3A186B1ABF895500D6A0B5 /* WFSubTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFSubTitleCell.m; path = ViewControllers/Views/WFSubTitleCell.m; sourceTree = "<group>"; };
+		2D550F251AC03B01004A27AA /* WFAddURLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFAddURLViewController.h; path = ViewControllers/WFAddURLViewController.h; sourceTree = "<group>"; };
+		2D550F261AC03B01004A27AA /* WFAddURLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFAddURLViewController.m; path = ViewControllers/WFAddURLViewController.m; sourceTree = "<group>"; };
 		47422309BA50442679966331 /* Pods-Workify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.debug.xcconfig"; sourceTree = "<group>"; };
 		F4195F47C08CA42427BE3646 /* Pods-Workify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.release.xcconfig"; sourceTree = "<group>"; };
 		F4261DE61A873258000040B5 /* WFTwoColumnItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTwoColumnItem.h; path = ViewControllers/Models/WFTwoColumnItem.h; sourceTree = "<group>"; };
@@ -652,6 +655,8 @@
 				2D3A18431ABDEB0300D6A0B5 /* WFLoginViewController.m */,
 				2D3A18511ABED44D00D6A0B5 /* WFAddReviewController.h */,
 				2D3A18521ABED44D00D6A0B5 /* WFAddReviewController.m */,
+				2D550F251AC03B01004A27AA /* WFAddURLViewController.h */,
+				2D550F261AC03B01004A27AA /* WFAddURLViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1059,6 +1064,7 @@
 				2D3A185B1ABF5E2100D6A0B5 /* WFMapViewController.m in Sources */,
 				F45C0C571A84791F00E221EE /* FUIButton.m in Sources */,
 				F4261E811A89F050000040B5 /* WFOptionViewCell.m in Sources */,
+				2D550F271AC03B01004A27AA /* WFAddURLViewController.m in Sources */,
 				F45C0BC51A83DA8200E221EE /* WFCoreDataStack.m in Sources */,
 				F4261E661A88D6C4000040B5 /* WFFiltersViewController.m in Sources */,
 				2D3A18611ABF5E4000D6A0B5 /* WFLocationController.m in Sources */,

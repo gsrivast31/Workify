@@ -11,8 +11,10 @@
 #import "WFPhotoCell.h"
 #import "KRLCollectionViewGridLayout.h"
 #import "JTSImageViewController.h"
+#import "MZFormSheetPresentationController.h"
+#import "WFAddURLViewController.h"
 
-@interface WFAddPhotoViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate>
+@interface WFAddPhotoViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, WFAddURLDelegate>
 
 @property (nonatomic, strong) NSMutableArray *photosArray;
 
@@ -108,7 +110,7 @@ static NSString * const reuseIdentifier = @"photoCell";
 #pragma mark UIImagePickerControllerDelegate
 
 - (void)promptForSource {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Image Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Roll", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Image Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Roll", @"URL", nil];
     
     [actionSheet showInView:self.view];
 }
@@ -125,6 +127,14 @@ static NSString * const reuseIdentifier = @"photoCell";
     controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     controller.delegate = self;
     [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)promptForURL {
+    WFAddURLViewController* vc = [[WFAddURLViewController alloc] init];
+    vc.delegate = self;
+    
+    UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:navVC animated:YES completion:nil];
 }
 
 - (void) saveImage:(UIImage*)image {
@@ -159,10 +169,22 @@ static NSString * const reuseIdentifier = @"photoCell";
     if (buttonIndex != actionSheet.cancelButtonIndex) {
         if (buttonIndex == actionSheet.firstOtherButtonIndex) {
             [self promptForCamera];
-        } else {
+        } else if(buttonIndex == actionSheet.firstOtherButtonIndex + 1) {
             [self promptForPhotoRoll];
+        } else {
+            [self promptForURL];
         }
     }
+}
+
+#pragma mark WFAddURLDelegate
+
+- (void)urlsAdded:(NSArray *)urlArray {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)noUrlAdded {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

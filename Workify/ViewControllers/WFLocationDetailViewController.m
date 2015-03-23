@@ -17,8 +17,9 @@
 
 #import "WFMapViewController.h"
 #import <MessageUI/MessageUI.h>
+#import "MWPhotoBrowser.h"
 
-@interface WFLocationDetailViewController () <RETableViewManagerDelegate, WFDetailDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
+@interface WFLocationDetailViewController () <RETableViewManagerDelegate, WFDetailDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, MWPhotoBrowserDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *reviewsButton;
@@ -26,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @property (nonatomic, strong, readwrite) RETableViewManager *manager;
+@property (nonatomic, strong) NSMutableArray *photos;
+@property (nonatomic, strong) NSMutableArray *thumbs;
 
 @end
 
@@ -34,9 +37,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.photos = [[NSMutableArray alloc] init];
+    self.thumbs = [[NSMutableArray alloc] init];
+
     ParallaxHeaderView* headerView = [ParallaxHeaderView parallaxHeaderViewWithImage:[UIImage imageNamed:@"bkgnd1"] forSize:CGSizeMake(self.tableView.frame.size.width, 200)];
     headerView.headerTitleLabel.text = @"";
     self.tableView.tableHeaderView = headerView;
+    
+    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotos)];
+    [headerView addGestureRecognizer:gesture];
     
     self.tableView.tintColor = [UIColor turquoiseColor];
     self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView delegate:self];
@@ -53,6 +62,7 @@
     [self.photosButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.photosButton setTintColor:[UIColor whiteColor]];
     [self.photosButton setImage:[UIImage imageNamed:@"photos"] forState:UIControlStateNormal];
+    [self.photosButton addTarget:self action:@selector(showPhotos) forControlEvents:UIControlEventTouchUpInside];
 
     [self addTableEntries];
     
@@ -70,6 +80,12 @@
     
     UIBarButtonItem* shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
     self.navigationItem.rightBarButtonItem = shareItem;
+    
+    for (NSInteger i=0; i<5; i++) {
+        MWPhoto* photo = [MWPhoto photoWithImage:[UIImage imageNamed:@"splash"]];
+        [self.photos addObject:photo];
+        [self.thumbs addObject:photo];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -83,6 +99,27 @@
 
 - (void)share:(id)sender {
     
+}
+
+- (void)showPhotos {
+    // Create browser
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    browser.displayActionButton = YES;
+    browser.displayNavArrows = YES;
+    browser.displaySelectionButtons = NO;
+    browser.alwaysShowControls = NO;
+    browser.zoomPhotosToFill = YES;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+    browser.wantsFullScreenLayout = YES;
+#endif
+    browser.enableGrid = YES;
+    browser.startOnGrid = YES;
+    browser.enableSwipeToDismiss = YES;
+    [browser setCurrentPhotoIndex:0];
+    
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
+    nc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:nc animated:YES completion:nil];
 }
 
 #pragma mark -
@@ -281,6 +318,24 @@
     }
     
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return _photos.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < _photos.count)
+        return [_photos objectAtIndex:index];
+    return nil;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
+    if (index < _thumbs.count)
+        return [_thumbs objectAtIndex:index];
+    return nil;
 }
 
 @end
