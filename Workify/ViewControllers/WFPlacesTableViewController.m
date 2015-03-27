@@ -13,6 +13,7 @@
 #import "WFAppDelegate.h"
 #import "WFTooltipViewController.h"
 #import "WFIntroductionTooltipView.h"
+#import <Parse/Parse.h>
 
 @interface WFPlacesTableViewController () <WFTooltipViewControllerDelegate>
 
@@ -43,43 +44,42 @@
     [modalView present];
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (id)initWithCoder:(NSCoder *)aCoder {
+    self = [super initWithCoder:aCoder];
+    if (self) {
+        // The className to query on
+        self.parseClassName = kWFCityClassKey;
+        
+        // Whether the built-in pull-to-refresh is enabled
+        self.pullToRefreshEnabled = YES;
+        
+        // Whether the built-in pagination is enabled
+        self.paginationEnabled = NO;
+        
+        // The number of objects to show per page
+        // self.objectsPerPage = 10;
+        
+        // The Loading text clashes with the dark Anypic design
+        self.loadingViewEnabled = NO;
+    }
+    return self;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+- (PFQuery *)queryForTable {
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    [query orderByDescending:kWFCityLocationsCountKey];
+    return query;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     WFPlacesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"placeCell" forIndexPath:indexPath];
 
-    NSString* city;
-    NSInteger placeCount = 0;
-    NSString* imageName;
-    if (indexPath.row == 1) {
-        city = @"Mumbai";
-        imageName = @"Mumbai1";
-        placeCount = 5;
-    } else if (indexPath.row == 0) {
-        city = @"Bengaluru";
-        imageName = @"Bangalore";
-        placeCount = 20;
-    } else if (indexPath.row == 2) {
-        city = @"New Delhi";
-        imageName = @"Delhi1";
-    }
-    [cell configureCellWithCity:city locationsCount:placeCount imageName:imageName];
+    [cell configureCellWithObject:object];
+    
     return cell;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-}
-
-#pragma mark - Table view delegate 
+#pragma mark - Table view delegate
 
 #pragma mark WFTooltipViewControllerDelegate
 

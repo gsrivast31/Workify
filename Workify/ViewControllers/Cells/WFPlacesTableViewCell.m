@@ -9,9 +9,12 @@
 #import "WFPlacesTableViewCell.h"
 #import "WFMediaController.h"
 
+#import <ParseUI/ParseUI.h>
+#import <Parse/Parse.h>
+
 @interface WFPlacesTableViewCell()
 
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *backgroundImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
@@ -20,11 +23,22 @@
 
 @implementation WFPlacesTableViewCell
 
-- (void)awakeFromNib {
-}
+- (void)configureCellWithObject:(PFObject*)object {
+    self.backgroundImageView.image = [UIImage imageNamed:@"banner1"];
+    self.backgroundImageView.file = [object objectForKey:kWFCityDisplayPhotoKey];
+    
+    [self.backgroundImageView loadInBackground];
+    
+    self.nameLabel.font = [UIFont boldFlatFontOfSize:20];
+    self.nameLabel.text = [object objectForKey:kWFCityNameKey];
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+    self.statusLabel.font = [UIFont flatFontOfSize:14];
+    NSInteger locCount = [[object objectForKey:kWFCityLocationsCountKey] integerValue];
+    if (locCount == 0) {
+        self.statusLabel.text = @"( COMING SOON )";
+    } else {
+        self.statusLabel.text = [NSString stringWithFormat:@"%ld places", (long)locCount];
+    }
 }
 
 - (void)configureCellWithCity:(NSString *)city locationsCount:(NSInteger)count imageName:(NSString*)imageName {
@@ -38,7 +52,7 @@
     
     self.nameLabel.text = city;
     self.nameLabel.font = [UIFont boldFlatFontOfSize:20];
-    
+
     if (count == 0) {
         self.statusLabel.text = @"( COMING SOON )";
     } else {

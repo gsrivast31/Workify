@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class PFObject;
+
 @interface WFPlacesTableViewCell : UITableViewCell
 
-- (void)configureCellWithCity:(NSString*)city locationsCount:(NSInteger)count imageName:(NSString*)imageName;
+- (void)configureCellWithObject:(PFObject*)object;
 
 @end
