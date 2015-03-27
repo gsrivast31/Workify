@@ -53,6 +53,7 @@ static const CGFloat kVerticalMargin = 10.0;
 }
 
 - (void)layoutSubviews {
+    [super layoutSubviews];
     CGFloat horizontalMargin = kHorizontalMargin;
     if (REUIKitIsFlatMode() && self.section.style.contentViewMargin <= 0)
         horizontalMargin += 5.0;

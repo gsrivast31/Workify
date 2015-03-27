@@ -50,12 +50,16 @@ static const CGFloat kVerticalMargin = 5.0f;
     self.label.frame = CGRectMake(kRowSize + kHorizontalMargin, 0, self.frame.size.width - kRowSize - kHorizontalMargin, self.frame.size.height);
 }
 
-- (void)setContent:(NSString*)value {
-    self.label.text = value;
+- (void)setContent:(NSString*)text {
+    self.label.text = text;
 }
 
 - (void)changeState {
     self.button.selected = !self.button.selected;
+    self.value = self.button.selected;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(optionToggled)]) {
+        [self.delegate optionToggled];
+    }
 }
 
 + (CGFloat)heightWithText:(NSString*)text constrainedToWidth:(CGFloat)width{
@@ -64,16 +68,19 @@ static const CGFloat kVerticalMargin = 5.0f;
 
 @end
 
-
 @implementation WFOptionViewCell
 
 - (void)cellDidLoad {
     [super cellDidLoad];
     
+    self.viewsArray = [NSMutableArray array];
     if (self.itemCount > 0) {
         NSUInteger count = self.itemCount;
         while (count-- > 0) {
-            [self.contentView addSubview:[[WFSingleOptionView alloc] init]];
+            WFSingleOptionView* v = [[WFSingleOptionView alloc] init];
+            v.delegate = self;
+            [self.contentView addSubview:v];
+            [self.viewsArray addObject:v];
         }
     }
 }
@@ -81,12 +88,10 @@ static const CGFloat kVerticalMargin = 5.0f;
 - (void)cellWillAppear {
     [super cellWillAppear];
     
-    NSUInteger index= 0;
-    for (UIView* view in self.contentView.subviews) {
-        if ([view isKindOfClass:[WFSingleOptionView class]]) {
-            [(WFSingleOptionView*)view setContent:[self.item.options objectAtIndex:index]];
-            index++;
-        }
+    NSUInteger index = 0;
+    for (WFSingleOptionView* view in self.viewsArray) {
+        [view setContent:[self.item.options objectAtIndex:index]];
+        index++;
     }
 }
 
@@ -110,22 +115,20 @@ static const CGFloat kVerticalMargin = 5.0f;
     NSInteger index = 0;
     CGFloat optionWidth = frame.size.width/2.0f - 1.0;
     CGFloat leftOptionHeight = 0.0f, rightOptionHeight = 0.0f;
-    for (UIView* view in self.contentView.subviews) {
-        if ([view isKindOfClass:[WFSingleOptionView class]]) {
-            CGFloat optionHeight = [WFSingleOptionView heightWithText:[self.item.options objectAtIndex:index]  constrainedToWidth:optionWidth];
-            if (isLeft) {
-                leftOptionHeight = optionHeight;
-                [(WFSingleOptionView*)view setFrame:CGRectMake(frame.origin.x, startY, optionWidth, optionHeight)];
-            } else {
-                rightOptionHeight = optionHeight;
-                [(WFSingleOptionView*)view setFrame:CGRectMake(frame.origin.x + frame.size.width/2.0f + 1.0, startY, optionWidth, optionHeight)];
-                startY += MAX(leftOptionHeight, rightOptionHeight) + kVerticalMargin;
-                leftOptionHeight = rightOptionHeight = 0.0f;
-            }
-            isLeft = !isLeft;
-            ++index;
-            [view setNeedsLayout];
+    for (WFSingleOptionView* view in self.viewsArray) {
+        CGFloat optionHeight = [WFSingleOptionView heightWithText:[self.item.options objectAtIndex:index]  constrainedToWidth:optionWidth];
+        if (isLeft) {
+            leftOptionHeight = optionHeight;
+            [(WFSingleOptionView*)view setFrame:CGRectMake(frame.origin.x, startY, optionWidth, optionHeight)];
+        } else {
+            rightOptionHeight = optionHeight;
+            [(WFSingleOptionView*)view setFrame:CGRectMake(frame.origin.x + frame.size.width/2.0f + 1.0, startY, optionWidth, optionHeight)];
+            startY += MAX(leftOptionHeight, rightOptionHeight) + kVerticalMargin;
+            leftOptionHeight = rightOptionHeight = 0.0f;
         }
+        isLeft = !isLeft;
+        ++index;
+        [view setNeedsLayout];
     }
 }
 
@@ -158,5 +161,17 @@ static const CGFloat kVerticalMargin = 5.0f;
     return height;
 }
 
+#pragma mark WFSingleOptionDelegate
+
+- (void)optionToggled {
+    NSMutableArray* array = [NSMutableArray array];
+    for (WFSingleOptionView* view in self.viewsArray) {
+        [array addObject:[NSNumber numberWithBool:view.value]];
+    }
+    self.item.value = [array copy];
+    
+    //BOOL val = ![self.item.value[index] boolValue];
+    //self.item.value[index] =  [NSNumber numberWithBool:val];
+}
 
 @end

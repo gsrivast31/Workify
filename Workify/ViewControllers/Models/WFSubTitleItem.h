@@ -12,4 +12,6 @@
 
 + (instancetype)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle accessoryType:(UITableViewCellAccessoryType)accessoryType selectionHandler:(void(^)(RETableViewItem *item))selectionHandler;
 
+@property (nonatomic, copy, readwrite) NSDictionary* value;
+
 @end

@@ -15,7 +15,7 @@
 
 @end
 
-@interface WFAddReviewController : UIViewController
+@interface WFAddReviewController : UITableViewController
 
 @property (nonatomic, strong) id <WFAddReviewDelegate> delegate;
 

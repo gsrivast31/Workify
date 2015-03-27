@@ -15,6 +15,8 @@
 		2D18532A1ABAAE7A00404108 /* WFButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1853291ABAAE7A00404108 /* WFButtonItem.m */; };
 		2D18532D1ABAF56A00404108 /* WFSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18532C1ABAF56A00404108 /* WFSideMenuViewController.m */; };
 		2D1853301ABAF6F800404108 /* WFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18532F1ABAF6F800404108 /* WFNavigationController.m */; };
+		2D1D82921AC0C165008F48C5 /* WFReviewViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1D82901AC0C165008F48C5 /* WFReviewViewCell.m */; };
+		2D1D82961AC0C18E008F48C5 /* WFReviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1D82951AC0C18E008F48C5 /* WFReviewItem.m */; };
 		2D3A162F1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A162E1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.m */; };
 		2D3A16351ABBFFE400D6A0B5 /* WFAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A16341ABBFFE400D6A0B5 /* WFAddressViewController.m */; };
 		2D3A16371ABC407E00D6A0B5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A16361ABC407E00D6A0B5 /* MapKit.framework */; };
@@ -45,6 +47,12 @@
 		2D3A18691ABF893C00D6A0B5 /* WFSubTitleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A18681ABF893C00D6A0B5 /* WFSubTitleItem.m */; };
 		2D3A186C1ABF895500D6A0B5 /* WFSubTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A186B1ABF895500D6A0B5 /* WFSubTitleCell.m */; };
 		2D550F271AC03B01004A27AA /* WFAddURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D550F261AC03B01004A27AA /* WFAddURLViewController.m */; };
+		2DF6E3B21AC4B92600B51EEC /* WFParseConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3B11AC4B92600B51EEC /* WFParseConstants.m */; };
+		2DF6E3CA1AC5486100B51EEC /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C11AC5486100B51EEC /* UIImage+Alpha.m */; };
+		2DF6E3CB1AC5486100B51EEC /* UIImage+AlphaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C31AC5486100B51EEC /* UIImage+AlphaAdditions.m */; };
+		2DF6E3CC1AC5486100B51EEC /* UIImage+ResizeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C51AC5486100B51EEC /* UIImage+ResizeAdditions.m */; };
+		2DF6E3CD1AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C71AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m */; };
+		2DF6E3CE1AC5486100B51EEC /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C91AC5486100B51EEC /* UIView+Animation.m */; };
 		F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DE71A873258000040B5 /* WFTwoColumnItem.m */; };
 		F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DEF1A87654A000040B5 /* WFDetailSingleItemCell.m */; };
 		F4261DF21A87654A000040B5 /* WFDetailSingleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4261DF01A87654A000040B5 /* WFDetailSingleItemCell.xib */; };
@@ -67,7 +75,6 @@
 		F4261E631A88CEBA000040B5 /* SGSheetMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E5E1A88CEBA000040B5 /* SGSheetMenu.m */; };
 		F4261E661A88D6C4000040B5 /* WFFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E651A88D6C4000040B5 /* WFFiltersViewController.m */; };
 		F4261E691A88F3F3000040B5 /* WFAddPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E681A88F3F3000040B5 /* WFAddPlaceViewController.m */; };
-		F4261E6C1A88F4C2000040B5 /* WFAddPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E6B1A88F4C2000040B5 /* WFAddPhotoViewController.m */; };
 		F4261E6F1A8926CE000040B5 /* WFMultilineTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E6E1A8926CE000040B5 /* WFMultilineTextItem.m */; };
 		F4261E721A892715000040B5 /* WFMultilineTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E711A892715000040B5 /* WFMultilineTextCell.m */; };
 		F4261E751A892C30000040B5 /* WFHourViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261E741A892C30000040B5 /* WFHourViewCell.m */; };
@@ -126,7 +133,6 @@
 		F45C0CC71A84F98100E221EE /* WFTagViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CC61A84F98100E221EE /* WFTagViewCell.m */; };
 		F45C0CE31A854C2A00E221EE /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CE21A854C2A00E221EE /* DWTagList.m */; };
 		F45C0D051A85596D00E221EE /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CF81A85596C00E221EE /* ParallaxHeaderView.m */; };
-		F45C0D061A85596D00E221EE /* WFReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CFA1A85596C00E221EE /* WFReviewCell.m */; };
 		F45C0D081A85596D00E221EE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0CFE1A85596C00E221EE /* UIImage+ImageEffects.m */; };
 		F45C0D0B1A85DA0900E221EE /* WFLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0D0A1A85DA0900E221EE /* WFLocationsViewController.m */; };
 		F45C0D391A85E99F00E221EE /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45C0D381A85E99F00E221EE /* TTUITableViewZoomController.m */; };
@@ -160,6 +166,10 @@
 		2D18532C1ABAF56A00404108 /* WFSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFSideMenuViewController.m; path = ViewControllers/WFSideMenuViewController.m; sourceTree = "<group>"; };
 		2D18532E1ABAF6F800404108 /* WFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFNavigationController.h; path = ViewControllers/WFNavigationController.h; sourceTree = "<group>"; };
 		2D18532F1ABAF6F800404108 /* WFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFNavigationController.m; path = ViewControllers/WFNavigationController.m; sourceTree = "<group>"; };
+		2D1D828F1AC0C165008F48C5 /* WFReviewViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFReviewViewCell.h; path = ViewControllers/Views/WFReviewViewCell.h; sourceTree = "<group>"; };
+		2D1D82901AC0C165008F48C5 /* WFReviewViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFReviewViewCell.m; path = ViewControllers/Views/WFReviewViewCell.m; sourceTree = "<group>"; };
+		2D1D82941AC0C18E008F48C5 /* WFReviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFReviewItem.h; path = ViewControllers/Models/WFReviewItem.h; sourceTree = "<group>"; };
+		2D1D82951AC0C18E008F48C5 /* WFReviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFReviewItem.m; path = ViewControllers/Models/WFReviewItem.m; sourceTree = "<group>"; };
 		2D3A162D1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFLocationSearchViewController.h; path = ViewControllers/WFLocationSearchViewController.h; sourceTree = "<group>"; };
 		2D3A162E1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFLocationSearchViewController.m; path = ViewControllers/WFLocationSearchViewController.m; sourceTree = "<group>"; };
 		2D3A16331ABBFFE400D6A0B5 /* WFAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFAddressViewController.h; path = ViewControllers/WFAddressViewController.h; sourceTree = "<group>"; };
@@ -207,6 +217,19 @@
 		2D3A186B1ABF895500D6A0B5 /* WFSubTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFSubTitleCell.m; path = ViewControllers/Views/WFSubTitleCell.m; sourceTree = "<group>"; };
 		2D550F251AC03B01004A27AA /* WFAddURLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFAddURLViewController.h; path = ViewControllers/WFAddURLViewController.h; sourceTree = "<group>"; };
 		2D550F261AC03B01004A27AA /* WFAddURLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFAddURLViewController.m; path = ViewControllers/WFAddURLViewController.m; sourceTree = "<group>"; };
+		2DF6E3B11AC4B92600B51EEC /* WFParseConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFParseConstants.m; path = Common/WFParseConstants.m; sourceTree = "<group>"; };
+		2DF6E3C01AC5486100B51EEC /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "Categories/UIImage+Alpha.h"; sourceTree = "<group>"; };
+		2DF6E3C11AC5486100B51EEC /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "Categories/UIImage+Alpha.m"; sourceTree = "<group>"; };
+		2DF6E3C21AC5486100B51EEC /* UIImage+AlphaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+AlphaAdditions.h"; path = "Categories/UIImage+AlphaAdditions.h"; sourceTree = "<group>"; };
+		2DF6E3C31AC5486100B51EEC /* UIImage+AlphaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+AlphaAdditions.m"; path = "Categories/UIImage+AlphaAdditions.m"; sourceTree = "<group>"; };
+		2DF6E3C41AC5486100B51EEC /* UIImage+ResizeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ResizeAdditions.h"; path = "Categories/UIImage+ResizeAdditions.h"; sourceTree = "<group>"; };
+		2DF6E3C51AC5486100B51EEC /* UIImage+ResizeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ResizeAdditions.m"; path = "Categories/UIImage+ResizeAdditions.m"; sourceTree = "<group>"; };
+		2DF6E3C61AC5486100B51EEC /* UIImage+RoundedCornerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCornerAdditions.h"; path = "Categories/UIImage+RoundedCornerAdditions.h"; sourceTree = "<group>"; };
+		2DF6E3C71AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCornerAdditions.m"; path = "Categories/UIImage+RoundedCornerAdditions.m"; sourceTree = "<group>"; };
+		2DF6E3C81AC5486100B51EEC /* UIView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Animation.h"; path = "Categories/UIView+Animation.h"; sourceTree = "<group>"; };
+		2DF6E3C91AC5486100B51EEC /* UIView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Animation.m"; path = "Categories/UIView+Animation.m"; sourceTree = "<group>"; };
+		2DF6E3CF1AC5487100B51EEC /* WFCredentials.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WFCredentials.h; path = Common/WFCredentials.h; sourceTree = "<group>"; };
+		2DF6E3D01AC5487100B51EEC /* WFParseConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WFParseConstants.h; path = Common/WFParseConstants.h; sourceTree = "<group>"; };
 		47422309BA50442679966331 /* Pods-Workify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.debug.xcconfig"; sourceTree = "<group>"; };
 		F4195F47C08CA42427BE3646 /* Pods-Workify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.release.xcconfig"; sourceTree = "<group>"; };
 		F4261DE61A873258000040B5 /* WFTwoColumnItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTwoColumnItem.h; path = ViewControllers/Models/WFTwoColumnItem.h; sourceTree = "<group>"; };
@@ -251,8 +274,6 @@
 		F4261E651A88D6C4000040B5 /* WFFiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFFiltersViewController.m; path = ViewControllers/WFFiltersViewController.m; sourceTree = "<group>"; };
 		F4261E671A88F3F3000040B5 /* WFAddPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFAddPlaceViewController.h; path = ViewControllers/WFAddPlaceViewController.h; sourceTree = "<group>"; };
 		F4261E681A88F3F3000040B5 /* WFAddPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFAddPlaceViewController.m; path = ViewControllers/WFAddPlaceViewController.m; sourceTree = "<group>"; };
-		F4261E6A1A88F4C2000040B5 /* WFAddPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFAddPhotoViewController.h; path = ViewControllers/WFAddPhotoViewController.h; sourceTree = "<group>"; };
-		F4261E6B1A88F4C2000040B5 /* WFAddPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFAddPhotoViewController.m; path = ViewControllers/WFAddPhotoViewController.m; sourceTree = "<group>"; };
 		F4261E6D1A8926CE000040B5 /* WFMultilineTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFMultilineTextItem.h; path = ViewControllers/Models/WFMultilineTextItem.h; sourceTree = "<group>"; };
 		F4261E6E1A8926CE000040B5 /* WFMultilineTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFMultilineTextItem.m; path = ViewControllers/Models/WFMultilineTextItem.m; sourceTree = "<group>"; };
 		F4261E701A892715000040B5 /* WFMultilineTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFMultilineTextCell.h; path = ViewControllers/Views/WFMultilineTextCell.h; sourceTree = "<group>"; };
@@ -271,7 +292,7 @@
 		F446F75F1A8651AE0020EEA4 /* WFDetailedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFDetailedItem.m; path = ViewControllers/Models/WFDetailedItem.m; sourceTree = "<group>"; };
 		F446F7641A86889B0020EEA4 /* WFDetailedViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFDetailedViewItem.h; path = ViewControllers/Models/WFDetailedViewItem.h; sourceTree = "<group>"; };
 		F446F7651A86889B0020EEA4 /* WFDetailedViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFDetailedViewItem.m; path = ViewControllers/Models/WFDetailedViewItem.m; sourceTree = "<group>"; };
-		F45C0B921A83D93400E221EE /* Workify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workify.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F45C0B921A83D93400E221EE /* Workfrom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workfrom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F45C0B961A83D93400E221EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F45C0B971A83D93400E221EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F45C0B991A83D93400E221EE /* WFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFAppDelegate.h; sourceTree = "<group>"; };
@@ -364,8 +385,6 @@
 		F45C0CE21A854C2A00E221EE /* DWTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWTagList.m; sourceTree = "<group>"; };
 		F45C0CF71A85596C00E221EE /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxHeaderView.h; sourceTree = "<group>"; };
 		F45C0CF81A85596C00E221EE /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
-		F45C0CF91A85596C00E221EE /* WFReviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFReviewCell.h; path = Vendors/ParallaxTableViewHeader/WFReviewCell.h; sourceTree = "<group>"; };
-		F45C0CFA1A85596C00E221EE /* WFReviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFReviewCell.m; path = Vendors/ParallaxTableViewHeader/WFReviewCell.m; sourceTree = "<group>"; };
 		F45C0CFD1A85596C00E221EE /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		F45C0CFE1A85596C00E221EE /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		F45C0D091A85DA0900E221EE /* WFLocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFLocationsViewController.h; path = ViewControllers/WFLocationsViewController.h; sourceTree = "<group>"; };
@@ -442,6 +461,16 @@
 		2D3A183D1ABD984800D6A0B5 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				2DF6E3C01AC5486100B51EEC /* UIImage+Alpha.h */,
+				2DF6E3C11AC5486100B51EEC /* UIImage+Alpha.m */,
+				2DF6E3C21AC5486100B51EEC /* UIImage+AlphaAdditions.h */,
+				2DF6E3C31AC5486100B51EEC /* UIImage+AlphaAdditions.m */,
+				2DF6E3C41AC5486100B51EEC /* UIImage+ResizeAdditions.h */,
+				2DF6E3C51AC5486100B51EEC /* UIImage+ResizeAdditions.m */,
+				2DF6E3C61AC5486100B51EEC /* UIImage+RoundedCornerAdditions.h */,
+				2DF6E3C71AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m */,
+				2DF6E3C81AC5486100B51EEC /* UIView+Animation.h */,
+				2DF6E3C91AC5486100B51EEC /* UIView+Animation.m */,
 				2D3A183E1ABD989A00D6A0B5 /* UIView+Animation.h */,
 				2D3A183F1ABD989A00D6A0B5 /* UIView+Animation.m */,
 			);
@@ -543,7 +572,7 @@
 		F45C0B931A83D93400E221EE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F45C0B921A83D93400E221EE /* Workify.app */,
+				F45C0B921A83D93400E221EE /* Workfrom.app */,
 				F45C0BAB1A83D93400E221EE /* WorkifyTests.xctest */,
 			);
 			name = Products;
@@ -608,6 +637,8 @@
 		F45C0BBC1A83D94600E221EE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2DF6E3CF1AC5487100B51EEC /* WFCredentials.h */,
+				2DF6E3D01AC5487100B51EEC /* WFParseConstants.h */,
 				2D3A18621ABF5E4F00D6A0B5 /* WFEnumConstants.h */,
 				2D3A18631ABF5E4F00D6A0B5 /* WFStringConstants.h */,
 				2D3A18641ABF5E4F00D6A0B5 /* WFStringStore.h */,
@@ -615,6 +646,7 @@
 				F45C0BBF1A83DA1500E221EE /* WFCommon.h */,
 				F45C0BC01A83DA5300E221EE /* WFHelper.h */,
 				F45C0BC11A83DA5300E221EE /* WFHelper.m */,
+				2DF6E3B11AC4B92600B51EEC /* WFParseConstants.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -643,8 +675,6 @@
 				F4261E651A88D6C4000040B5 /* WFFiltersViewController.m */,
 				F4261E671A88F3F3000040B5 /* WFAddPlaceViewController.h */,
 				F4261E681A88F3F3000040B5 /* WFAddPlaceViewController.m */,
-				F4261E6A1A88F4C2000040B5 /* WFAddPhotoViewController.h */,
-				F4261E6B1A88F4C2000040B5 /* WFAddPhotoViewController.m */,
 				2D18532B1ABAF56A00404108 /* WFSideMenuViewController.h */,
 				2D18532C1ABAF56A00404108 /* WFSideMenuViewController.m */,
 				2D3A162D1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.h */,
@@ -664,8 +694,6 @@
 		F45C0BD21A83DB6100E221EE /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				F45C0CF91A85596C00E221EE /* WFReviewCell.h */,
-				F45C0CFA1A85596C00E221EE /* WFReviewCell.m */,
 				F45C0BD31A83DB7900E221EE /* WFPlacesTableViewCell.h */,
 				F45C0BD41A83DB7900E221EE /* WFPlacesTableViewCell.m */,
 				F45C0BD61A83DB8800E221EE /* WFLocationTableViewCell.h */,
@@ -817,6 +845,8 @@
 				2D1853261ABAA61F00404108 /* WFButtonCell.m */,
 				2D3A186A1ABF895500D6A0B5 /* WFSubTitleCell.h */,
 				2D3A186B1ABF895500D6A0B5 /* WFSubTitleCell.m */,
+				2D1D828F1AC0C165008F48C5 /* WFReviewViewCell.h */,
+				2D1D82901AC0C165008F48C5 /* WFReviewViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -850,6 +880,8 @@
 				2D1853291ABAAE7A00404108 /* WFButtonItem.m */,
 				2D3A18671ABF893C00D6A0B5 /* WFSubTitleItem.h */,
 				2D3A18681ABF893C00D6A0B5 /* WFSubTitleItem.m */,
+				2D1D82941AC0C18E008F48C5 /* WFReviewItem.h */,
+				2D1D82951AC0C18E008F48C5 /* WFReviewItem.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -902,7 +934,7 @@
 			);
 			name = Workify;
 			productName = Workify;
-			productReference = F45C0B921A83D93400E221EE /* Workify.app */;
+			productReference = F45C0B921A83D93400E221EE /* Workfrom.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F45C0BAA1A83D93400E221EE /* WorkifyTests */ = {
@@ -1043,6 +1075,7 @@
 				F4261E621A88CEBA000040B5 /* SGGridMenu.m in Sources */,
 				F45C0CC41A84F91100E221EE /* WFTagItem.m in Sources */,
 				F45C0C671A84791F00E221EE /* UITabBar+FlatUI.m in Sources */,
+				2D1D82961AC0C18E008F48C5 /* WFReviewItem.m in Sources */,
 				F4261E611A88CEBA000040B5 /* SGBaseMenu.m in Sources */,
 				2D1853211AB8A55600404108 /* WFFullTextView.m in Sources */,
 				F4261DFA1A88A8A1000040B5 /* WFReviewsViewController.m in Sources */,
@@ -1058,6 +1091,7 @@
 				2D3A184D1ABDF8C000D6A0B5 /* WFTooltipViewController.m in Sources */,
 				F45C0CB61A84DD8E00E221EE /* WFStepperItem.m in Sources */,
 				F45C0CC71A84F98100E221EE /* WFTagViewCell.m in Sources */,
+				2D1D82921AC0C165008F48C5 /* WFReviewViewCell.m in Sources */,
 				F4261E481A88C96F000040B5 /* JTSAnimatedGIFUtility.m in Sources */,
 				F4261E7B1A89D603000040B5 /* WFInputViewCell.m in Sources */,
 				2D18532D1ABAF56A00404108 /* WFSideMenuViewController.m in Sources */,
@@ -1067,7 +1101,9 @@
 				2D550F271AC03B01004A27AA /* WFAddURLViewController.m in Sources */,
 				F45C0BC51A83DA8200E221EE /* WFCoreDataStack.m in Sources */,
 				F4261E661A88D6C4000040B5 /* WFFiltersViewController.m in Sources */,
+				2DF6E3B21AC4B92600B51EEC /* WFParseConstants.m in Sources */,
 				2D3A18611ABF5E4000D6A0B5 /* WFLocationController.m in Sources */,
+				2DF6E3CB1AC5486100B51EEC /* UIImage+AlphaAdditions.m in Sources */,
 				F45C0C5D1A84791F00E221EE /* NSString+Icons.m in Sources */,
 				2D1853241AB96E3E00404108 /* WFRatingCell.m in Sources */,
 				F45C0C601A84791F00E221EE /* UIFont+FlatUI.m in Sources */,
@@ -1111,23 +1147,25 @@
 				F45C0C5B1A84791F00E221EE /* FUISwitch.m in Sources */,
 				2D3A18691ABF893C00D6A0B5 /* WFSubTitleItem.m in Sources */,
 				F45C0C621A84791F00E221EE /* UINavigationBar+FlatUI.m in Sources */,
+				2DF6E3CD1AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m in Sources */,
 				F45C0C561A84791F00E221EE /* FUIAlertView.m in Sources */,
 				2D3A16351ABBFFE400D6A0B5 /* WFAddressViewController.m in Sources */,
 				F45C0C5C1A84791F00E221EE /* FUITextField.m in Sources */,
 				F45C0CE31A854C2A00E221EE /* DWTagList.m in Sources */,
+				2DF6E3CC1AC5486100B51EEC /* UIImage+ResizeAdditions.m in Sources */,
 				F4261E4B1A88C96F000040B5 /* JTSSimpleImageDownloader.m in Sources */,
 				F45C0C691A84791F00E221EE /* UIToolbar+FlatUI.m in Sources */,
+				2DF6E3CA1AC5486100B51EEC /* UIImage+Alpha.m in Sources */,
 				2D3A18661ABF5E4F00D6A0B5 /* WFStringStore.m in Sources */,
 				F45C0C611A84791F00E221EE /* UIImage+FlatUI.m in Sources */,
 				F45C0C661A84791F00E221EE /* UIStepper+FlatUI.m in Sources */,
 				F45C0CAC1A84BC2700E221EE /* WFDaysTableViewCell.m in Sources */,
 				F45C0BD81A83DB8800E221EE /* WFLocationTableViewCell.m in Sources */,
-				F45C0D061A85596D00E221EE /* WFReviewCell.m in Sources */,
 				F446F7601A8651AE0020EEA4 /* WFDetailedItem.m in Sources */,
 				F4261DF61A87CE2E000040B5 /* WFTwoColumnViewCell.m in Sources */,
 				2D3A184E1ABDF8C000D6A0B5 /* WFIntroductionTooltipView.m in Sources */,
 				F4261E751A892C30000040B5 /* WFHourViewCell.m in Sources */,
-				F4261E6C1A88F4C2000040B5 /* WFAddPhotoViewController.m in Sources */,
+				2DF6E3CE1AC5486100B51EEC /* UIView+Animation.m in Sources */,
 				F45C0D0B1A85DA0900E221EE /* WFLocationsViewController.m in Sources */,
 				2D3A185E1ABF5E2F00D6A0B5 /* WFMapPin.m in Sources */,
 			);
@@ -1262,7 +1300,7 @@
 				INFOPLIST_FILE = Workify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Workfrom;
 			};
 			name = Debug;
 		};
@@ -1281,7 +1319,7 @@
 				INFOPLIST_FILE = Workify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Workfrom;
 			};
 			name = Release;
 		};
@@ -1300,7 +1338,7 @@
 				INFOPLIST_FILE = WorkifyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workify.app/Workify";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfrom.app/Workfrom";
 			};
 			name = Debug;
 		};
@@ -1315,7 +1353,7 @@
 				INFOPLIST_FILE = WorkifyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workify.app/Workify";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfrom.app/Workfrom";
 			};
 			name = Release;
 		};

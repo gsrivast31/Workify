@@ -10,10 +10,15 @@
 #define Workify_WFCommon_h
 
 #import "WFStringConstants.h"
+#import "WFParseConstants.h"
 #import "WFEnumConstants.h"
+#import "WFCredentials.h"
 
-static NSString* const APP_NAME = @"Workify";
-static NSString* const kErrorDomain = @"com.memoir.workify";
+static NSString* const APP_NAME = @"Workfrom";
+static NSString* const APP_ID = @"979220877";
+static NSString* const APP_URL = @"https://itunes.apple.com/app/id/id979220877";
+
+static NSString* const kErrorDomain = @"com.memoir.workfrom";
 
 static NSString * const kHasSeenStarterTooltip = @"kHasSeenStarterTooltip";
 

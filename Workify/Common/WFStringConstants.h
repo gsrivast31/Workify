@@ -28,6 +28,11 @@ static NSString* const kWifiSpeed2Mbps = @"2 Mbps";
 static NSString* const kWifiSpeed4Mbps = @"4 Mbps";
 static NSString* const kWifiSpeed10Mbps = @"10 Mbps";
 
+//Pricing
+static NSString* const kPriceDayPassKey = @"dayPass";
+static NSString* const kPriceWeekPassKey = @"weekPass";
+static NSString* const kPriceMonthPassKey = @"monthPass";
+
 //Noise
 static NSString* const kNoiseSilence = @"Silence";
 static NSString* const kNoiseAverage = @"Avg. Noisy";
@@ -62,6 +67,15 @@ static NSString* const kAmenityDogFriendly = @"Dog Friendly";
 static NSString* const kAmenityKidFriendly = @"Kid Friendly";
 static NSString* const kAmenityWashroom = @"Washroom";
 static NSString* const kAmenityParking = @"Parking";
+
+//Days
+static NSString* const kMonday = @"Monday";
+static NSString* const kTuesday = @"Tuesday";
+static NSString* const kWednesday = @"Wednesday";
+static NSString* const kThursday = @"Thursday";
+static NSString* const kFriday = @"Friday";
+static NSString* const kSaturday = @"Saturday";
+static NSString* const kSunday = @"Sunday";
 
 //Address
 static NSString* const kAddressStreet = @"ThoroughFare";

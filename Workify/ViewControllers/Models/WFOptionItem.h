@@ -11,6 +11,8 @@
 @interface WFOptionItem : RETableViewItem
 
 @property (nonatomic, copy, readwrite) NSArray* options;
+@property (nonatomic, copy, readwrite) NSArray* value;
+
 + (WFOptionItem*)itemWithOptions:(NSArray*)option;
 
 @end

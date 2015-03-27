@@ -11,8 +11,6 @@
 #import "WFDayItem.h"
 #import "WFStepperItem.h"
 #import "WFRatingItem.h"
-#import "WFTagItem.h"
-#import "WFTagViewCell.h"
 
 @interface WFFiltersViewController () <RETableViewManagerDelegate>
 
@@ -20,14 +18,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
 
 @property (nonatomic, strong, readwrite) RETableViewManager *manager;
-@property (nonatomic, strong, readwrite) RETableViewSection *spaceSection;
-@property (nonatomic, strong, readwrite) RETableViewSection *daysSection;
-@property (nonatomic, strong, readwrite) RETableViewSection *ratingSection;
-@property (nonatomic, strong, readwrite) RETableViewSection *wifiSection;
-@property (nonatomic, strong, readwrite) RETableViewSection *noiseSection;
-@property (nonatomic, strong, readwrite) RETableViewSection *foodSection;
-@property (nonatomic, strong, readwrite) RETableViewSection *seatingSection;
-@property (nonatomic, strong, readwrite) RETableViewSection *powerSection;
+//@property (nonatomic, strong) NSMutableArray* spaceTypeItemsArray;
+@property (nonatomic, strong) WFDayItem* dayItem;
+@property (nonatomic, strong) WFRatingItem* ratingItem;
+@property (nonatomic, strong) WFStepperItem* wifiItem;
+@property (nonatomic, strong) RESegmentedItem* spaceTypeItem;
 
 @end
 
@@ -37,20 +32,12 @@
     [super viewDidLoad];
     self.title = @"Filters";
     
+//    self.spaceTypeItemsArray = [[NSMutableArray alloc] init];
     self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView delegate:self];
     self.manager[@"WFDayItem"] = @"WFDaysTableViewCell";
     self.manager[@"WFStepperItem"] = @"WFStepperTableViewCell";
     self.manager[@"WFRatingItem"] = @"WFRatingCell";
-    self.manager[@"WFTagItem"] = @"WFTagViewCell";
-    self.manager[@"WFDetailedItem"] = @"RETableViewCell";
-    self.spaceSection = [self addSpaceTypeControls];
-    self.daysSection = [self addDaysControls];
-    self.ratingSection = [self addRatingControls];
-    self.wifiSection = [self addWifiControls];
-    self.noiseSection = [self addNoiseControls];
-    self.foodSection = [self addFoodControls];
-    self.seatingSection = [self addSeatingControls];
-    self.powerSection = [self addPowerControls];
+    [self addTableEntries];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconCancel"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconSave"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
@@ -58,6 +45,9 @@
     self.clearButton.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8];
     [self.clearButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
     [self.clearButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.clearButton addTarget:self action:@selector(clear:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)cancel:(id)sender {
@@ -65,62 +55,120 @@
 }
 
 - (void)save:(id)sender {
+    /*NSMutableArray* spaceTypeValues = [NSMutableArray array];
     
+    for (RETableViewItem* item in self.spaceTypeItemsArray) {
+        if (item.accessoryType == UITableViewCellAccessoryCheckmark) {
+            WFSpaceType type = (WFSpaceType)[WFStringStore spaceTypeIndex:item.title];
+            [spaceTypeValues addObject:[NSNumber numberWithInteger:type]];
+        }
+    }
+    */
+    NSNumber* spaceType = [NSNumber numberWithInteger:self.spaceTypeItem.value];
+    NSArray* dayValues = self.dayItem.value;
+    NSNumber* minimumRatings = self.ratingItem.value;
+    NSNumber* minimumWifi = [NSNumber numberWithInteger:[WFStringStore wifiSpeedIndex:self.wifiItem.value]];
+    
+    NSDictionary* filterDict = @{@"spaceFilters":spaceType,
+                                 @"dayFilters": dayValues,
+                                 @"ratingFilters": minimumRatings,
+                                 @"wifiFilters": minimumWifi};
+    if (self.delegate && [self.delegate respondsToSelector:@selector(filtersAdded:)]) {
+        [self.delegate filtersAdded:filterDict];
+    }
 }
 
 - (void)clear:(id)sender {
+/*    for (RETableViewItem* item in self.spaceTypeItemsArray) {
+        item.accessoryType = UITableViewCellAccessoryCheckmark;
+        [item reloadRowWithAnimation:UITableViewRowAnimationAutomatic];
+    }
+  */
+    self.spaceTypeItem.value = -1;
+    [self.spaceTypeItem reloadRowWithAnimation:UITableViewRowAnimationAutomatic];
     
+    self.dayItem.value = @[[NSNumber numberWithInt:0]];
+    [self.dayItem reloadRowWithAnimation:UITableViewRowAnimationAutomatic];
+    
+    self.ratingItem.value = [NSNumber numberWithInt:0];
+    [self.ratingItem reloadRowWithAnimation:UITableViewRowAnimationAutomatic];
+    
+    self.wifiItem.value = [WFStringStore wifiSpeedString:0];
+    [self.wifiItem reloadRowWithAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (RETableViewSection*)addSpaceTypeControls {
+- (void)addTableEntries {
+    [self addSpaceTypeControls];
+    [self addDaysControls];
+    [self addRatingControls];
+    [self addWifiControls];
+    /*    [self addNoiseControls];
+     [self addFoodControls];
+     [self addSeatingControls];
+     [self addPowerControls];*/
+}
+
+- (void)addSpaceTypeControls {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Space Type"];
     [self.manager addSection:section];
     
-    __typeof (&*self) __weak weakSelf = self;
+    /*__typeof (&*self) __weak weakSelf = self;
     void (^changeState)(RETableViewItem *item) = ^(RETableViewItem *item){
         UITableViewCell* cell = [weakSelf.tableView cellForRowAtIndexPath:item.indexPath];
         [weakSelf.tableView deselectRowAtIndexPath:item.indexPath animated:NO];
+        
         if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
             cell.accessoryType = UITableViewCellAccessoryNone;
         } else {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
+        item.accessoryType = cell.accessoryType;
     };
 
     for (NSString* value in [WFStringStore spaceTypeStrings]) {
-        [section addItem:[RETableViewItem itemWithTitle:value accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
+        RETableViewItem* item = [RETableViewItem itemWithTitle:value accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
             changeState(item);
-        }]];
-    }
-    return section;
+        }];
+        [section addItem:item];
+        [self.spaceTypeItemsArray addObject:item];
+    }*/
+    self.spaceTypeItem = [RESegmentedItem itemWithTitle:nil segmentedControlTitles:[WFStringStore spaceTypeStrings] value:-1];
+    self.spaceTypeItem.tintColor = [UIColor turquoiseColor];
+    [section addItem:self.spaceTypeItem];
 }
 
-- (RETableViewSection*)addDaysControls {
+- (void)addDaysControls {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Open Days"];
     [self.manager addSection:section];
     
-    [section addItem:[WFDayItem item]];
-    return section;
+    self.dayItem = [WFDayItem item];
+    [section addItem:self.dayItem];
 }
 
-- (RETableViewSection*)addRatingControls {
+- (void)addRatingControls {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Minimum Ratings"];
     [self.manager addSection:section];
     
-    [section addItem:[WFRatingItem itemWithValue:[NSNumber numberWithInt:3]]];
-    return section;
+    self.ratingItem = [WFRatingItem itemWithValue:[NSNumber numberWithInt:3]];
+    [section addItem:self.ratingItem];
 }
 
-- (RETableViewSection*)addWifiControls {
+- (void)addWifiControls {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Minimum Wifi Speed"];
     [self.manager addSection:section];
     
-    [section addItem:[WFStepperItem itemWithValue:[WFStringStore wifiSpeedString:WFWifiSpeed1Mbps] andRange:[WFStringStore wifiSpeedStrings]]];
-
-    return section;
+    self.wifiItem = [WFStepperItem itemWithValue:[WFStringStore wifiSpeedString:WFWifiSpeed1Mbps] andRange:[WFStringStore wifiSpeedStrings]];
+    [section addItem:self.wifiItem];
 }
 
-- (RETableViewSection*)addNoiseControls {
+#pragma mark UITableViewDelegate
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+/*
+- (void)addNoiseControls {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Noise level"];
     [self.manager addSection:section];
     
@@ -129,10 +177,9 @@
 
     item.tintColor = [UIColor turquoiseColor];
     [section addItem:item];
-    return section;
 }
 
-- (RETableViewSection*)addFoodControls {
+- (void)addFoodControls {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Dining Options"];
     [self.manager addSection:section];
     
@@ -152,10 +199,9 @@
             changeState(item);
         }]];
     }
-    return section;
 }
 
-- (RETableViewSection*)addSeatingControls {
+- (void)addSeatingControls {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Seating Options"];
     [self.manager addSection:section];
     
@@ -175,11 +221,9 @@
             changeState(item);
         }]];
     }
-
-    return section;
 }
 
-- (RETableViewSection*)addPowerControls {
+- (void)addPowerControls {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Power Options"];
     [self.manager addSection:section];
     
@@ -199,8 +243,6 @@
             changeState(item);
         }]];
     }
-
-    return section;
-}
+}*/
 
 @end

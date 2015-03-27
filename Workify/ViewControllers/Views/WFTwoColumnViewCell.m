@@ -86,8 +86,12 @@ static const CGFloat kHorizSpacing = 5.0f;
     [self.label setText:self.item.name];
     [self.label setFont:[UIFont flatFontOfSize:14.0f]];
 
-    [self.button setImage:[UIImage imageNamed:self.item.imagename] forState:UIControlStateNormal];
-    [self.button setContentMode:UIViewContentModeCenter];
+    if (self.item.imagename) {
+        [self.button setImage:[UIImage imageNamed:self.item.imagename] forState:UIControlStateNormal];
+        [self.button setContentMode:UIViewContentModeCenter];
+    } else {
+        [self.button setImage:nil forState:UIControlStateNormal];
+    }
     
     NSUInteger index= 0;
     for (UIView* view in self.mainView.subviews) {

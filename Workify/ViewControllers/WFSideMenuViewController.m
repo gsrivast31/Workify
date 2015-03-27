@@ -11,6 +11,7 @@
 #import "WFAppDelegate.h"
 #import "WFNavigationController.h"
 #import "WFLocationSearchViewController.h"
+#import "WFAddPlaceViewController.h"
 
 #import <MessageUI/MessageUI.h>
 #import "UAAppReviewManager.h"
@@ -220,7 +221,7 @@
 
 @end
 
-@interface WFSideMenuViewController () <MFMailComposeViewControllerDelegate>
+@interface WFSideMenuViewController () <MFMailComposeViewControllerDelegate, WFAddPlaceDelegate>
 
 @property (nonatomic, strong) WFUserView* userView;
 
@@ -298,14 +299,11 @@
                 return;
             }
             [(REFrostedViewController*)appDelegate.viewController hideMenuViewController];
-        } else {
-            if (![WFHelper isLoggedIn]) {
-                [self.userView animateLoginButton];
-                return;
-            }
-            [(REFrostedViewController*)appDelegate.viewController hideMenuViewController];
+            
             UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-            [navVC pushViewController:[storyboard instantiateViewControllerWithIdentifier:@"addPlaceController"] animated:NO];
+            WFAddPlaceViewController* vc = (WFAddPlaceViewController*)[storyboard instantiateViewControllerWithIdentifier:@"addPlaceController"];
+            vc.delegate = self;
+            [navVC pushViewController:vc animated:NO];
         }
     } else if (indexPath.section == 1) {
         [(REFrostedViewController*)appDelegate.viewController hideMenuViewController];
@@ -314,7 +312,7 @@
                 MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
                 [mailController setMailComposeDelegate:self];
                 [mailController setModalPresentationStyle:UIModalPresentationFormSheet];
-                [mailController setSubject:@"Workify Support"];
+                [mailController setSubject:[NSString stringWithFormat:@"%@ Support", APP_NAME]];
                 [mailController setToRecipients:@[@"gaurav.sri87@gmail.com"]];
                 [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n", NSLocalizedString(@"Here's my feedback:", @"A default message shown to users when contacting support for help")] isHTML:NO];
                 if(mailController) {
@@ -333,7 +331,10 @@
                 MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
                 [mailController setMailComposeDelegate:self];
                 [mailController setModalPresentationStyle:UIModalPresentationFormSheet];
-                [mailController setSubject:@"Checkout this:Workify"];
+                [mailController setSubject:[NSString stringWithFormat:@"Checkout this:%@", APP_NAME]];
+                
+                NSString *body = [NSString stringWithFormat:@"Hey! I found this cool app <b><u><a href='%@'>%@</a></u></b>. Check it out.", APP_URL, APP_NAME];
+                [mailController setMessageBody:body isHTML:YES];
                 if(mailController) {
                     [navVC presentViewController:mailController animated:YES completion:nil];
                 }
@@ -355,23 +356,20 @@
 #pragma mark -
 #pragma mark UITableView Datasource
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 54;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
+    if (sectionIndex == 0) return 2;
     return 3;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -381,7 +379,7 @@
     }
     
     if (indexPath.section == 0) {
-        NSArray *titles = @[@"Home", @"My Places", @"Suggest a place"];
+        NSArray *titles = @[@"Home", @"Suggest a place"];
         cell.textLabel.text = titles[indexPath.row];
     } else {
         NSArray *titles = @[@"Give feedback", @"Tell a friend", @"Rate this app"];
@@ -399,6 +397,26 @@
     }
     
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark WFAddPlaceDelegate 
+
+- (void)placeAdded:(BOOL)success error:(NSError *)error {
+    if (success) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your suggestion has been received. We will get back to you soon" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    } else if (error) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    } else {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Failed" message:@"Could not save the suggestion. Try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
+    
+    WFAppDelegate* appDelegate = (WFAppDelegate*)[[UIApplication sharedApplication] delegate];
+    UINavigationController* navVC = (UINavigationController*)[(REFrostedViewController*)appDelegate.viewController contentViewController];
+    [navVC popToRootViewControllerAnimated:YES];
+
 }
 
 @end

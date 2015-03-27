@@ -14,12 +14,16 @@
 #import "WFTwoColumnItem.h"
 #import "WFTwoColumnViewCell.h"
 #import "WFFullTextView.h"
+#import "WFButtonItem.h"
 
 #import "WFMapViewController.h"
+#import "WFReviewsViewController.h"
 #import <MessageUI/MessageUI.h>
 #import "MWPhotoBrowser.h"
+#import "WFLoginViewController.h"
+#import "MZFormSheetPresentationController.h"
 
-@interface WFLocationDetailViewController () <RETableViewManagerDelegate, WFDetailDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, MWPhotoBrowserDelegate>
+@interface WFLocationDetailViewController () <RETableViewManagerDelegate, WFDetailDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, MWPhotoBrowserDelegate, WFLoginDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *reviewsButton;
@@ -52,12 +56,15 @@
     self.manager[@"WFDetailedItem"] = @"WFDetailSingleItemCell";
     self.manager[@"WFDetailedViewItem"] = @"WFDetailsViewCell";
     self.manager[@"WFTwoColumnItem"] = @"WFTwoColumnViewCell";
+    self.manager[@"WFButtonItem"] = @"WFButtonCell";
 
     self.bottomView.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8];
     [self.reviewsButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
     [self.reviewsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.reviewsButton setTintColor:[UIColor whiteColor]];
     [self.reviewsButton setImage:[UIImage imageNamed:@"reviews"] forState:UIControlStateNormal];
+    [self.reviewsButton addTarget:self action:@selector(showReviews) forControlEvents:UIControlEventTouchUpInside];
+
     [self.photosButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
     [self.photosButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.photosButton setTintColor:[UIColor whiteColor]];
@@ -101,6 +108,13 @@
     
 }
 
+- (void)showReviews {
+    WFReviewsViewController* vc = [[WFReviewsViewController alloc] init];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:vc];
+    navVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:navVC animated:YES completion:nil];
+}
+
 - (void)showPhotos {
     // Create browser
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
@@ -138,6 +152,7 @@
     [self addInfoSection];
     [self addHoursSection];
     [self addAmenitiesSection];
+    [self addReportEditSection];
 }
 
 - (void)addGeneralSection {
@@ -171,7 +186,7 @@
     }]];
     [section addItem:[WFDetailedItem itemWithTitle:@"Location Type" subTitle:@"Co-Working space" imageName:@"locationtype"]];
     [section addItem:[WFDetailedItem itemWithTitle:@"WiFi" subTitle:@"Reliable - 4Mbps download speed, 2Mbps upload speed" imageName:@"wifi"]];
-    [section addItem:[WFDetailedItem itemWithTitle:@"Pricing" subTitle:@"Rs. 200" imageName:@"pricing"]];
+    [section addItem:[WFDetailedItem itemWithTitle:@"Pricing" subTitle:@"Day Pass - INR 200, Weekly Pass - INR 300, Monthly Pass - INR 400" imageName:@"pricing"]];
     [section addItem:[WFDetailedItem itemWithTitle:@"Power" subTitle:@"1/2 per table" imageName:@"power"]];
     [section addItem:[WFDetailedItem itemWithTitle:@"Food" subTitle:@"Tea, Coffee, Snacks, Dinner, Alcohol, Desserts" imageName:@"food"]];
     [section addItem:[WFDetailedItem itemWithTitle:@"Noise" subTitle:@"Average Noisy" imageName:@"noise"]];
@@ -182,7 +197,16 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@""];
     [self.manager addSection:section];
     
-    [section addItem:[WFTwoColumnItem itemWithTitle:@"Hours" imageName:@"calendar" contents:@[@{@"title":@"Mon", @"value":@"7am - 11pm"}, @{@"title":@"Tue", @"value":@"7am - 11pm"}, @{@"title":@"Wed", @"value":@"7am - 11pm"}, @{@"title":@"Thu", @"value":@"7am - 11pm"}, @{@"title":@"Fri", @"value":@"7am - 11pm"}, @{@"title":@"Sat", @"value":@"7am - 11pm"}, @{@"title":@"Sun", @"value":@"Closed"}]]];
+    [section addItem:[WFTwoColumnItem itemWithTitle:@"Hours"
+                                          imageName:@"calendar"
+                                            contents:@[@{@"title":@"Mon", @"value":@"Open"},
+                                                       @{@"title":@"Tue", @"value":@"Open"},
+                                                       @{@"title":@"Wed", @"value":@"Open"},
+                                                       @{@"title":@"Thu", @"value":@"Open"},
+                                                       @{@"title":@"Fri", @"value":@"Open"},
+                                                       @{@"title":@"Sat", @"value":@"Open"},
+                                                       @{@"title":@"Sun", @"value":@"Closed"}
+                                                       ]]];
 }
 
 - (void)addAmenitiesSection {
@@ -196,6 +220,54 @@
                        @{@"images":@{@"normal":@"check",@"disabled":@"check"},@"value":@"Kid Friendly"},
                        @{@"images":@{@"normal":@"check",@"disabled":@"check"},@"value":@"Washroom"}
                        ]]];
+}
+
+- (void)addReportEditSection {
+    RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@""];
+    [self.manager addSection:section];
+    
+    __typeof (&*self) __weak weakSelf = self;
+    [section addItem:[WFButtonItem itemWithTitle:@"Report Edits" tapHandler:^(RETableViewItem *item) {
+        [weakSelf reportEdits];
+    }]];
+}
+
+- (void)reportEdits {
+    if ([WFHelper isLoggedIn]) {
+        if([MFMailComposeViewController canSendMail]) {
+            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+            [mailController setMailComposeDelegate:self];
+            [mailController setModalPresentationStyle:UIModalPresentationFormSheet];
+            [mailController setSubject:@"Reporting Edits"];
+            [mailController setToRecipients:@[@"gaurav.sri87@gmail.com"]];
+            [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n", NSLocalizedString(@"Here's my info:", @"A default message shown to users when contacting support for help")] isHTML:NO];
+            if(mailController) {
+                [self presentViewController:mailController animated:YES completion:nil];
+            }
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Uh oh!", nil)
+                                                                message:NSLocalizedString(@"This device hasn't been setup to send emails.", nil)
+                                                               delegate:nil
+                                                      cancelButtonTitle:NSLocalizedString(@"Okay", nil)
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        }
+    } else {
+        WFLoginViewController* vc = [[WFLoginViewController alloc] init];
+        vc.loginDelegate = self;
+        UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:vc];
+        navVC.view.layer.cornerRadius = 6.0;
+        
+        MZFormSheetPresentationController *controller = [[MZFormSheetPresentationController alloc] initWithContentViewController:navVC];
+        controller.contentViewControllerTransitionStyle = MZFormSheetTransitionStyleDropDown;
+        controller.shouldCenterVertically = YES;
+        controller.shouldDismissOnBackgroundViewTap = YES;
+        controller.movementActionWhenKeyboardAppears = MZFormSheetActionWhenKeyboardAppearsMoveToTop;
+        controller.shouldApplyBackgroundBlurEffect = YES;
+        
+        navVC.navigationBarHidden = YES;
+        [self presentViewController:controller animated:YES completion:nil];
+    }
 }
 
 #pragma mark RETableViewManagerDelegate
@@ -219,10 +291,8 @@
 
 - (void)phoneTapped:(RETableViewItem *)item {
     WFDetailedViewItem* _item = (WFDetailedViewItem*)item;
-    NSURL* phoneURL = [NSURL URLWithString:[@"tel://" stringByAppendingString:_item.phone]];
-    if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
-        [[UIApplication sharedApplication] openURL:phoneURL];
-    }
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil message:_item.phone delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Call", nil];
+    [alertView show];
 }
 
 - (void)emailTapped:(RETableViewItem*)item {
@@ -336,6 +406,60 @@
     if (index < _thumbs.count)
         return [_thumbs objectAtIndex:index];
     return nil;
+}
+
+#pragma mark WFLoginDelegate
+
+- (void)loggedInWithUser:(PFUser *)user error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if (!user) {
+        NSString *errorMessage = nil;
+        if (!error) {
+            NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            errorMessage = @"Uh oh. The user cancelled the Facebook login.";
+        } else {
+            NSLog(@"Uh oh. An error occurred: %@", error);
+            errorMessage = [error localizedDescription];
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In Error"
+                                                        message:errorMessage
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"Dismiss", nil];
+        [alert show];
+    } else {
+        if([MFMailComposeViewController canSendMail]) {
+            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+            [mailController setMailComposeDelegate:self];
+            [mailController setModalPresentationStyle:UIModalPresentationFormSheet];
+            [mailController setSubject:@"Reporting Edits"];
+            [mailController setToRecipients:@[@"gaurav.sri87@gmail.com"]];
+            [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n", NSLocalizedString(@"Here's my info:", @"A default message shown to users when contacting support for help")] isHTML:NO];
+            if(mailController) {
+                [self presentViewController:mailController animated:YES completion:nil];
+            }
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Uh oh!", nil)
+                                                                message:NSLocalizedString(@"This device hasn't been setup to send emails.", nil)
+                                                               delegate:nil
+                                                      cancelButtonTitle:NSLocalizedString(@"Okay", nil)
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        }
+    }
+}
+
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            NSURL* phoneURL = [NSURL URLWithString:[@"tel://" stringByAppendingString:@"+91-9717961964"]];
+            if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
+                [[UIApplication sharedApplication] openURL:phoneURL];
+            }
+        }
+    }
 }
 
 @end

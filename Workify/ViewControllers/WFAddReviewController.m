@@ -12,10 +12,6 @@
 
 @interface WFAddReviewController () <RETableViewManagerDelegate>
 
-@property (nonatomic, strong) UIButton* publishButton;
-@property (nonatomic, strong) UIButton* cancelButton;
-
-@property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, readwrite, strong) RETableViewManager* manager;
 
 @property (nonatomic, strong) WFRatingItem* ratingItem;
@@ -29,28 +25,11 @@
     
     self.title = @"Add Review";
     
-    self.tableView = [[UITableView alloc] init];
-    [self.view addSubview:self.tableView];
-    
-    self.publishButton = [[UIButton alloc] init];
-    [self.publishButton setBackgroundColor:[UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8]];
-    [self.publishButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.publishButton setTitle:[NSString stringWithFormat:@"%@ Publish", [NSString iconStringForEnum:FUICheck]] forState:UIControlStateNormal];
-    [self.publishButton.titleLabel setFont:[UIFont iconFontWithSize:16]];
-    [self.publishButton addTarget:self action:@selector(publish:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.publishButton];
-    
-    self.cancelButton = [[UIButton alloc] init];
-    [self.cancelButton setBackgroundColor:[UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8]];
-    [self.cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.cancelButton setTitle:[NSString stringWithFormat:@"%@ Cancel", [NSString iconStringForEnum:FUICross]]  forState:UIControlStateNormal];
-    [self.cancelButton.titleLabel setFont:[UIFont iconFontWithSize:16]];
-
-    [self.cancelButton addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.cancelButton];
-
     self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView delegate:self];
     self.manager[@"WFRatingItem"] = @"WFRatingCell";
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconCancel"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconSave"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(publish:)];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self addTableEntries];
@@ -58,14 +37,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-}
-
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    
-    self.publishButton.frame = CGRectMake(0.0f, self.view.frame.size.height - 44.0f, self.view.frame.size.width / 2.0f, 44.0f);
-    self.cancelButton.frame = CGRectMake(self.view.frame.size.width / 2.0f, self.view.frame.size.height - 44.0f, self.view.frame.size.width / 2.0f, 44.0f);
-    self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44.0f);
 }
 
 - (void)addTableEntries {

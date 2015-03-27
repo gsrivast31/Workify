@@ -15,7 +15,7 @@
 
 @end
 
-@interface WFAddURLViewController : UIViewController
+@interface WFAddURLViewController : UITableViewController
 
 @property (nonatomic, strong) id <WFAddURLDelegate> delegate;
 

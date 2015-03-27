@@ -13,7 +13,8 @@
 @implementation WFHelper
 
 + (BOOL) isLoggedIn {
-    return ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]);
+    //return ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]);
+    return TRUE;
 }
 
 @end

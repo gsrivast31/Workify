@@ -22,13 +22,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Workify";
+    self.title = APP_NAME;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavBarIconListMenu"] style:UIBarButtonItemStylePlain target:(WFNavigationController *)self.navigationController action:@selector(showMenu)];
     
     if(![[NSUserDefaults standardUserDefaults] boolForKey:kHasSeenStarterTooltip]) {
         [self showTips];
     }
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)showTips {
@@ -52,15 +54,32 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WFPlacesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"placeCell"     forIndexPath:indexPath];
+    WFPlacesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"placeCell" forIndexPath:indexPath];
 
-    [cell configureCell];
+    NSString* city;
+    NSInteger placeCount = 0;
+    NSString* imageName;
+    if (indexPath.row == 1) {
+        city = @"Mumbai";
+        imageName = @"Mumbai1";
+        placeCount = 5;
+    } else if (indexPath.row == 0) {
+        city = @"Bengaluru";
+        imageName = @"Bangalore";
+        placeCount = 20;
+    } else if (indexPath.row == 2) {
+        city = @"New Delhi";
+        imageName = @"Delhi1";
+    }
+    [cell configureCellWithCity:city locationsCount:placeCount imageName:imageName];
     return cell;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
 }
+
+#pragma mark - Table view delegate 
 
 #pragma mark WFTooltipViewControllerDelegate
 

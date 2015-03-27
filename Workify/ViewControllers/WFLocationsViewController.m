@@ -11,7 +11,9 @@
 #import "SGActionView.h"
 #import "SGSheetMenu.h"
 
-@interface WFLocationsViewController () <UITableViewDataSource, UITableViewDelegate>
+#import "WFFiltersViewController.h"
+
+@interface WFLocationsViewController () <UITableViewDataSource, UITableViewDelegate, WFFilterDelegate>
 {
     NSInteger currentMaxDisplayedCell;
     NSInteger currentMaxDisplayedSection;
@@ -19,7 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UIButton *filterButton;
-@property (weak, nonatomic) IBOutlet UIButton *sortButton;
+//@property (weak, nonatomic) IBOutlet UIButton *sortButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSNumber* cellZoomXScaleFactor;
@@ -48,7 +50,7 @@
     
     self.title = @"Mumbai";
     
-    [self.sortButton addTarget:self action:@selector(showSortMenu:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.sortButton addTarget:self action:@selector(showSortMenu:) forControlEvents:UIControlEventTouchUpInside];
 
     if(!self.navigationItem.leftBarButtonItem) {
         UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -67,10 +69,13 @@
     [self.filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.filterButton setTintColor:[UIColor whiteColor]];
     [self.filterButton setImage:[UIImage imageNamed:@"filter"] forState:UIControlStateNormal];
-    [self.sortButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
+/*    [self.sortButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
     [self.sortButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.sortButton setImage:[UIImage imageNamed:@"sort"] forState:UIControlStateNormal];
-    [self.sortButton setTintColor:[UIColor whiteColor]];
+    [self.sortButton setTintColor:[UIColor whiteColor]];*/
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
 }
 
 - (void)dismissSelf:(id)sender {
@@ -130,9 +135,23 @@
 }
 
 - (void)showSortMenu:(id)sender {
-    [SGActionView showSheetWithTitle:@"Sort By" itemTitles:@[@"Ratings", @"Distance from Current Position", @"Wifi Speed", @"Average Cost"] selectedIndex:0 selectedHandle:^(NSInteger index) {
-        
+    [SGActionView showSheetWithTitle:@"Sort By" itemTitles:@[@"Ratings", @"Wifi Speed", @"Average Cost"] selectedIndex:0 selectedHandle:^(NSInteger index) {
+        if (index ==0) { //Ratings
+            
+        } else if (index == 1) { //Wifi Speed
+            
+        } else { //Average Daily Cost
+            
+        }
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"filterSegue"]) {
+        UINavigationController* navVC = (UINavigationController*)segue.destinationViewController;
+        WFFiltersViewController* vc = (WFFiltersViewController*)navVC.topViewController;
+        vc.delegate = self;
+    }
 }
 
 #pragma -mark Setters for four customisable variables
@@ -195,6 +214,12 @@
         _initialAlpha = [NSNumber numberWithFloat:0.3];
     }
     return _initialAlpha;
+}
+
+#pragma mark WFFilterDelegate 
+
+- (void)filtersAdded:(NSDictionary *)filterDictionary {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

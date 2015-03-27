@@ -29,7 +29,7 @@
     // ****************************************************************************
     // Fill in with your Parse credentials:
     // ****************************************************************************
-    [Parse setApplicationId:@"bQq1Yxu8avvF2wsLi8kb9wMD8I5Xz3mfLo0pA5E3" clientKey:@"DND6IMQmrkPlBqiI3WIJ6AYSwPsJrQ7SrtH960bw"];
+    [Parse setApplicationId:PARSE_API_ID clientKey:PARSE_CLIENT_KEY];
     
     // ****************************************************************************
     // Your Facebook application id is configured in Info.plist.
@@ -42,7 +42,7 @@
     [UAAppReviewManager setUsesUntilPrompt:5];
     [UAAppReviewManager setSignificantEventsUntilPrompt:-1];
     [UAAppReviewManager setDaysBeforeReminding:3];
-    [UAAppReviewManager setReviewMessage:NSLocalizedString(@"If you find Workify useful you can help support further development by leaving a review on the App Store. It'll only take a minute!", nil)];
+    [UAAppReviewManager setReviewMessage:[NSString stringWithFormat:NSLocalizedString(@"If you find %@ useful you can help support further development by leaving a review on the App Store. It'll only take a minute!", nil), APP_NAME]];
     
     WFSideMenuViewController* sideVC = [[WFSideMenuViewController alloc] init];
     WFNavigationController* navVC = (WFNavigationController*)[[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"rootController"];
@@ -83,6 +83,7 @@
     [[UISegmentedControl appearance] setTintColor:[UIColor turquoiseColor]];
     [[RETableViewCell appearance] setTintColor:[UIColor turquoiseColor]];
     [[REActionBar appearance] setTintColor:[UIColor turquoiseColor]];
+    [[UITextField appearance] setTextAlignment:NSTextAlignmentRight];
 }
 
 // ****************************************************************************

@@ -10,4 +10,6 @@
 
 @interface WFDayItem : RETableViewItem
 
+@property (copy, readwrite, nonatomic) NSArray *value;
+
 @end

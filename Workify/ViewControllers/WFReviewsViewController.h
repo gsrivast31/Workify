@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WFReviewsViewController : UIViewController
+@interface WFReviewsViewController : UITableViewController
 
 @end

@@ -10,6 +10,6 @@
 
 @interface WFPlacesTableViewCell : UITableViewCell
 
-- (void)configureCell;
+- (void)configureCellWithCity:(NSString*)city locationsCount:(NSInteger)count imageName:(NSString*)imageName;
 
 @end

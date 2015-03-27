@@ -16,9 +16,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *wifiDownloadLabel;
 @property (weak, nonatomic) IBOutlet UIButton *wifiUploadIconButton;
 @property (weak, nonatomic) IBOutlet UILabel *wifiUploadLabel;
-@property (weak, nonatomic) IBOutlet UIButton *bookmarkButton;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *spaceTypeLabel;
 
 @end
 
@@ -52,15 +53,25 @@
     [self.wifiDownloadIconButton setTintColor:[UIColor whiteColor]];
     [self.wifiUploadIconButton setTintColor:[UIColor whiteColor]];
     
-    [self.bookmarkButton setTitle:[NSString iconStringForEnum:FUIHeart] forState:UIControlStateNormal];
-    [self.bookmarkButton.titleLabel setFont:[UIFont iconFontWithSize:16]];
-    self.bookmarkButton.layer.cornerRadius = CGRectGetWidth(self.bookmarkButton.frame) / 2.0f;
+    [self.ratingLabel setFont:[UIFont iconFontWithSize:17]];
+    
+    [self.spaceTypeLabel setFont:[UIFont flatFontOfSize:15]];
+    self.spaceTypeLabel.text = kSpaceCoWorking;
+    
+    NSString* string = @"";
+    for (NSInteger i=0; i<5; i++) {
+        string = [string stringByAppendingString:[NSString iconStringForEnum:FUIStar2]];
+    }
+    [self.ratingLabel setText:string];
+    [self.ratingLabel setTextColor:[UIColor turquoiseColor]];
     
     self.nameLabel.text = @"CAFE COFFEE DAY";
     self.addressLabel.text = @"Indiranagar, Colaba, Mumbai";
     
     self.nameLabel.font = [UIFont flatFontOfSize:18];
     self.addressLabel.font = [UIFont flatFontOfSize:16];
+    
+    
 }
 
 @end

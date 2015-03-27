@@ -26,7 +26,7 @@
                     <color key="textColor" red="0.079887427389621735" green="0.79034280776977539" blue="0.60733050107955933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workify" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workfrom" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
                     <rect key="frame" x="20" y="129" width="441" height="64"/>
                     <fontDescription key="fontDescription" name="SnellRoundhand-Black" family="Snell Roundhand" pointSize="50"/>
                     <color key="textColor" red="0.079887427389621735" green="0.79034280776977539" blue="0.60733050107955933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

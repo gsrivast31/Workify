@@ -9,17 +9,27 @@
 #import "RETableViewCell.h"
 #import "WFOptionItem.h"
 
-@interface WFSingleOptionView : UIView
+@protocol WFSingleOptionDelegate <NSObject>
 
-- (id)init;
-- (void)setContent:(NSDictionary*)dict;
-+ (CGFloat)heightWithText:(NSString*)text constrainedToWidth:(CGFloat)width;
+- (void)optionToggled;
 
 @end
 
-@interface WFOptionViewCell : RETableViewCell
+@interface WFSingleOptionView : UIView
+
+- (id)init;
+- (void)setContent:(NSString*)text;
++ (CGFloat)heightWithText:(NSString*)text constrainedToWidth:(CGFloat)width;
+
+@property (nonatomic) BOOL value;
+@property (nonatomic, strong) id<WFSingleOptionDelegate> delegate;
+
+@end
+
+@interface WFOptionViewCell : RETableViewCell<WFSingleOptionDelegate>
 
 @property (nonatomic, strong, readwrite) WFOptionItem* item;
+@property (nonatomic, strong) NSMutableArray* viewsArray;
 @property (readwrite, nonatomic) NSUInteger itemCount;
 
 @end

@@ -13,6 +13,8 @@
 #import "NSString+RETableViewManagerAdditions.h"
 #import "WFAddressViewController.h"
 
+#import "MBProgressHUD.h"
+
 @implementation WFDistanceView
 
 @synthesize distanceLabel;
@@ -94,14 +96,26 @@ static NSString * const reuseIdentifier = @"Cell";
     self.currentPlaceMark = nil;
     __typeof (&*self) __weak weakSelf = self;
     
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText = @"Fetching location";
+    
     [[WFLocationController sharedInstance] fetchUserLocationWithSuccess:^(CLLocation *location) {
         [[WFLocationController sharedInstance] reverseGeocodeLocation:location withSuccess:^(NSArray *placemarks) {
             if (placemarks.count) {
                 weakSelf.currentPlaceMark = [placemarks objectAtIndex:0];
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [hud hide:YES];
+            });
         } failure:^(NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [hud hide:YES];
+            });
         }];
     } failure:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [hud hide:YES];
+        });
     }];
 }
 

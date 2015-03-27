@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol WFFilterDelegate <NSObject>
+
+- (void)filtersAdded:(NSDictionary*)filterDictionary;
+
+@end
+
 @interface WFFiltersViewController : UIViewController
+
+@property (nonatomic, strong) id<WFFilterDelegate> delegate;
 
 @end

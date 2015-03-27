@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 @end
 
@@ -26,17 +27,24 @@
     [super setSelected:selected animated:animated];
 }
 
-- (void)configureCell {
+- (void)configureCellWithCity:(NSString *)city locationsCount:(NSInteger)count imageName:(NSString*)imageName {
     /*__weak typeof(self) weakSelf = self;
     [[WFMediaController sharedInstance] imageWithFilenameAsync:@"bkgnd1" success:^(UIImage *image) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.backgroundImageView.image = image;
     } failure:^{
     }];*/
-    self.backgroundImageView.image = [UIImage imageNamed:@"bkgnd1"];
+    self.backgroundImageView.image = [UIImage imageNamed:imageName];
     
-    self.nameLabel.text = @"MUMBAI";
-    self.nameLabel.font = [UIFont flatFontOfSize:17];
+    self.nameLabel.text = city;
+    self.nameLabel.font = [UIFont boldFlatFontOfSize:20];
+    
+    if (count == 0) {
+        self.statusLabel.text = @"( COMING SOON )";
+    } else {
+        self.statusLabel.text = [NSString stringWithFormat:@"%ld places", (long)count];
+    }
+    self.statusLabel.font = [UIFont flatFontOfSize:14];
 }
 
 @end
