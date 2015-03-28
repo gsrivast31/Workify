@@ -22,6 +22,7 @@
 #import "MWPhotoBrowser.h"
 #import "WFLoginViewController.h"
 #import "MZFormSheetPresentationController.h"
+#import <Parse/Parse.h>
 
 @interface WFLocationDetailViewController () <RETableViewManagerDelegate, WFDetailDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, MWPhotoBrowserDelegate, WFLoginDelegate, UIAlertViewDelegate>
 
@@ -98,6 +99,16 @@
 - (void)viewDidAppear:(BOOL)animated {
     [(ParallaxHeaderView*)self.tableView.tableHeaderView refreshBlurViewForNewImage];
     [super viewDidAppear:animated];
+}
+
+- (void)loadDetails {
+    if (self.locationId) {
+        PFQuery* query = [PFQuery queryWithClassName:kWFLocationClassKey];
+        [query whereKey:@"objectId" equalTo:self.locationId];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            
+        }];
+    }
 }
 
 - (void)dismissSelf:(id)sender {

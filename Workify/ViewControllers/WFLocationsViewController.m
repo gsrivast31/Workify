@@ -12,17 +12,19 @@
 #import "SGSheetMenu.h"
 
 #import "WFFiltersViewController.h"
+#import "WFLocationDetailViewController.h"
+#import <Parse/Parse.h>
 
-@interface WFLocationsViewController () <UITableViewDataSource, UITableViewDelegate, WFFilterDelegate>
+@interface WFLocationsViewController () </*UITableViewDataSource, UITableViewDelegate, */WFFilterDelegate>
 {
     NSInteger currentMaxDisplayedCell;
     NSInteger currentMaxDisplayedSection;
 }
 
-@property (weak, nonatomic) IBOutlet UIView *footerView;
-@property (weak, nonatomic) IBOutlet UIButton *filterButton;
+//@property (weak, nonatomic) IBOutlet UIView *footerView;
+//@property (weak, nonatomic) IBOutlet UIButton *filterButton;
 //@property (weak, nonatomic) IBOutlet UIButton *sortButton;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSNumber* cellZoomXScaleFactor;
 @property (strong, nonatomic) NSNumber* cellZoomYScaleFactor;
@@ -45,10 +47,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.dataSource = self;
+    /*self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
-    self.title = @"Mumbai";
+    */
+    //self.title = @"Mumbai";
     
 //    [self.sortButton addTarget:self action:@selector(showSortMenu:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -64,11 +66,25 @@
         [self.navigationItem setLeftBarButtonItem:backBarButtonItem];
     }
     
-    self.footerView.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8];
+    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"filter"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(filter:)forControlEvents:UIControlEventTouchUpInside];
+    [button setFrame:CGRectMake(0, 0, 53, 31)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 5, 50, 20)];
+    [label setFont:[UIFont flatFontOfSize:13]];
+    [label setText:@""];
+    label.textAlignment = NSTextAlignmentCenter;
+    [label setTextColor:[UIColor whiteColor]];
+    [label setBackgroundColor:[UIColor clearColor]];
+    [button addSubview:label];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = barButton;
+    
+    /*self.footerView.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8];
     [self.filterButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
     [self.filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.filterButton setTintColor:[UIColor whiteColor]];
-    [self.filterButton setImage:[UIImage imageNamed:@"filter"] forState:UIControlStateNormal];
+    [self.filterButton setImage:[UIImage imageNamed:@"filter"] forState:UIControlStateNormal];*/
 /*    [self.sortButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
     [self.sortButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.sortButton setImage:[UIImage imageNamed:@"sort"] forState:UIControlStateNormal];
@@ -82,9 +98,63 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)filter:(id)sender {
+    UINavigationController* navVC = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"filtersNavVC"];
+    WFFiltersViewController* vc = (WFFiltersViewController*)navVC.topViewController;
+    vc.delegate = self;
+    [self presentViewController:navVC animated:YES completion:nil];
+}
+
+- (id)initWithCoder:(NSCoder *)aCoder {
+    self = [super initWithCoder:aCoder];
+    if (self) {
+        // The className to query on
+        self.parseClassName = kWFLocationClassKey;
+        
+        // Whether the built-in pull-to-refresh is enabled
+        self.pullToRefreshEnabled = YES;
+        
+        // Whether the built-in pagination is enabled
+        self.paginationEnabled = NO;
+        
+        // The number of objects to show per page
+        // self.objectsPerPage = 10;
+        
+        // The Loading text clashes with the dark Anypic design
+        self.loadingViewEnabled = NO;
+    }
+    return self;
+}
+
+- (PFQuery *)queryForTable {
+    PFRelation* relation = [self.cityObject relationForKey:kWFCityLocationsKey];
+    PFQuery* query = [relation query];
+    [query selectKeys:@[kWFLocationNameKey,
+                        kWFLocationWifiDownloadSpeedKey,
+                        kWFLocationWifiUploadSpeedKey,
+                        kWFLocationRatingsKey,
+                        kWFLocationAddressKey,
+                        kWFLocationTypeKey,
+                        kWFLocationDisplayPhotoKey]];
+    [query orderByDescending:kWFLocationRatingsKey];
+    return query;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    WFLocationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
+    
+    [cell configureCellForObject:object];
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 200.f;
+}
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
@@ -127,13 +197,14 @@
         currentMaxDisplayedCell = indexPath.row;
         currentMaxDisplayedSection = indexPath.section;
     }
-}
+}*/
 
 -(void)resetViewedCells{
     currentMaxDisplayedSection = 0;
     currentMaxDisplayedCell = 0;
 }
 
+/*
 - (void)showSortMenu:(id)sender {
     [SGActionView showSheetWithTitle:@"Sort By" itemTitles:@[@"Ratings", @"Wifi Speed", @"Average Cost"] selectedIndex:0 selectedHandle:^(NSInteger index) {
         if (index ==0) { //Ratings
@@ -144,13 +215,21 @@
             
         }
     }];
-}
+}*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"filterSegue"]) {
         UINavigationController* navVC = (UINavigationController*)segue.destinationViewController;
         WFFiltersViewController* vc = (WFFiltersViewController*)navVC.topViewController;
         vc.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"locationDetailSegue"]) {
+        WFLocationDetailViewController* vc = (WFLocationDetailViewController*)segue.destinationViewController;
+        NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
+        if (indexPath.row < self.objects.count) {
+            PFObject* obj = [self.objects objectAtIndex:indexPath.row];
+            vc.locationId = obj.objectId;
+            vc.title = [obj valueForKey:kWFLocationNameKey];
+        }
     }
 }
 

@@ -19,6 +19,8 @@
 + (NSArray*)powerStrings;
 + (NSArray*)amenitiesStrings;
 + (NSArray*)daysStrings;
++ (NSArray*)wifiUnitStrings;
++ (NSArray*)priceUnitStrings;
 
 + (NSString*)spaceTypeString:(NSInteger)type;
 + (NSString*)wifiString:(NSInteger)type;
@@ -29,6 +31,8 @@
 + (NSString*)powerString:(NSInteger)type;
 + (NSString*)amenitiesString:(NSInteger)type;
 + (NSString*)daysString:(NSInteger)type;
++ (NSString*)wifiUnitString:(NSInteger)type;
++ (NSString*)priceUnitString:(NSInteger)type;
 
 + (NSInteger)spaceTypeIndex:(NSString*)string;
 + (NSInteger)wifiIndex:(NSString*)string;
@@ -39,5 +43,7 @@
 + (NSInteger)powerIndex:(NSString*)string;
 + (NSInteger)amenitiesIndex:(NSString*)string;
 + (NSInteger)daysIndex:(NSString*)string;
++ (NSInteger)wifiUnitIndex:(NSString*)string;
++ (NSInteger)priceUnitIndex:(NSString*)string;
 
 @end

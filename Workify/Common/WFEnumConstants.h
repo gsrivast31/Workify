@@ -90,4 +90,19 @@ typedef NS_ENUM(NSInteger, WFDay) {
     WFSunday = 7
 };
 
+//Wifi Speed Units
+typedef NS_ENUM(NSInteger, WFWifiSpeedUnit) {
+    WFWifiSpeedKbps = 1,
+    WFWifiSpeedMbps = 2,
+    WFWifiSpeedGbps = 3,
+};
+
+//Price Units
+typedef NS_ENUM(NSInteger, WFWifiPriceUnit) {
+    WFPriceINR = 1,
+    WFPriceDollar = 2,
+    WFPricePound = 3,
+    WFPriceEuro = 4,
+};
+
 #endif

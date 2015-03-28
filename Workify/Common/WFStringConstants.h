@@ -78,9 +78,13 @@ static NSString* const kSaturday = @"Saturday";
 static NSString* const kSunday = @"Sunday";
 
 //Address
+
 static NSString* const kAddressStreet = @"ThoroughFare";
+static NSString* const kAddressSubStreet = @"SubThoroughFare";
 static NSString* const kAddressCity = @"Locality";
+static NSString* const kAddressSubCity = @"SubLocality";
 static NSString* const kAddressState = @"AdministrativeArea";
+static NSString* const kAddressSubState = @"SubAdministrativeArea";
 static NSString* const kAddressZIP = @"PostalCode";
 static NSString* const kAddressCountry = @"Country";
 static NSString* const kAddressLatitude = @"Latitude";
@@ -91,5 +95,16 @@ static NSString * const kReviewsKey   = @"Reviews";
 static NSString * const kReviewKey    = @"Review";
 static NSString * const kTimeKey      = @"Time";
 static NSString * const kRatingKey    = @"Rating";
+
+//Wifi Speed Units
+static NSString * const kWifiKbps = @"Kbps";
+static NSString * const kWifiMbps = @"Mbps";
+static NSString * const kWifiGbps = @"Gbps";
+
+//Currencies
+static NSString * const kPriceINR = @"INR";
+static NSString * const kPriceDollar = @"Dollars";
+static NSString * const kPricePounds = @"Pounds";
+static NSString * const kPriceEuros = @"Euros";
 
 #endif

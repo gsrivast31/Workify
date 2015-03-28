@@ -192,16 +192,16 @@
             NSNumber* lon = self.placemark ?  [NSNumber numberWithFloat:self.placemark.location.coordinate.longitude] : nil;
             NSDictionary* addressDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                                          [self validString:self.nameItem.value], @"Name",
-                                         [self validString:self.thoroughfareItem.value], @"ThoroughFare",
-                                         [self validString:self.subThoroughfareItem.value], @"SubThoroughFare",
-                                         [self validString:self.localityItem.value], @"Locality",
-                                         [self validString:self.subLocalityItem.value], @"SubLocality",
-                                         [self validString:self.administrativeAreaItem.value], @"AdministrativeArea",
-                                         [self validString:self.subAdministrativeAreaItem.value], @"SubAdministrativeArea",
-                                         [self validString:self.postalCodeItem.value], @"PostalCode",
-                                         [self validString:self.countryItem.value], @"Country",
-                                         lat, @"Latitude",
-                                         lon, @"Longitude",
+                                         [self validString:self.thoroughfareItem.value], kAddressStreet,
+                                         [self validString:self.subThoroughfareItem.value], kAddressSubStreet,
+                                         [self validString:self.localityItem.value], kAddressCity,
+                                         [self validString:self.subLocalityItem.value], kAddressSubCity,
+                                         [self validString:self.administrativeAreaItem.value], kAddressState,
+                                         [self validString:self.subAdministrativeAreaItem.value], kAddressSubState,
+                                         [self validString:self.postalCodeItem.value], kAddressZIP,
+                                         [self validString:self.countryItem.value], kAddressCountry,
+                                         lat, kAddressLatitude,
+                                         lon, kAddressLongitude,
                                          nil];
             [self.delegate addressAdded:addressDict];
         }

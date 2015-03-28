@@ -45,15 +45,14 @@
 @property (strong, readwrite, nonatomic) RELongTextItem *descItem;
 
 @property (strong, readwrite, nonatomic) RESegmentedItem *wifiItem;
-@property (strong, readwrite, nonatomic) RETextItem *wifiDownloadItem;
-@property (strong, readwrite, nonatomic) REPickerItem *wifiDownloadUnitItem;
-@property (strong, readwrite, nonatomic) RETextItem *wifiUploadItem;
-@property (strong, readwrite, nonatomic) REPickerItem *wifiUploadUnitItem;
+@property (strong, readwrite, nonatomic) RENumberItem *wifiDownloadItem;
+@property (strong, readwrite, nonatomic) RESegmentedItem *wifiSpeedUnitItem;
+@property (strong, readwrite, nonatomic) RENumberItem *wifiUploadItem;
 
-@property (strong, readwrite, nonatomic) REPickerItem *priceUnitItem;
-@property (strong, readwrite, nonatomic) RETextItem *dayPriceItem;
-@property (strong, readwrite, nonatomic) RETextItem *weeklyPriceItem;
-@property (strong, readwrite, nonatomic) RETextItem *monthlyPriceItem;
+@property (strong, readwrite, nonatomic) RESegmentedItem *priceUnitItem;
+@property (strong, readwrite, nonatomic) RENumberItem *dayPriceItem;
+@property (strong, readwrite, nonatomic) RENumberItem *weeklyPriceItem;
+@property (strong, readwrite, nonatomic) RENumberItem *monthlyPriceItem;
 
 /*@property (strong, readwrite, nonatomic) WFInputItem *wifiDownloadItem;
 @property (strong, readwrite, nonatomic) WFInputItem *wifiUploadItem;
@@ -120,12 +119,27 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
+- (NSNumber*)wifiSpeed:(NSString*)speedString {
+    double speed = [speedString doubleValue];
+    WFWifiSpeedUnit unit = self.wifiSpeedUnitItem.value + 1;
+    if (unit == WFWifiSpeedKbps) {
+        speed = speed * 0.001f;
+    } else if (unit == WFWifiSpeedGbps) {
+        speed = speed * 1000.0f;
+    }
+    return [NSNumber numberWithDouble:speed];
+}
+
 - (void)save:(id)sender {
     PFObject* locationObj = [PFObject objectWithClassName:kWFLocationClassKey];
-    if (self.nameItem.value) locationObj[kWFLocationNameKey] = self.nameItem.value;
+    if (self.nameItem.value) {
+        locationObj[kWFLocationNameKey] = self.nameItem.value;
+        locationObj[kWFLocationCanonicalNameKey] = [[self.nameItem.value lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    }
+    
     if (self.emailItem.value) locationObj[kWFLocationEmailKey] = self.emailItem.value;
     if (self.phoneItem.value) locationObj[kWFLocationPhoneKey] = self.phoneItem.value;
-    locationObj[kWFLocationTypeKey] = [NSNumber numberWithInteger:self.locationTypeItem.value];
+    locationObj[kWFLocationTypeKey] = [NSNumber numberWithInteger:self.locationTypeItem.value + 1];
     
     NSString* city = nil;
     if (self.addressItem.value) {
@@ -138,10 +152,10 @@
     if (self.twitterItem.value) locationObj[kWFLocationTwitterKey] = self.twitterItem.value;
     
     if (self.descItem.value) locationObj[kWFLocationAboutKey] = self.descItem.value;
-    locationObj[kWFLocationWifiTypeKey] = [NSNumber numberWithInteger:self.wifiItem.value];
-    
-    if (self.wifiDownloadItem.value) locationObj[kWFLocationWifiDownloadSpeedKey] = self.wifiDownloadItem.value;
-    if (self.wifiUploadItem.value) locationObj[kWFLocationWifiUploadSpeedKey] = self.wifiUploadItem.value;
+    locationObj[kWFLocationWifiTypeKey] = [NSNumber numberWithInteger:self.wifiItem.value + 1] ;
+
+    if (self.wifiDownloadItem.value) locationObj[kWFLocationWifiDownloadSpeedKey] = [self wifiSpeed:self.wifiDownloadItem.value];
+    if (self.wifiUploadItem.value) locationObj[kWFLocationWifiUploadSpeedKey] = [self wifiSpeed:self.wifiUploadItem.value];
     
     if (self.dayPriceItem.value && self.weeklyPriceItem.value && self.monthlyPriceItem.value) {
         locationObj[kWFLocationPricingKey] = @{kPriceDayPassKey : self.dayPriceItem.value,
@@ -149,11 +163,9 @@
                                                kPriceMonthPassKey : self.monthlyPriceItem.value};
     }
     
-    if ([self.priceUnitItem.value count]) {
-        locationObj[kWFLocationPricingUnitKey] = [self.priceUnitItem.value objectAtIndex:0];
-    }
+    locationObj[kWFLocationPricingKey] = [NSNumber numberWithInteger:self.priceUnitItem.value + 1];
     
-    locationObj[kWFLocationNoiseOptionsKey] = [NSNumber numberWithInteger:self.noiseItem.value];
+    locationObj[kWFLocationNoiseOptionsKey] = [NSNumber numberWithInteger:self.noiseItem.value + 1];
 
     if ([self.openDaysItem.value count]) locationObj[kWFLocationOpenDaysKey] = self.openDaysItem.value;
     if ([self.foodItem.value count]) locationObj[kWFLocationFoodOptionsKey] = self.foodItem.value;
@@ -161,6 +173,9 @@
     
     if ([self.seatingItem.value count]) locationObj[kWFLocationSeatingOptionsKey] = self.seatingItem.value;
     if ([self.amenitiesItem.value count]) locationObj[kWFLocationAmenitiesKey] = self.amenitiesItem.value;
+    
+    locationObj[kWFLocationRatingsKey] = [NSNumber numberWithInteger:0];
+    locationObj[kWFLocationReviewCountKey] = [NSNumber numberWithInteger:0];
     
     PFRelation* locImages = [locationObj relationForKey:kWFLocationPhotosKey];
 
@@ -195,7 +210,7 @@
         __strong typeof(weakSelf) strongSelf = weakSelf;
         NSMutableArray* photoObjArray = [NSMutableArray array];
         for (UIImage* anImage in strongSelf.photosArray) {
-            UIImage *resizedImage = [anImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(560.0f, 560.0f) interpolationQuality:kCGInterpolationHigh];
+            UIImage *resizedImage = [anImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(1024.0f, 1024.0f) interpolationQuality:kCGInterpolationHigh];
             UIImage *thumbnailImage = [anImage thumbnailImage:86.0f transparentBorder:0.0f cornerRadius:10.0f interpolationQuality:kCGInterpolationDefault];
             
             NSData *imageData = UIImageJPEGRepresentation(resizedImage, 0.8f);
@@ -232,13 +247,18 @@
                 for (PFObject* obj in photoObjArray) {
                     [locImages addObject:obj];
                 }
+                
+                //Save the display image
+                locationObj[kWFLocationDisplayPhotoKey] = [[photoObjArray objectAtIndex:0] objectForKey:kWFPhotoPictureKey];
+                locationObj[kWFLocationPhotoCountKey] = [NSNumber numberWithInteger:photoObjArray.count];
+
                 [locationObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
                         NSLog(@"Saved Successfully:%@", locationObj.objectId);
-
+                        
                         if (city) {
                             PFQuery* query = [PFQuery queryWithClassName:kWFCityClassKey];
-                            [query whereKey:kWFCityCanonicalNameKey equalTo:[city lowercaseString]];
+                            [query whereKey:kWFCityCanonicalNameKey equalTo:[[city lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
                             [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
                                 if (error == nil) {
                                     if (object != nil) {
@@ -264,6 +284,7 @@
                                     });
                                 }
                             }];
+                            
                         } else {
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
@@ -359,7 +380,7 @@
     
     self.nameItem = [RETextItem itemWithTitle:@"Name" value:nil placeholder:@"E.g. Gaurav Srivastava"];
     self.emailItem = [RETextItem itemWithTitle:@"Email" value:nil placeholder:@"abc@xyz.com"];
-    self.phoneItem = [RENumberItem itemWithTitle:@"Phone" value:nil placeholder:@"(123) 456-7890" format:@"(XXX) XXX-XXXX"];
+    self.phoneItem = [RENumberItem itemWithTitle:@"Phone" value:nil placeholder:@"(123) 456-7890"];
     
     [section addItem:self.nameItem];
     [section addItem:self.emailItem];
@@ -433,19 +454,15 @@
     self.wifiItem.tintColor = [UIColor turquoiseColor];
     [section addItem:self.wifiItem];
     
-    self.wifiDownloadItem = [RETextItem itemWithTitle:@"Download Speed" value:nil placeholder:@"4"];
+    self.wifiDownloadItem = [RENumberItem itemWithTitle:@"Download Speed" value:nil placeholder:@"4"];
     [section addItem:self.wifiDownloadItem];
 
-    self.wifiDownloadUnitItem = [REPickerItem itemWithTitle:@"Download Unit" value:@[@"Mbps"] placeholder:nil options:@[@[@"Kbps", @"Mbps", @"Gbps"]]];
-    self.wifiDownloadUnitItem.inlinePicker = YES;
-    [section addItem:self.wifiDownloadUnitItem];
-    
-    self.wifiUploadItem = [RETextItem itemWithTitle:@"Upload Speed" value:nil placeholder:@"4"];
+    self.wifiUploadItem = [RENumberItem itemWithTitle:@"Upload Speed" value:nil placeholder:@"4"];
     [section addItem:self.wifiUploadItem];
 
-    self.wifiUploadUnitItem = [REPickerItem itemWithTitle:@"Upload Unit" value:@[@"Mbps"] placeholder:nil options:@[@[@"Kbps", @"Mbps", @"Gbps"]]];
-    self.wifiUploadUnitItem.inlinePicker = YES;
-    [section addItem:self.wifiUploadUnitItem];
+    self.wifiSpeedUnitItem = [RESegmentedItem itemWithTitle:@"Speed Unit" segmentedControlTitles:[WFStringStore wifiUnitStrings] value:WFWifiSpeedMbps - 1];
+    [section addItem:self.wifiSpeedUnitItem];
+
     /*self.wifiDownloadItem = [WFInputItem itemWithTitle:@"Download Speed" value:@"4" categories:@[@"Gbps", @"Mbps", @"Kbps"] selectedIndex:[NSNumber numberWithInteger:2]];
     [section addItem:self.wifiDownloadItem];
     
@@ -457,13 +474,12 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Pricing"];
     [self.manager addSection:section];
     
-    self.priceUnitItem = [REPickerItem itemWithTitle:@"Price Unit" value:@[@"INR"] placeholder:nil options:@[@[@"INR", @"Dollars", @"Pounds", @"Euros"]]];
-    self.priceUnitItem.inlinePicker = YES;
+    self.priceUnitItem = [RESegmentedItem itemWithTitle:@"Price Unit" segmentedControlTitles:[WFStringStore priceUnitStrings] value:WFPriceINR - 1];
     [section addItem:self.priceUnitItem];
     
-    self.dayPriceItem = [RETextItem itemWithTitle:@"Day Pass" value:nil placeholder:@"0"];
-    self.weeklyPriceItem = [RETextItem itemWithTitle:@"Weekly Pass" value:nil placeholder:@"0"];
-    self.monthlyPriceItem = [RETextItem itemWithTitle:@"Monthly Pass" value:nil placeholder:@"0"];
+    self.dayPriceItem = [RENumberItem itemWithTitle:@"Day Pass" value:nil placeholder:@"0"];
+    self.weeklyPriceItem = [RENumberItem itemWithTitle:@"Weekly Pass" value:nil placeholder:@"0"];
+    self.monthlyPriceItem = [RENumberItem itemWithTitle:@"Monthly Pass" value:nil placeholder:@"0"];
     
     [section addItem:self.dayPriceItem];
     [section addItem:self.weeklyPriceItem];
@@ -606,7 +622,7 @@
 
 #pragma mark - UITableViewDelegate
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath isEqual:self.addressItem.indexPath] || [indexPath isEqual:self.priceUnitItem.indexPath] || [indexPath isEqual:self.wifiDownloadUnitItem.indexPath] || [indexPath isEqual:self.wifiUploadUnitItem.indexPath] ) {
+    if ([indexPath isEqual:self.addressItem.indexPath]) {
         return YES;
     }
     return NO;
@@ -629,15 +645,12 @@
 #pragma mark WFAddAddressDelegate
 
 - (void)addressAdded:(NSDictionary *)addressDictionary {
-    double latitude, longitude;
-    NSNumber* lat = (NSNumber*)[addressDictionary objectForKey:kAddressLatitude];
-    NSNumber* lon = (NSNumber*)[addressDictionary objectForKey:kAddressLongitude];
-    if (lat) latitude = [lat doubleValue];
-    if (lon) longitude = [lon doubleValue];
-
     NSString* addrString  = [@[[addressDictionary objectForKey:kAddressStreet],
+                               [addressDictionary objectForKey:kAddressSubStreet],
                                [addressDictionary objectForKey:kAddressCity],
+                               [addressDictionary objectForKey:kAddressSubCity],
                                [addressDictionary objectForKey:kAddressState],
+                               [addressDictionary objectForKey:kAddressSubState],
                                [addressDictionary objectForKey:kAddressZIP],
                                [addressDictionary objectForKey:kAddressCountry]] componentsJoinedByString:@", "];
 

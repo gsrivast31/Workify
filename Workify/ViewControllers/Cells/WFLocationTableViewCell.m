@@ -8,10 +8,12 @@
 
 #import "WFLocationTableViewCell.h"
 #import "WFMediaController.h"
+#import <ParseUI/ParseUI.h>
+#import <Parse/Parse.h>
 
 @interface WFLocationTableViewCell()
 
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIButton *wifiDownloadIconButton;
 @property (weak, nonatomic) IBOutlet UILabel *wifiDownloadLabel;
 @property (weak, nonatomic) IBOutlet UIButton *wifiUploadIconButton;
@@ -25,24 +27,32 @@
 
 @implementation WFLocationTableViewCell
 
-- (void)awakeFromNib {
-}
+- (void)configureCellForObject:(PFObject *)object {
+    self.backgroundImageView.image = [UIImage imageNamed:@"banner2"];
+    
+    PFFile* file = [object objectForKey:kWFLocationDisplayPhotoKey];
+    if (file) {
+        self.backgroundImageView.file = file;
+        [self.backgroundImageView loadInBackground];
+    }
+    
+    NSNumber* wifiDownloadSpeedNum = [object objectForKey:kWFLocationWifiDownloadSpeedKey] ;
+    
+    if (wifiDownloadSpeedNum) {
+        double wifiDownloadSpeed = [wifiDownloadSpeedNum doubleValue];
+        self.wifiDownloadLabel.text = [NSString stringWithFormat:@"%.1f Mbps", wifiDownloadSpeed];
+    } else {
+        self.wifiDownloadLabel.text = @"-";
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-}
-
-- (void)configureCell {
-    /*__weak typeof(self) weakSelf = self;
-    [[WFMediaController sharedInstance] imageWithFilenameAsync:@"bkgnd2" success:^(UIImage *image) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        strongSelf.backgroundImageView.image = image;
-    } failure:^{
-    }];*/
-    self.backgroundImageView.image = [UIImage imageNamed:@"bkgnd2"];
-
-    self.wifiDownloadLabel.text = @"4Mbps";
-    self.wifiUploadLabel.text = @"2Mbps";
+    }
+    
+    NSNumber* wifiUploadSpeedNum = [object objectForKey:kWFLocationWifiUploadSpeedKey] ;
+    if (wifiUploadSpeedNum) {
+        double wifiUploadSpeed = [wifiUploadSpeedNum doubleValue];
+        self.wifiUploadLabel.text = [NSString stringWithFormat:@"%.1f Mbps", wifiUploadSpeed];
+    } else {
+        self.wifiUploadLabel.text = @"-";
+    }
     
     [self.wifiDownloadLabel setFont:[UIFont flatFontOfSize:16]];
     [self.wifiUploadLabel setFont:[UIFont flatFontOfSize:16]];
@@ -56,17 +66,20 @@
     [self.ratingLabel setFont:[UIFont iconFontWithSize:17]];
     
     [self.spaceTypeLabel setFont:[UIFont flatFontOfSize:15]];
-    self.spaceTypeLabel.text = kSpaceCoWorking;
+    
+    self.spaceTypeLabel.text = [WFStringStore spaceTypeString:[[object objectForKey:kWFLocationTypeKey] integerValue]];
     
     NSString* string = @"";
-    for (NSInteger i=0; i<5; i++) {
+    for (NSInteger i=0; i<[[object objectForKey:kWFLocationRatingsKey] integerValue]; i++) {
         string = [string stringByAppendingString:[NSString iconStringForEnum:FUIStar2]];
     }
     [self.ratingLabel setText:string];
     [self.ratingLabel setTextColor:[UIColor turquoiseColor]];
     
-    self.nameLabel.text = @"CAFE COFFEE DAY";
-    self.addressLabel.text = @"Indiranagar, Colaba, Mumbai";
+    self.nameLabel.text = [object objectForKey:kWFLocationNameKey];
+    
+    NSDictionary* addressDict = [object objectForKey:kWFLocationAddressKey];
+    self.addressLabel.text = [@[[addressDict objectForKey:kAddressStreet], [addressDict objectForKey:kAddressSubStreet], [addressDict objectForKey:kAddressSubCity]] componentsJoinedByString:@", "];
     
     self.nameLabel.font = [UIFont flatFontOfSize:18];
     self.addressLabel.font = [UIFont flatFontOfSize:16];

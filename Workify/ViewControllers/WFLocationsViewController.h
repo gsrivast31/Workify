@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ParseUI/ParseUI.h>
 
-@interface WFLocationsViewController : UIViewController
+@class PFObject;
+
+@interface WFLocationsViewController : PFQueryTableViewController
+
+@property (nonatomic, strong) PFObject* cityObject;
 
 @end

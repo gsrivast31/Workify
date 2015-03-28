@@ -8,4 +8,6 @@
 
 @interface WFLocationDetailViewController : UIViewController
 
+@property (nonatomic, strong) NSString* locationId;
+
 @end

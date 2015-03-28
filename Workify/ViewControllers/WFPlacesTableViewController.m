@@ -9,6 +9,7 @@
 #import "WFPlacesTableViewController.h"
 #import "WFPlacesTableViewCell.h"
 #import "WFNavigationController.h"
+#import "WFLocationsViewController.h"
 
 #import "WFAppDelegate.h"
 #import "WFTooltipViewController.h"
@@ -77,6 +78,18 @@
     [cell configureCellWithObject:object];
     
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showLocations"]) {
+        WFLocationsViewController* vc = (WFLocationsViewController*)segue.destinationViewController;
+        NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
+        if (indexPath.row < self.objects.count) {
+            PFObject* obj = [self.objects objectAtIndex:indexPath.row];
+            vc.cityObject = obj;
+            vc.title = [obj valueForKey:kWFCityNameKey];
+        }
+    }
 }
 
 #pragma mark - Table view delegate

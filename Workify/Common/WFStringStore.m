@@ -102,6 +102,26 @@
     return daysStrings;
 }
 
++ (NSArray*)wifiUnitStrings {
+    static dispatch_once_t pred;
+    static NSArray *wifiUnitStrings = nil;
+    dispatch_once(&pred, ^{
+        wifiUnitStrings = @[kWifiKbps, kWifiMbps, kWifiGbps];
+    });
+    
+    return wifiUnitStrings;
+}
+
++ (NSArray*)priceUnitStrings {
+    static dispatch_once_t pred;
+    static NSArray *priceUnitStrings = nil;
+    dispatch_once(&pred, ^{
+        priceUnitStrings = @[kPriceINR, kPriceDollar, kPricePounds, kPriceEuros];
+    });
+    
+    return priceUnitStrings;
+}
+
 + (NSString*)spaceTypeString:(NSInteger)type {
     if (type > 0 && type <= [WFStringStore spaceTypeStrings].count) {
         return [[WFStringStore spaceTypeStrings] objectAtIndex:type - 1];
@@ -165,6 +185,20 @@
     return nil;
 }
 
++ (NSString*)wifiUnitString:(NSInteger)type {
+    if (type > 0 && type <= [WFStringStore wifiUnitStrings].count) {
+        return [[WFStringStore wifiUnitStrings] objectAtIndex:type - 1];
+    }
+    return nil;
+}
+
++ (NSString*)priceUnitString:(NSInteger)type {
+    if (type > 0 && type <= [WFStringStore priceUnitStrings].count) {
+        return [[WFStringStore priceUnitStrings] objectAtIndex:type - 1];
+    }
+    return nil;
+}
+
 + (NSInteger)spaceTypeIndex:(NSString*)string {
     return [[WFStringStore spaceTypeStrings] indexOfObject:string] + 1;
 }
@@ -199,6 +233,14 @@
 
 + (NSInteger)daysIndex:(NSString *)string {
     return [[WFStringStore daysStrings] indexOfObject:string] + 1;
+}
+
++ (NSInteger)wifiUnitIndex:(NSString *)string {
+    return [[WFStringStore wifiUnitStrings] indexOfObject:string] + 1;
+}
+
++ (NSInteger)priceUnitIndex:(NSString *)string {
+    return [[WFStringStore priceUnitStrings] indexOfObject:string] + 1;
 }
 
 @end

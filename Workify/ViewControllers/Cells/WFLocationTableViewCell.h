@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class PFObject;
+
 @interface WFLocationTableViewCell : UITableViewCell
 
-- (void)configureCell;
+- (void)configureCellForObject:(PFObject*)object;
 
 @end

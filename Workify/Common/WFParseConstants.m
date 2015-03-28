@@ -13,7 +13,6 @@
 NSString *const kWFCityClassKey = @"City";
 
 // Field keys
-NSString *const kWFCityIDKey = @"cityId";
 NSString *const kWFCityNameKey = @"name";
 NSString *const kWFCityCanonicalNameKey = @"canonicalName";
 NSString *const kWFCityLocationsKey = @"locations";
@@ -25,7 +24,6 @@ NSString *const kWFCityDisplayPhotoKey = @"displayPhoto";
 NSString *const kWFLocationClassKey = @"Location";
 
 // Field keys
-NSString *const kWFLocationIDKey = @"locId";
 NSString *const kWFLocationCityKey = @"city";
 NSString *const kWFLocationNameKey = @"name";
 NSString *const kWFLocationCanonicalNameKey = @"canonicalName";
