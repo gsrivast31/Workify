@@ -54,6 +54,8 @@
 		2DF6E3CD1AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C71AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m */; };
 		2DF6E3CE1AC5486100B51EEC /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C91AC5486100B51EEC /* UIView+Animation.m */; };
 		2DF6E3D21AC5E0D600B51EEC /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF6E3D11AC5E0D600B51EEC /* ParseUI.framework */; };
+		2DF6E3D61AC7EAA100B51EEC /* WFReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3D41AC7EAA100B51EEC /* WFReviewCell.m */; };
+		2DF6E3D71AC7EAA100B51EEC /* WFReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6E3D51AC7EAA100B51EEC /* WFReviewCell.xib */; };
 		F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DE71A873258000040B5 /* WFTwoColumnItem.m */; };
 		F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DEF1A87654A000040B5 /* WFDetailSingleItemCell.m */; };
 		F4261DF21A87654A000040B5 /* WFDetailSingleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4261DF01A87654A000040B5 /* WFDetailSingleItemCell.xib */; };
@@ -232,6 +234,9 @@
 		2DF6E3CF1AC5487100B51EEC /* WFCredentials.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WFCredentials.h; path = Common/WFCredentials.h; sourceTree = "<group>"; };
 		2DF6E3D01AC5487100B51EEC /* WFParseConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WFParseConstants.h; path = Common/WFParseConstants.h; sourceTree = "<group>"; };
 		2DF6E3D11AC5E0D600B51EEC /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		2DF6E3D31AC7EAA100B51EEC /* WFReviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFReviewCell.h; path = ViewControllers/Cells/WFReviewCell.h; sourceTree = "<group>"; };
+		2DF6E3D41AC7EAA100B51EEC /* WFReviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFReviewCell.m; path = ViewControllers/Cells/WFReviewCell.m; sourceTree = "<group>"; };
+		2DF6E3D51AC7EAA100B51EEC /* WFReviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WFReviewCell.xib; path = ViewControllers/Cells/WFReviewCell.xib; sourceTree = "<group>"; };
 		47422309BA50442679966331 /* Pods-Workify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.debug.xcconfig"; sourceTree = "<group>"; };
 		F4195F47C08CA42427BE3646 /* Pods-Workify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.release.xcconfig"; sourceTree = "<group>"; };
 		F4261DE61A873258000040B5 /* WFTwoColumnItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTwoColumnItem.h; path = ViewControllers/Models/WFTwoColumnItem.h; sourceTree = "<group>"; };
@@ -642,7 +647,6 @@
 			isa = PBXGroup;
 			children = (
 				2DF6E3CF1AC5487100B51EEC /* WFCredentials.h */,
-				2DF6E3D01AC5487100B51EEC /* WFParseConstants.h */,
 				2D3A18621ABF5E4F00D6A0B5 /* WFEnumConstants.h */,
 				2D3A18631ABF5E4F00D6A0B5 /* WFStringConstants.h */,
 				2D3A18641ABF5E4F00D6A0B5 /* WFStringStore.h */,
@@ -650,6 +654,7 @@
 				F45C0BBF1A83DA1500E221EE /* WFCommon.h */,
 				F45C0BC01A83DA5300E221EE /* WFHelper.h */,
 				F45C0BC11A83DA5300E221EE /* WFHelper.m */,
+				2DF6E3D01AC5487100B51EEC /* WFParseConstants.h */,
 				2DF6E3B11AC4B92600B51EEC /* WFParseConstants.m */,
 			);
 			name = Common;
@@ -704,6 +709,9 @@
 				F45C0BD71A83DB8800E221EE /* WFLocationTableViewCell.m */,
 				F4261E021A88C777000040B5 /* WFPhotoCell.h */,
 				F4261E031A88C777000040B5 /* WFPhotoCell.m */,
+				2DF6E3D31AC7EAA100B51EEC /* WFReviewCell.h */,
+				2DF6E3D41AC7EAA100B51EEC /* WFReviewCell.m */,
+				2DF6E3D51AC7EAA100B51EEC /* WFReviewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1009,6 +1017,7 @@
 			files = (
 				F45C0C8B1A84791F00E221EE /* Lato-Light.ttf in Resources */,
 				F45C0BA11A83D93400E221EE /* Main.storyboard in Resources */,
+				2DF6E3D71AC7EAA100B51EEC /* WFReviewCell.xib in Resources */,
 				F45C0CAD1A84BC2700E221EE /* WFDaysTableViewCell.xib in Resources */,
 				F45C0BA61A83D93400E221EE /* LaunchScreen.xib in Resources */,
 				F45C0C881A84791F00E221EE /* flat-ui-icons-regular.ttf in Resources */,
@@ -1089,6 +1098,7 @@
 				2D1853301ABAF6F800404108 /* WFNavigationController.m in Sources */,
 				F45C0C631A84791F00E221EE /* UIPopoverController+FlatUI.m in Sources */,
 				F4261E721A892715000040B5 /* WFMultilineTextCell.m in Sources */,
+				2DF6E3D61AC7EAA100B51EEC /* WFReviewCell.m in Sources */,
 				F45C0C581A84791F00E221EE /* FUICellBackgroundView.m in Sources */,
 				F4261E631A88CEBA000040B5 /* SGSheetMenu.m in Sources */,
 				F45C0CB11A84C5EF00E221EE /* WFStepperTableViewCell.m in Sources */,

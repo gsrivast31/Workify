@@ -11,6 +11,7 @@
 @interface WFPhotoCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 - (void)configureCellWithURL:(NSString*)urlString;
 
 @end

@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ParseUI/ParseUI.h>
 
-@interface WFReviewsViewController : UITableViewController
+@class PFObject;
+
+@interface WFReviewsViewController : PFQueryTableViewController
+
+- (id) initWithObject:(PFObject*)object;
+
+@property (nonatomic, strong) PFObject* locationObject;
 
 @end

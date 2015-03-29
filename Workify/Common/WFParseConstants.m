@@ -51,17 +51,16 @@ NSString *const kWFLocationSeatingOptionsKey = @"seating";
 NSString *const kWFLocationAmenitiesKey = @"amenities";
 NSString *const kWFLocationOpenDaysKey = @"openDays";
 NSString *const kWFLocationReviewCountKey = @"reviewCnt";
+NSString *const kWFLocationReviewsKey = @"reviews";
 NSString *const kWFLocationPhotoCountKey = @"photoCnt";
 NSString *const kWFLocationPhotosKey = @"photos";
 
 #pragma mark - PFObject User Class
 // Field keys
+NSString *const kWFUserProfileKey = @"profile";
 NSString *const kWFUserDisplayNameKey = @"displayName";
 NSString *const kWFUserFacebookIDKey = @"facebookId";
-NSString *const kWFUserPhotoIDKey = @"photoId";
-NSString *const kWFUserProfilePicSmallKey = @"profilePictureSmall";
-NSString *const kWFUserProfilePicMediumKey = @"profilePictureMedium";
-NSString *const kWFUserEmailKey = @"email";
+NSString *const kWFUserFacebookPictureURLKey = @"pictureURL";
 
 #pragma mark - PFObject Photo Class
 // Class key
@@ -77,7 +76,5 @@ NSString *const kWFReviewClassKey = @"Review";
 
 // Field keys
 NSString *const kWFReviewContentKey = @"content";
-NSString *const kWFReviewLocationKey = @"location";
-NSString *const kWFReviewAuthorKey = @"author";
-NSString *const kWFReviewDateKey = @"date";
 NSString *const kWFReviewRatingsKey = @"ratings";
+NSString *const kWFReviewUserKey = @"user";

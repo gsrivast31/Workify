@@ -54,17 +54,16 @@ extern NSString *const kWFLocationSeatingOptionsKey;
 extern NSString *const kWFLocationAmenitiesKey;
 extern NSString *const kWFLocationOpenDaysKey;
 extern NSString *const kWFLocationReviewCountKey;
+extern NSString *const kWFLocationReviewsKey;
 extern NSString *const kWFLocationPhotoCountKey;
 extern NSString *const kWFLocationPhotosKey;
 
 #pragma mark - PFObject User Class
 // Field keys
+extern NSString *const kWFUserProfileKey;
 extern NSString *const kWFUserDisplayNameKey;
 extern NSString *const kWFUserFacebookIDKey;
-extern NSString *const kWFUserPhotoIDKey;
-extern NSString *const kWFUserProfilePicSmallKey;
-extern NSString *const kWFUserProfilePicMediumKey;
-extern NSString *const kWFUserEmailKey;
+extern NSString *const kWFUserFacebookPictureURLKey;
 
 #pragma mark - PFObject Photo Class
 // Class key
@@ -81,9 +80,7 @@ extern NSString *const kWFReviewClassKey;
 
 // Field keys
 extern NSString *const kWFReviewContentKey;
-extern NSString *const kWFReviewAuthorKey;
-extern NSString *const kWFReviewLocationKey;
-extern NSString *const kWFReviewDateKey;
 extern NSString *const kWFReviewRatingsKey;
+extern NSString *const kWFReviewUserKey;
 
 #endif

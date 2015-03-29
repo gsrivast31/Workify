@@ -10,19 +10,21 @@
 
 @implementation WFDetailedItem
 
-+ (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle imageName:(NSString*)imageName {
++ (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle placeHolder:(NSString*)placeholder imageName:(NSString*)imageName {
     WFDetailedItem* item = [[WFDetailedItem alloc] init];
     item.name = title;
     item.imagename = imageName;
     item.value = subtitle;
+    item.placeholder = placeholder;
     return item;
 }
 
-+ (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle imageName:(NSString*)imageName selectionHandler:(void(^)(RETableViewItem *item))selectionHandler {
++ (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle placeHolder:(NSString*)placeholder imageName:(NSString*)imageName selectionHandler:(void(^)(RETableViewItem *item))selectionHandler {
     WFDetailedItem* item = [[WFDetailedItem alloc] init];
     item.name = title;
     item.imagename = imageName;
     item.value = subtitle;
+    item.placeholder = placeholder;
     item.selectionHandler = selectionHandler;
     return item;
 }

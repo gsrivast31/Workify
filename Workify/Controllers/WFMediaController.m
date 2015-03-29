@@ -170,6 +170,35 @@
     });
 }
 
+- (void)imageFromURL:(NSURL *)url
+             success:(void (^)(UIImage *))successCallback
+             failure:(void (^)(void))failureCallback {
+    
+    if([self.cache objectForKey:url.absoluteString]) {
+        if(successCallback) successCallback([self.cache objectForKey:url.absoluteString]);
+        return;
+    }
+
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+        NSData *data = [[NSData alloc] initWithContentsOfURL:location];
+        UIImage *image = [[UIImage alloc] initWithData:data];
+        [self.cache setObject:image forKey:url.absoluteString];
+        
+        if (error == nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                successCallback(image);
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failureCallback();
+            });
+        }
+    }];
+    [task resume];
+}
+
 #pragma mark - Helpers
 - (UIImage *)resizeImage:(UIImage *)image
                   toSize:(CGSize)newSize

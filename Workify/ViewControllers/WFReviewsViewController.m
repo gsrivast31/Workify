@@ -12,15 +12,42 @@
 #import "MZFormSheetPresentationController.h"
 #import "RETableViewManager.h"
 #import "WFReviewItem.h"
+#import "WFReviewCell.h"
+
+#import <Parse/Parse.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface WFReviewsViewController () <WFAddReviewDelegate, WFLoginDelegate, RETableViewManagerDelegate>
 
-@property (nonatomic) NSMutableArray *reviewsArray;
 @property (nonatomic, strong, readwrite) RETableViewManager *manager;
 @property (nonatomic, strong, readwrite) RETableViewSection *section;
 @end
 
 @implementation WFReviewsViewController
+
+- (id) initWithObject:(PFObject*)object {
+    self = [super init];
+    if (self) {
+        self.locationObject = object;
+        
+        // The className to query on
+        self.parseClassName = kWFReviewClassKey;
+        
+        // Whether the built-in pull-to-refresh is enabled
+        self.pullToRefreshEnabled = YES;
+        
+        // Whether the built-in pagination is enabled
+        self.paginationEnabled = NO;
+        
+        // The number of objects to show per page
+        // self.objectsPerPage = 10;
+        
+        // The Loading text clashes with the dark Anypic design
+        self.loadingViewEnabled = YES;
+
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,12 +56,9 @@
 
     self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView delegate:self];
     self.manager[@"WFReviewItem"] = @"WFReviewViewCell";
-    [self loadPlaceHolderComments];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconCancel"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconAdd"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(addReview:)];
-    
-    [self addTableEntries];
 }
 
 - (void)cancel:(id)sender {
@@ -63,40 +87,71 @@
         navVC.navigationBarHidden = YES;
         [self presentViewController:controller animated:YES completion:nil];
     }
-
 }
 
-- (void)loadPlaceHolderComments {
-    self.reviewsArray = [NSMutableArray arrayWithObjects:@{kReviewKey: @"Friendship is always a sweet responsibility, never an opportunity", kTimeKey : @"1 Min Ago"},
-                         @{kReviewKey: @"True friendship is when you walk into their house and your WiFi connects automatically", kTimeKey : @"1 Min Ago"},
-                         @{kReviewKey: @"True friendship multiplies the good in life and divides its evils. Strive to have friends, for life without friends is like life on a desert island… to find one real friend in a lifetime is good fortune; to keep him is a blessing.", kTimeKey : @"1 Min Ago"},
-                         @{kReviewKey: @"Like Thought Catalog on Facebook", kTimeKey : @"1 Min Ago"},
-                         @{kReviewKey: @"The language of friendship is not words but meanings", kTimeKey : @"1 Min Ago"},
-                         @{kReviewKey: @"Don’t walk behind me; I may not lead. Don’t walk in front of me; I may not follow. Just walk beside me and be my friend.", kTimeKey : @"1 Min Ago"},
-                         @{kReviewKey: @"Friendship is like money, easier made than kept. – Samuel Butler", kTimeKey : @"1 Min Ago"},
-                         @{kReviewKey: @"A friend is one that knows you as you are, understands where you have been, accepts what you have become, and still, gently allows you to grow. – William Shakespeare", kTimeKey : @"1 Min Ago"},
-                         @{kReviewKey: @"I think if I’ve learned anything about friendship, it’s to hang in, stay connected, fight for them, and let them fight for you. Don’t walk away, don’t be distracted, don’t be too busy or tired, don’t take them for granted. Friends are part of the glue that holds life and faith together. Powerful stuff", kTimeKey : @"1 Min Ago"},
-                         @{kReviewKey: @"I value the friend who for me finds time on his calendar, but I cherish the friend who for me does not consult his calendar", kTimeKey : @"1 Min Ago"},
-                         @{kReviewKey: @"Every friendship travels at sometime through the black valley of despair. This tests every aspect of your affection. You lose the attraction and the magic. Your sense of each other darkens and your presence is sore. If you can come through this time, it can purify with your love, and falsity and need will fall away. It will bring you onto new ground where affection can grow again Friendship improves happiness, and abates misery, by doubling our joys, and dividing our grief Do not save your loving speeches For your friends till they are dead Do not write them on their tombstones, Speak them rather now instead", kTimeKey : @"1 Min Ago"},
-                         nil];
+- (PFQuery *)queryForTable {
+    PFRelation* relation = [self.locationObject objectForKey:kWFLocationReviewsKey];
+    PFQuery* query = [relation query];
+    [query orderByDescending:@"createdAt"];
+    return query;
 }
 
-- (void)addTableEntries {
-    self.section = [RETableViewSection sectionWithHeaderTitle:@""];
-    [self.manager addSection:self.section];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    WFReviewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell"];
     
-    for (NSDictionary* review in self.reviewsArray) {
-        [self.section addItem:[WFReviewItem itemWithReview:[review valueForKey:kReviewKey] author:@"Gaurav Srivastava" imageName:@"author" date:[review valueForKey:kTimeKey] ratings:3]];
+    if (cell == nil) {
+        [tableView registerNib:[UINib nibWithNibName:@"WFReviewCell" bundle:nil] forCellReuseIdentifier:@"locationCell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell"];
     }
+    
+    [cell configureCellWithObject:object];
+
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 200.f;
 }
 
 #pragma mark WFAddReviewDelegate
 - (void)reviewAdded:(NSDictionary *)reviewDictionary {
-    [self.reviewsArray addObject:reviewDictionary];
-    WFReviewItem* item = [WFReviewItem itemWithReview:[reviewDictionary valueForKey:kReviewKey] author:@"Gaurav Srivastava" imageName:@"author" date:@"1 Min Ago" ratings:[[reviewDictionary objectForKey:kRatingKey] integerValue]];
-    [self.section insertItem:item atIndex:0];
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self.manager.tableView insertRowsAtIndexPaths:@[item.indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    PFObject* object = [PFObject objectWithClassName:kWFReviewClassKey];
+    [object setObject:[PFUser currentUser] forKey:kWFReviewUserKey];
+    [object setObject:[reviewDictionary objectForKey:kReviewKey] forKey:kWFReviewContentKey];
+    [object setObject:[reviewDictionary objectForKey:kRatingKey] forKey:kWFReviewRatingsKey];
+    
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            PFRelation* relation = [self.locationObject relationForKey:kWFLocationReviewsKey];
+            [relation addObject:object];
+            NSInteger reviewCnt = [[self.locationObject objectForKey:kWFLocationReviewCountKey] integerValue];
+            NSInteger oldRatings = [[self.locationObject objectForKey:kWFLocationRatingsKey] integerValue];
+            NSInteger newRatings = (oldRatings * reviewCnt + [[object objectForKey:kWFReviewRatingsKey] integerValue]) / (reviewCnt + 1);
+            
+            [self.locationObject setObject:[NSNumber numberWithInteger:newRatings] forKey:kWFLocationRatingsKey];
+            [self.locationObject incrementKey:kWFLocationReviewCountKey];
+            
+            [self.locationObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+                        [self loadObjects];
+                    });
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kReviewAddedNotification object:nil];
+                }
+            }];
+        } else if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not save the review. Try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+            });
+        }
+    }];
+    
 }
 
 - (void)reviewCanceled {

@@ -107,4 +107,7 @@ static NSString * const kPriceDollar = @"Dollars";
 static NSString * const kPricePounds = @"Pounds";
 static NSString * const kPriceEuros = @"Euros";
 
+//Notifications
+static NSString * const kReviewAddedNotification = @"kReviewAddedNotification";
+
 #endif

@@ -13,10 +13,11 @@
 @property (nonatomic, copy, readwrite) NSString* name;
 @property (nonatomic, copy, readwrite) NSString* imagename;
 @property (nonatomic, copy, readwrite) NSString* value;
+@property (nonatomic, copy, readwrite) NSString* placeholder;
 
-+ (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle imageName:(NSString*)imageName;
++ (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle placeHolder:(NSString*)placeholder imageName:(NSString*)imageName;
 
-+ (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle imageName:(NSString*)imageName selectionHandler:(void(^)(RETableViewItem *item))selectionHandler ;
++ (id)itemWithTitle:(NSString *)title subTitle:(NSString*)subtitle placeHolder:(NSString*)placeholder imageName:(NSString*)imageName selectionHandler:(void(^)(RETableViewItem *item))selectionHandler ;
 
 @end
 

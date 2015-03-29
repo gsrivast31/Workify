@@ -23,6 +23,7 @@
 #import "WFLoginViewController.h"
 #import "MZFormSheetPresentationController.h"
 #import <Parse/Parse.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface WFLocationDetailViewController () <RETableViewManagerDelegate, WFDetailDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, MWPhotoBrowserDelegate, WFLoginDelegate, UIAlertViewDelegate>
 
@@ -32,8 +33,11 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @property (nonatomic, strong, readwrite) RETableViewManager *manager;
+@property (nonatomic, strong, readwrite) WFDetailedViewItem *generalItem;
 @property (nonatomic, strong) NSMutableArray *photos;
 @property (nonatomic, strong) NSMutableArray *thumbs;
+
+@property (nonatomic, strong) PFObject* locationObject;
 
 @end
 
@@ -45,12 +49,7 @@
     self.photos = [[NSMutableArray alloc] init];
     self.thumbs = [[NSMutableArray alloc] init];
 
-    ParallaxHeaderView* headerView = [ParallaxHeaderView parallaxHeaderViewWithImage:[UIImage imageNamed:@"bkgnd1"] forSize:CGSizeMake(self.tableView.frame.size.width, 200)];
-    headerView.headerTitleLabel.text = @"";
-    self.tableView.tableHeaderView = headerView;
-    
-    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotos)];
-    [headerView addGestureRecognizer:gesture];
+    self.locationObject = nil;
     
     self.tableView.tintColor = [UIColor turquoiseColor];
     self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView delegate:self];
@@ -72,7 +71,8 @@
     [self.photosButton setImage:[UIImage imageNamed:@"photos"] forState:UIControlStateNormal];
     [self.photosButton addTarget:self action:@selector(showPhotos) forControlEvents:UIControlEventTouchUpInside];
 
-    [self addTableEntries];
+    self.bottomView.alpha = 0.0f;
+    [self loadDetails];
     
     if(!self.navigationItem.leftBarButtonItem) {
         UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -89,11 +89,7 @@
     UIBarButtonItem* shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
     self.navigationItem.rightBarButtonItem = shareItem;
     
-    for (NSInteger i=0; i<5; i++) {
-        MWPhoto* photo = [MWPhoto photoWithImage:[UIImage imageNamed:@"splash"]];
-        [self.photos addObject:photo];
-        [self.thumbs addObject:photo];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadObject:) name:kReviewAddedNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -101,14 +97,39 @@
     [super viewDidAppear:animated];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReviewAddedNotification object:nil];
+}
+
 - (void)loadDetails {
     if (self.locationId) {
+        [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         PFQuery* query = [PFQuery queryWithClassName:kWFLocationClassKey];
         [query whereKey:@"objectId" equalTo:self.locationId];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-            
+            if (error == nil) {
+                self.locationObject = object;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+                    [self addTableEntries];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+                    
+                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not load the details. Try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [alertView show];
+                });
+            }
         }];
     }
+}
+
+- (void)reloadObject:(NSNotification*)notification {
+    [self setReviewCount];
+
+    [self.generalItem setRatings:[self.locationObject objectForKey:kWFLocationRatingsKey]];
+    [self.generalItem reloadRowWithAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)dismissSelf:(id)sender {
@@ -120,31 +141,58 @@
 }
 
 - (void)showReviews {
-    WFReviewsViewController* vc = [[WFReviewsViewController alloc] init];
+    WFReviewsViewController* vc = [[WFReviewsViewController alloc] initWithObject:self.locationObject];
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:vc];
     navVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:navVC animated:YES completion:nil];
 }
 
 - (void)showPhotos {
-    // Create browser
-    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-    browser.displayActionButton = YES;
-    browser.displayNavArrows = YES;
-    browser.displaySelectionButtons = NO;
-    browser.alwaysShowControls = NO;
-    browser.zoomPhotosToFill = YES;
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
-    browser.wantsFullScreenLayout = YES;
-#endif
-    browser.enableGrid = YES;
-    browser.startOnGrid = YES;
-    browser.enableSwipeToDismiss = YES;
-    [browser setCurrentPhotoIndex:0];
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     
-    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
-    nc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:nc animated:YES completion:nil];
+    PFRelation* relation = [self.locationObject objectForKey:kWFLocationPhotosKey];
+    PFQuery* query = [relation query];
+    
+    __typeof (&*self) __weak weakSelf = self;
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error == nil) {
+            for (PFObject* object in objects) {
+                PFFile* imageFile = [object objectForKey:kWFPhotoPictureKey];
+                PFFile* thumbFile = [object objectForKey:kWFPhotoThumbnailKey];
+                [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:imageFile.url]]];
+                [self.thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:thumbFile.url]]];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
+                
+                // Create browser
+                MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:weakSelf];
+                browser.displayActionButton = YES;
+                browser.displayNavArrows = YES;
+                browser.displaySelectionButtons = NO;
+                browser.alwaysShowControls = NO;
+                browser.zoomPhotosToFill = YES;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+                browser.wantsFullScreenLayout = YES;
+#endif
+                browser.enableGrid = YES;
+                browser.startOnGrid = YES;
+                browser.enableSwipeToDismiss = YES;
+                [browser setCurrentPhotoIndex:0];
+                
+                UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
+                nc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                [weakSelf presentViewController:nc animated:YES completion:nil];
+            });
+            
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
+            });
+        }
+    }];
+    
 }
 
 #pragma mark -
@@ -159,29 +207,71 @@
 #pragma mark -
 
 - (void)addTableEntries {
+    ParallaxHeaderView* headerView = [ParallaxHeaderView parallaxHeaderViewWithImage:[UIImage imageNamed:@"banner2"] forSize:CGSizeMake(self.tableView.frame.size.width, 200)];
+    headerView.headerTitleLabel.text = @"";
+    self.tableView.tableHeaderView = headerView;
+    
+    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPhotos)];
+    [headerView addGestureRecognizer:gesture];
+    
+    PFFile* displayFile = [self.locationObject objectForKey:kWFLocationDisplayPhotoKey];
+    [displayFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (error == nil) {
+            headerView.headerImage = [UIImage imageWithData:data];
+        }
+    }];
+    
     [self addGeneralSection];
     [self addInfoSection];
     [self addHoursSection];
     [self addAmenitiesSection];
     [self addReportEditSection];
+    
+    [self setPhotoCount];
+    [self setReviewCount];
+
+    self.bottomView.alpha = 1.0f;
+
+    [self.tableView reloadData];
+}
+
+- (void)setPhotoCount {
+    NSString* photoCountString = [NSString stringWithFormat:@"Photos(%@)", [(NSNumber*)[self.locationObject objectForKey:kWFLocationPhotoCountKey] stringValue]];
+    [self.photosButton setTitle:photoCountString forState:UIControlStateNormal];
+}
+
+- (void)setReviewCount {
+    NSString* reviewCountString = [NSString stringWithFormat:@"Reviews(%@)", [(NSNumber*)[self.locationObject objectForKey:kWFLocationReviewCountKey] stringValue]];
+    [self.reviewsButton setTitle:reviewCountString forState:UIControlStateNormal];
 }
 
 - (void)addGeneralSection {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@""];
     [self.manager addSection:section];
     
-    WFDetailedViewItem* item = [WFDetailedViewItem itemWithName:@"Cafe Zoe" delegate:self];
-    item.ratings = [NSNumber numberWithInteger:4];
-    item.phone = @"+91-9717961964";
-    item.email = @"gaurav.sri87@gmail.com";
-    item.address = @"12/105, VikasNagar, Lucknow, U.P. - 226022";
-    item.longitude = nil;
-    item.latitude = nil;
-    item.website = @"http://www.google.com";
-    item.facebookUrl = @"http://www.facebook.com/";
-    item.twitterUrl = @"http://www.twitter.com/";
+    self.generalItem = [WFDetailedViewItem itemWithName:[self.locationObject objectForKey:kWFLocationNameKey] delegate:self];
+    self.generalItem.ratings = [self.locationObject objectForKey:kWFLocationRatingsKey];
+    self.generalItem.phone = [self.locationObject objectForKey:kWFLocationPhoneKey];
+    self.generalItem.email = [self.locationObject objectForKey:kWFLocationEmailKey];
     
-    [section addItem:item];
+    NSDictionary* addressDict = [self.locationObject objectForKey:kWFLocationAddressKey];
+    self.generalItem.address = [WFHelper commaSeparatedString:@[[addressDict objectForKey:kAddressStreet],
+                     [addressDict objectForKey:kAddressSubStreet],
+                     [addressDict objectForKey:kAddressCity],
+                     [addressDict objectForKey:kAddressSubCity],
+                     [addressDict objectForKey:kAddressState],
+                     [addressDict objectForKey:kAddressSubState],
+                     [addressDict objectForKey:kAddressZIP],
+                     [addressDict objectForKey:kAddressCountry],
+                     ]];
+    
+    self.generalItem.longitude = [addressDict objectForKey:kAddressLongitude];
+    self.generalItem.latitude = [addressDict objectForKey:kAddressLatitude];
+    self.generalItem.website = [self.locationObject objectForKey:kWFLocationWebsiteKey];
+    self.generalItem.facebookUrl = [self.locationObject objectForKey:kWFLocationFacebookKey];
+    self.generalItem.twitterUrl = [self.locationObject objectForKey:kWFLocationTwitterKey];
+    
+    [section addItem:self.generalItem];
 }
 
 - (void)addInfoSection {
@@ -191,46 +281,132 @@
     NSString* aboutText = @"";
     
     __typeof (&*self) __weak weakSelf = self;
-    [section addItem:[WFDetailedItem itemWithTitle:@"About" subTitle:aboutText imageName:@"about" selectionHandler:^(RETableViewItem *item) {
+    [section addItem:[WFDetailedItem itemWithTitle:@"About" subTitle:[self.locationObject objectForKey:kWFLocationAboutKey] placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"about" selectionHandler:^(RETableViewItem *item) {
         [weakSelf.tableView deselectRowAtIndexPath:item.indexPath animated:NO];
         [WFFullTextView presentInView:self.view withText:aboutText];
     }]];
-    [section addItem:[WFDetailedItem itemWithTitle:@"Location Type" subTitle:@"Co-Working space" imageName:@"locationtype"]];
-    [section addItem:[WFDetailedItem itemWithTitle:@"WiFi" subTitle:@"Reliable - 4Mbps download speed, 2Mbps upload speed" imageName:@"wifi"]];
-    [section addItem:[WFDetailedItem itemWithTitle:@"Pricing" subTitle:@"Day Pass - INR 200, Weekly Pass - INR 300, Monthly Pass - INR 400" imageName:@"pricing"]];
-    [section addItem:[WFDetailedItem itemWithTitle:@"Power" subTitle:@"1/2 per table" imageName:@"power"]];
-    [section addItem:[WFDetailedItem itemWithTitle:@"Food" subTitle:@"Tea, Coffee, Snacks, Dinner, Alcohol, Desserts" imageName:@"food"]];
-    [section addItem:[WFDetailedItem itemWithTitle:@"Noise" subTitle:@"Average Noisy" imageName:@"noise"]];
-    [section addItem:[WFDetailedItem itemWithTitle:@"Seating" subTitle:@"Indoor, Outdoor, Standing Desks, Table for 2, Table for 4" imageName:@"seat"]];
+    
+    NSString* spaceString = [WFStringStore spaceTypeString:[[self.locationObject objectForKey:kWFLocationTypeKey] integerValue]];
+    [section addItem:[WFDetailedItem itemWithTitle:@"Location Type" subTitle:spaceString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"locationtype"]];
+    
+    NSString* wifiString = [WFStringStore wifiString:[[self.locationObject objectForKey:kWFLocationWifiTypeKey] integerValue]];
+    double wifiDwnldSpeed = [[self.locationObject objectForKey:kWFLocationWifiDownloadSpeedKey] doubleValue];
+    double wifiUpldSpeed = [[self.locationObject objectForKey:kWFLocationWifiUploadSpeedKey] doubleValue];
+    
+    if (wifiDwnldSpeed < 1.0) {
+        wifiDwnldSpeed *= 1000.0f;
+        wifiString = [wifiString stringByAppendingFormat:@" - %0.1f Kbps download speed", wifiDwnldSpeed];
+    } else if (wifiDwnldSpeed > 1000.0) {
+        wifiDwnldSpeed /= 1000.0f;
+        wifiString = [wifiString stringByAppendingFormat:@" - %0.1f Gbps download speed", wifiDwnldSpeed];
+    } else {
+        wifiString = [wifiString stringByAppendingFormat:@" - %0.1f Mbps download speed", wifiDwnldSpeed];
+    }
+    
+    if (wifiUpldSpeed < 1.0) {
+        wifiUpldSpeed *= 1000.0f;
+        wifiString = [wifiString stringByAppendingFormat:@", %0.1f Kbps upload speed", wifiUpldSpeed];
+    } else if (wifiUpldSpeed > 1000.0) {
+        wifiUpldSpeed /= 1000.0f;
+        wifiString = [wifiString stringByAppendingFormat:@", %0.1f Gbps upload speed", wifiUpldSpeed];
+    } else {
+        wifiString = [wifiString stringByAppendingFormat:@", %0.1f Mbps upload speed", wifiUpldSpeed];
+    }
+
+    [section addItem:[WFDetailedItem itemWithTitle:@"WiFi" subTitle:wifiString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"wifi"]];
+    
+    NSString* priceUnit = [WFStringStore priceUnitString:[[self.locationObject objectForKey:kWFLocationPricingUnitKey] integerValue]];
+    NSDictionary* priceDict = [self.locationObject objectForKey:kWFLocationPricingKey];
+    NSString* priceString = [NSString stringWithFormat:@"Day Pass - %@ %@, Weekly Pass - %@ %@, Monthly Pass - %@ %@", [priceDict objectForKey:kPriceDayPassKey], priceUnit, [priceDict objectForKey:kPriceWeekPassKey], priceUnit, [priceDict objectForKey:kPriceMonthPassKey], priceUnit];
+    [section addItem:[WFDetailedItem itemWithTitle:@"Pricing" subTitle:priceString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"pricing"]];
+    
+    NSArray* powerOptions = [self.locationObject objectForKey:kWFLocationPowerOptionsKey];
+    NSString* powerString = @"";
+    for (NSInteger i=0; i<powerOptions.count; i++) {
+        if ([[powerOptions objectAtIndex:i] boolValue] == TRUE) {
+            powerString = [powerString stringByAppendingFormat:@"%@, ", [WFStringStore powerString:i + 1]];
+        }
+    }
+    if ([powerString hasSuffix:@", "]) {
+        powerString = [powerString substringToIndex:powerString.length - 2];
+    }
+    
+    [section addItem:[WFDetailedItem itemWithTitle:@"Power" subTitle:powerString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"power"]];
+    
+    NSArray* foodOptions = [self.locationObject objectForKey:kWFLocationFoodOptionsKey];
+    NSString* foodString = @"";
+    for (NSInteger i=0; i<foodOptions.count; i++) {
+        if ([[foodOptions objectAtIndex:i] boolValue] == TRUE) {
+            foodString = [foodString stringByAppendingFormat:@"%@, ", [WFStringStore foodString:i + 1]];
+        }
+    }
+    if ([foodString hasSuffix:@", "]) {
+        foodString = [foodString substringToIndex:foodString.length - 2];
+    }
+    
+    [section addItem:[WFDetailedItem itemWithTitle:@"Food" subTitle:foodString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"food"]];
+    
+    NSString* noiseString = [WFStringStore noiseString:[[self.locationObject objectForKey:kWFLocationNoiseOptionsKey] integerValue]];
+
+    [section addItem:[WFDetailedItem itemWithTitle:@"Noise" subTitle:noiseString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"noise"]];
+    
+    NSArray* seatingOptions = [self.locationObject objectForKey:kWFLocationSeatingOptionsKey];
+    NSString* seatingString = @"";
+    for (NSInteger i=0; i<seatingOptions.count; i++) {
+        if ([[seatingOptions objectAtIndex:i] boolValue] == TRUE) {
+            seatingString = [seatingString stringByAppendingFormat:@"%@, ", [WFStringStore seatingString:i + 1]];
+        }
+    }
+    if ([seatingString hasSuffix:@", "]) {
+        seatingString = [seatingString substringToIndex:seatingString.length - 2];
+    }
+    
+    [section addItem:[WFDetailedItem itemWithTitle:@"Seating" subTitle:seatingString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"seat"]];
 }
 
 - (void)addHoursSection {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@""];
     [self.manager addSection:section];
     
-    [section addItem:[WFTwoColumnItem itemWithTitle:@"Hours"
-                                          imageName:@"calendar"
-                                            contents:@[@{@"title":@"Mon", @"value":@"Open"},
-                                                       @{@"title":@"Tue", @"value":@"Open"},
-                                                       @{@"title":@"Wed", @"value":@"Open"},
-                                                       @{@"title":@"Thu", @"value":@"Open"},
-                                                       @{@"title":@"Fri", @"value":@"Open"},
-                                                       @{@"title":@"Sat", @"value":@"Open"},
-                                                       @{@"title":@"Sun", @"value":@"Closed"}
-                                                       ]]];
+    NSArray* hourOptions = [self.locationObject objectForKey:kWFLocationOpenDaysKey];
+    
+    if (hourOptions && hourOptions.count) {
+        NSMutableArray* hourArray = [NSMutableArray array];
+        for (NSInteger i=0; i<hourOptions.count; i++) {
+            NSString* stateString = ([[hourOptions objectAtIndex:i] boolValue] == TRUE) ? @"Open" : @"Closed";
+            [hourArray addObject:@{@"title":[[WFStringStore daysString:i + 1] substringToIndex:3], @"value":stateString}];
+        }
+        
+        [section addItem:[WFTwoColumnItem itemWithTitle:@"Hours"
+                                              imageName:@"calendar"
+                                               contents:hourArray]];
+    } else {
+        WFDetailedItem* item = [WFDetailedItem itemWithTitle:@"Hours" subTitle:nil placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"seat"];
+        [section addItem:item];
+    }
 }
 
 - (void)addAmenitiesSection {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@""];
     [self.manager addSection:section];
 
-    [section addItem:[WFTwoColumnItem itemWithTitle:@"Amenities" imageName:nil contents:
-                      @[@{@"images":@{@"normal":@"check",@"disabled":@"check"},@"value":@"Air Conditioner"},
-                       @{@"images":@{@"normal":@"check",@"disabled":@"check"},@"value":@"Television"},
-                       @{@"images":@{@"normal":@"check",@"disabled":@"check"},@"value":@"Dog Friendly"},
-                       @{@"images":@{@"normal":@"check",@"disabled":@"check"},@"value":@"Kid Friendly"},
-                       @{@"images":@{@"normal":@"check",@"disabled":@"check"},@"value":@"Washroom"}
-                       ]]];
+    NSArray* amenitiesOptions = [self.locationObject objectForKey:kWFLocationAmenitiesKey];
+    NSMutableArray* amenitiesArray = [NSMutableArray array];
+    
+    if (amenitiesOptions && amenitiesOptions.count) {
+        for (NSInteger i=0; i<amenitiesOptions.count; i++) {
+            if ([[amenitiesOptions objectAtIndex:i] boolValue] == TRUE) {
+                [amenitiesArray addObject:@{@"images":@{@"normal":@"check",@"disabled":@"check-disabled"},@"value":[WFStringStore amenitiesString:i + 1]}];
+            }
+        }
+        
+        [section addItem:[WFTwoColumnItem itemWithTitle:@"Amenities"
+                                              imageName:nil
+                                               contents:amenitiesArray]];
+    } else {
+        WFDetailedItem* item = [WFDetailedItem itemWithTitle:@"Amenities" subTitle:nil placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:nil];
+        [section addItem:item];
+    }
 }
 
 - (void)addReportEditSection {
@@ -337,30 +513,22 @@
     WFDetailedViewItem* _item = (WFDetailedViewItem*)item;
     NSString* website = _item.website;
     NSURL* webURL = [NSURL URLWithString:website];
-    if ([[UIApplication sharedApplication] canOpenURL:webURL]) {
-        [[UIApplication sharedApplication] openURL:webURL];
-    }
+    [[UIApplication sharedApplication] openURL:webURL];
 }
 
 - (void)facebookTapped:(RETableViewItem*)item {
     WFDetailedViewItem* _item = (WFDetailedViewItem*)item;
-    NSString* facebookUrl = _item.facebookUrl;
-    if ([facebookUrl hasSuffix:@"/"]) {
-        facebookUrl = [facebookUrl substringToIndex:[facebookUrl length] - 1];
-    }
-    
-    NSArray* components = [facebookUrl componentsSeparatedByString:@"/"];
-    if (components.count) {
+    if (_item.facebookUrl) {
         __typeof (&*self) __weak weakSelf = self;
 
-        NSString* pageName = [components lastObject];
-        NSString* graphURLString = [@"https://graph.facebook.com/" stringByAppendingString:pageName];
+        NSString* facebookUrl = [@"https://www.facebook.com/" stringByAppendingString:_item.facebookUrl];
+        NSString* graphURLString = [@"https://graph.facebook.com/" stringByAppendingString:_item.facebookUrl];
         NSURL* graphURL = [NSURL URLWithString:graphURLString];
         [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:graphURL] queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
             if (connectionError == nil) {
                 NSError* error = nil;
                 NSDictionary* parsedObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-                if (error != nil) {
+                if (error == nil) {
                     NSString* identifier = [parsedObject valueForKey:@"id"];
                     [weakSelf openPage:[NSString stringWithFormat:@"fb:///profile/%@", identifier] withURL:facebookUrl];
                 }
@@ -371,15 +539,9 @@
 
 - (void)twitterTapped:(RETableViewItem*)item {
     WFDetailedViewItem* _item = (WFDetailedViewItem*)item;
-    NSString* twitterUrl = _item.twitterUrl;
-    if ([twitterUrl hasSuffix:@"/"]) {
-        twitterUrl = [twitterUrl substringToIndex:[twitterUrl length] - 1];
-    }
-    
-    NSArray* components = [twitterUrl componentsSeparatedByString:@"/"];
-    if (components.count) {
-        NSString* identifier = [components lastObject];
-        [self openPage:[NSString stringWithFormat:@"twitter:///user?screen_name=%@", identifier] withURL:twitterUrl];
+    if (_item.twitterUrl) {
+        NSString* twitterUrl = [@"https://twitter.com/" stringByAppendingString:_item.twitterUrl];
+        [self openPage:[NSString stringWithFormat:@"twitter:///user?screen_name=%@", _item.twitterUrl] withURL:twitterUrl];
     }
 }
 
@@ -417,6 +579,12 @@
     if (index < _thumbs.count)
         return [_thumbs objectAtIndex:index];
     return nil;
+}
+
+- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
+    [_photos removeAllObjects];
+    [_thumbs removeAllObjects];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark WFLoginDelegate

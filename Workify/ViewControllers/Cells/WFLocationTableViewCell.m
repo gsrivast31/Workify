@@ -79,7 +79,7 @@
     self.nameLabel.text = [object objectForKey:kWFLocationNameKey];
     
     NSDictionary* addressDict = [object objectForKey:kWFLocationAddressKey];
-    self.addressLabel.text = [@[[addressDict objectForKey:kAddressStreet], [addressDict objectForKey:kAddressSubStreet], [addressDict objectForKey:kAddressSubCity]] componentsJoinedByString:@", "];
+    self.addressLabel.text = [WFHelper commaSeparatedString:@[[addressDict objectForKey:kAddressStreet], [addressDict objectForKey:kAddressSubStreet], [addressDict objectForKey:kAddressSubCity]]];
     
     self.nameLabel.font = [UIFont flatFontOfSize:18];
     self.addressLabel.font = [UIFont flatFontOfSize:16];

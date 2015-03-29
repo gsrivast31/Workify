@@ -163,7 +163,7 @@
                                                kPriceMonthPassKey : self.monthlyPriceItem.value};
     }
     
-    locationObj[kWFLocationPricingKey] = [NSNumber numberWithInteger:self.priceUnitItem.value + 1];
+    locationObj[kWFLocationPricingUnitKey] = [NSNumber numberWithInteger:self.priceUnitItem.value + 1];
     
     locationObj[kWFLocationNoiseOptionsKey] = [NSNumber numberWithInteger:self.noiseItem.value + 1];
 
@@ -211,7 +211,7 @@
         NSMutableArray* photoObjArray = [NSMutableArray array];
         for (UIImage* anImage in strongSelf.photosArray) {
             UIImage *resizedImage = [anImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(1024.0f, 1024.0f) interpolationQuality:kCGInterpolationHigh];
-            UIImage *thumbnailImage = [anImage thumbnailImage:86.0f transparentBorder:0.0f cornerRadius:10.0f interpolationQuality:kCGInterpolationDefault];
+            UIImage *thumbnailImage = [anImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(56.0f, 56.0f) interpolationQuality:kCGInterpolationHigh];
             
             NSData *imageData = UIImageJPEGRepresentation(resizedImage, 0.8f);
             NSData *thumbnailImageData = UIImagePNGRepresentation(thumbnailImage);

@@ -9,5 +9,6 @@
 @interface WFHelper : NSObject
 
 + (BOOL) isLoggedIn;
++ (NSString*) commaSeparatedString:(NSArray*)array;
 
 @end

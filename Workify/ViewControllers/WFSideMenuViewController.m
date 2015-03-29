@@ -165,17 +165,17 @@
             NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:3];
             
             if (facebookID) {
-                userProfile[@"facebookId"] = facebookID;
+                userProfile[kWFUserFacebookIDKey] = facebookID;
             }
             
             NSString *name = userData[@"name"];
             if (name) {
-                userProfile[@"name"] = name;
+                userProfile[kWFUserDisplayNameKey] = name;
             }
             
-            userProfile[@"pictureURL"] = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
+            userProfile[kWFUserFacebookPictureURLKey] = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
             
-            [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
+            [[PFUser currentUser] setObject:userProfile forKey:kWFUserProfileKey];
             [[PFUser currentUser] saveInBackground];
             
             [self _updateProfileData];
@@ -192,12 +192,12 @@
 // Set received values if they are not nil and reload the table
 - (void)_updateProfileData {
     [self setViewState:TRUE];
-    NSString *name = [PFUser currentUser][@"profile"][@"name"];
+    NSString *name = [PFUser currentUser][kWFUserProfileKey][kWFUserDisplayNameKey];
     if (name) {
         self.usernameLabel.text = name;
     }
     
-    NSString *userProfilePhotoURLString = [PFUser currentUser][@"profile"][@"pictureURL"];
+    NSString *userProfilePhotoURLString = [PFUser currentUser][kWFUserProfileKey][kWFUserFacebookPictureURLKey];
     // Download the user's facebook profile picture
     if (userProfilePhotoURLString) {
         NSURL *pictureURL = [NSURL URLWithString:userProfilePhotoURLString];

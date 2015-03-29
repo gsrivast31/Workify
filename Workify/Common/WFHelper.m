@@ -13,8 +13,21 @@
 @implementation WFHelper
 
 + (BOOL) isLoggedIn {
-    //return ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]);
-    return TRUE;
+    return ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]);
 }
+
++ (NSString*) commaSeparatedString:(NSArray*)array {
+    NSString* string = @"";
+    for (NSString* str in array) {
+        if (![str isEqualToString:@""]) {
+            string = [string stringByAppendingFormat:@"%@, ", str];
+        }
+    }
+    if ([string hasSuffix:@", "]) {
+        string = [string substringToIndex:string.length - 2];
+    }
+    return string;
+}
+
 
 @end

@@ -61,7 +61,7 @@
         // self.objectsPerPage = 10;
         
         // The Loading text clashes with the dark Anypic design
-        self.loadingViewEnabled = NO;
+        self.loadingViewEnabled = YES;
     }
     return self;
 }

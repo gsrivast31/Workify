@@ -22,6 +22,9 @@
 - (void)imageWithFilenameAsync:(NSString *)filename
                        success:(void (^)(UIImage *))successCallback
                        failure:(void (^)(void))failureCallback;
+- (void)imageFromURL:(NSURL *)url
+             success:(void (^)(UIImage *))successCallback
+             failure:(void (^)(void))failureCallback;
 
 // Helpers
 - (UIImage *)resizeImage:(UIImage *)image

@@ -33,7 +33,14 @@ static const CGFloat kVerticalMargin = 10.0;
 - (void)cellWillAppear {
     [super cellWillAppear];
     [self.titleLabel setText:self.item.name];
-    [self.valueLabel setText:self.item.value];
+    
+    if (self.item.value) {
+        [self.valueLabel setFont:[UIFont flatFontOfSize:16.0f]];
+        [self.valueLabel setText:self.item.value];
+    } else {
+        [self.valueLabel setFont:[UIFont italicFlatFontOfSize:16.0f]];
+        [self.valueLabel setText:self.item.placeholder];
+    }
     [self.imageButton setImage:[UIImage imageNamed:self.item.imagename] forState:UIControlStateNormal];
     [self.imageButton setContentMode:UIViewContentModeCenter];
 }
@@ -67,8 +74,10 @@ static const CGFloat kVerticalMargin = 10.0;
     
     CGFloat width = CGRectGetWidth(tableViewManager.tableView.bounds) - 2.0 * horizontalMargin;
     CGFloat height = 30.0f + 2*kVerticalMargin;
-    if (detailItem.value) {
+    if (detailItem.value && ![detailItem.value isEqualToString:@""]) {
         height += [detailItem.value re_sizeWithFont:[UIFont flatFontOfSize:16] constrainedToSize:CGSizeMake(width - 40.0f, INFINITY)].height + kVerticalMargin;
+    } else {
+        height += [detailItem.placeholder re_sizeWithFont:[UIFont italicFlatFontOfSize:16] constrainedToSize:CGSizeMake(width - 40.0f, INFINITY)].height + kVerticalMargin;
     }
     
     return MIN(200.0f, height);
