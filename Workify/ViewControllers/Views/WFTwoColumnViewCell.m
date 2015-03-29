@@ -52,7 +52,7 @@ static const CGFloat kHorizSpacing = 5.0f;
     
     [self.button setTitle:title forState:UIControlStateNormal];
     [self.button setImage:[UIImage imageNamed:normalImage] forState:UIControlStateNormal];
-    [self.button setImage:[UIImage imageNamed:disabledImage] forState:UIControlStateNormal];
+    [self.button setImage:[UIImage imageNamed:disabledImage] forState:UIControlStateDisabled];
     
     [self.label setText:value];
 }

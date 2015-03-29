@@ -10,7 +10,6 @@
 
 @interface WFDaysTableViewCell()
 
-@property (weak, nonatomic) IBOutlet UIButton *anyButton;
 @property (weak, nonatomic) IBOutlet UIButton *monButton;
 @property (weak, nonatomic) IBOutlet UIButton *tueButton;
 @property (weak, nonatomic) IBOutlet UIButton *wedButton;
@@ -26,7 +25,6 @@
 - (void)cellDidLoad {
     [super cellDidLoad];
     [self setTintColor:[UIColor clearColor]];
-    [self.anyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.monButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.tueButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.wedButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -35,7 +33,6 @@
     [self.satButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.sunButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
-    [self.anyButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
     [self.monButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
     [self.tueButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
     [self.wedButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
@@ -44,7 +41,6 @@
     [self.satButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
     [self.sunButton setTitleColor:[UIColor turquoiseColor] forState:UIControlStateSelected];
     
-    [self.anyButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
     [self.monButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
     [self.tueButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
     [self.wedButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
@@ -52,36 +48,31 @@
     [self.friButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
     [self.satButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
     [self.sunButton addTarget:self action:@selector(changeState:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.anyButton.selected = self.monButton.selected = self.tueButton.selected = self.wedButton.selected = self.thursButton.selected = self.friButton.selected = self.satButton.selected = self.sunButton.selected = NO;
-
 }
 
 - (void)cellWillAppear {
     [super cellWillAppear];
     
+    self.monButton.selected = self.tueButton.selected = self.wedButton.selected = self.thursButton.selected = self.friButton.selected = self.satButton.selected = self.sunButton.selected = NO;
+
     for (NSNumber* val in self.item.value) {
         NSInteger intVal = [val integerValue];
         if (intVal == 0) {
-            self.anyButton.selected = YES;
-        } else if (intVal == 1) {
             self.monButton.selected = YES;
-        } else if (intVal == 2) {
+        } else if (intVal == 1) {
             self.tueButton.selected = YES;
-        } else if (intVal == 3) {
+        } else if (intVal == 2) {
             self.wedButton.selected = YES;
-        } else if (intVal == 4) {
+        } else if (intVal == 3) {
             self.thursButton.selected = YES;
-        } else if (intVal == 5) {
+        } else if (intVal == 4) {
             self.friButton.selected = YES;
-        } else if (intVal == 6) {
+        } else if (intVal == 5) {
             self.satButton.selected = YES;
-        } else if (intVal == 7) {
+        } else if (intVal == 6) {
             self.sunButton.selected = YES;
         }
     }
-    [self.anyButton setSelected:YES];
-    [self.thursButton setSelected:YES];
 }
 
 - (void)cellDidDisappear {
@@ -91,21 +82,31 @@
 - (void)changeState:(id)sender {
     UIButton* button = (UIButton*)sender;
     button.selected = !button.selected;
-    
-    if (button == self.anyButton && button.selected == YES) {
-        self.monButton.selected = self.tueButton.selected = self.wedButton.selected = self.thursButton.selected = self.friButton.selected = self.satButton.selected = self.sunButton.selected = NO;
-    } else if(button.selected == YES) {
-        self.anyButton.selected = NO;
+
+    NSMutableArray* array = [NSMutableArray array];
+    if (self.monButton.selected) {
+        [array addObject:[NSNumber numberWithInteger:0]];
+    }
+    if (self.tueButton.selected) {
+        [array addObject:[NSNumber numberWithInteger:1]];
+    }
+    if (self.wedButton.selected) {
+        [array addObject:[NSNumber numberWithInteger:2]];
+    }
+    if (self.thursButton.selected) {
+        [array addObject:[NSNumber numberWithInteger:3]];
+    }
+    if (self.friButton.selected) {
+        [array addObject:[NSNumber numberWithInteger:4]];
+    }
+    if (self.satButton.selected) {
+        [array addObject:[NSNumber numberWithInteger:5]];
+    }
+    if (self.sunButton.selected) {
+        [array addObject:[NSNumber numberWithInteger:6]];
     }
     
-    self.item.value = @[[NSNumber numberWithBool:self.anyButton.selected],
-                        [NSNumber numberWithBool:self.monButton.selected],
-                        [NSNumber numberWithBool:self.tueButton.selected],
-                        [NSNumber numberWithBool:self.wedButton.selected],
-                        [NSNumber numberWithBool:self.thursButton.selected],
-                        [NSNumber numberWithBool:self.friButton.selected],
-                        [NSNumber numberWithBool:self.satButton.selected],
-                        [NSNumber numberWithBool:self.sunButton.selected]];
+    self.item.value = [array copy];
 }
 
 @end

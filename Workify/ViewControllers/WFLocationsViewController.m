@@ -15,6 +15,8 @@
 #import "WFLocationDetailViewController.h"
 #import <Parse/Parse.h>
 
+#define N(x) [NSNumber numberWithInt: x]
+
 @interface WFLocationsViewController () </*UITableViewDataSource, UITableViewDelegate, */WFFilterDelegate>
 {
     NSInteger currentMaxDisplayedCell;
@@ -33,6 +35,13 @@
 @property (strong, nonatomic) NSNumber* cellZoomInitialAlpha;
 @property (strong, nonatomic) NSNumber* cellZoomAnimationDuration;
 
+@property (strong, nonatomic) NSNumber* minRatingFilter;
+@property (strong, nonatomic) NSNumber* minWifiSpeedFilter;
+@property (strong, nonatomic) NSNumber* spaceTypeFilter;
+@property (strong, nonatomic) NSArray* openDaysFilter;
+
+@property (strong, nonatomic) UIButton* filterButton;
+
 -(void)resetViewedCells;
 
 @end
@@ -47,6 +56,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSInteger filterCount = (self.minRatingFilter?1:0) + (self.minWifiSpeedFilter?1:0) + (self.spaceTypeFilter?1:0) + (self.openDaysFilter?1:0);
     /*self.tableView.dataSource = self;
     self.tableView.delegate = self;
     */
@@ -66,18 +76,19 @@
         [self.navigationItem setLeftBarButtonItem:backBarButtonItem];
     }
     
-    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[UIImage imageNamed:@"filter"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(filter:)forControlEvents:UIControlEventTouchUpInside];
-    [button setFrame:CGRectMake(0, 0, 53, 31)];
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 5, 50, 20)];
-    [label setFont:[UIFont flatFontOfSize:13]];
-    [label setText:@""];
-    label.textAlignment = NSTextAlignmentCenter;
-    [label setTextColor:[UIColor whiteColor]];
-    [label setBackgroundColor:[UIColor clearColor]];
-    [button addSubview:label];
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.filterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 53, 31)];
+    [self.filterButton setImage:[UIImage imageNamed:@"filter"] forState:UIControlStateNormal];
+    [self.filterButton addTarget:self action:@selector(filter:)forControlEvents:UIControlEventTouchUpInside];
+    
+    NSString* filterString = nil;
+    if (filterCount) {
+        filterString = [NSString stringWithFormat:@"(%ld)", (long)filterCount];
+    }
+    [self.filterButton setTitle:filterString forState:UIControlStateNormal];
+    [self.filterButton.titleLabel setFont:[UIFont flatFontOfSize:17]];
+    [self.filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:self.filterButton];
     self.navigationItem.rightBarButtonItem = barButton;
     
     /*self.footerView.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8];
@@ -126,6 +137,36 @@
     return self;
 }
 
+- (NSNumber*)minWifiSpeed:(NSInteger)index {
+    double val = 0.0f;
+    switch (index) {
+        case WFWifiSpeed0Mbps:
+            val = 0.0f;
+            break;
+        case WFWifiSpeed256Kbps:
+            val = 0.256f;
+            break;
+        case WFWifiSpeed512Kbps:
+            val = 0.512f;
+            break;
+        case WFWifiSpeed1Mbps:
+            val = 1.0f;
+            break;
+        case WFWifiSpeed2Mbps:
+            val = 2.0f;
+            break;
+        case WFWifiSpeed4Mbps:
+            val = 4.0f;
+            break;
+        case WFWifiSpeed10Mbps:
+            val = 10.0f;
+            break;
+        default:
+            break;
+    }
+    return [NSNumber numberWithDouble:val];
+}
+
 - (PFQuery *)queryForTable {
     PFRelation* relation = [self.cityObject relationForKey:kWFCityLocationsKey];
     PFQuery* query = [relation query];
@@ -136,6 +177,25 @@
                         kWFLocationAddressKey,
                         kWFLocationTypeKey,
                         kWFLocationDisplayPhotoKey]];
+    
+    self.minRatingFilter = [[NSUserDefaults standardUserDefaults] objectForKey:kFilterRatings];
+    self.openDaysFilter = [[NSUserDefaults standardUserDefaults] objectForKey:kFilterOpenDays];
+    self.spaceTypeFilter = [[NSUserDefaults standardUserDefaults] objectForKey:kFilterSpaceType];
+    self.minWifiSpeedFilter = [[NSUserDefaults standardUserDefaults] objectForKey:kFilterWifiSpeed];
+    
+    if (self.spaceTypeFilter) {
+        [query whereKey:kWFLocationTypeKey equalTo:self.spaceTypeFilter];
+    }
+    if (self.minRatingFilter) {
+        [query whereKey:kWFLocationRatingsKey greaterThanOrEqualTo:self.minRatingFilter];
+    }
+    if (self.minWifiSpeedFilter) {
+        [query whereKey:kWFLocationWifiDownloadSpeedKey greaterThanOrEqualTo:[self minWifiSpeed:[self.minWifiSpeedFilter integerValue]]];
+    }
+    if (self.openDaysFilter) {
+        [query whereKey:kWFLocationOpenDaysKey containedIn:self.openDaysFilter];
+    }
+    
     [query orderByDescending:kWFLocationRatingsKey];
     return query;
 }
@@ -144,7 +204,8 @@
     WFLocationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
     
     [cell configureCellForObject:object];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 
@@ -298,7 +359,41 @@
 #pragma mark WFFilterDelegate 
 
 - (void)filtersAdded:(NSDictionary *)filterDictionary {
+    self.minRatingFilter = [filterDictionary objectForKey:kFilterRatings];
+    self.minWifiSpeedFilter = [filterDictionary objectForKey:kFilterWifiSpeed];
+    self.spaceTypeFilter = [filterDictionary objectForKey:kFilterSpaceType];
+    self.openDaysFilter = [[filterDictionary objectForKey:kFilterOpenDays] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [(NSNumber *)obj1 compare:(NSNumber *)obj2] == NSOrderedDescending;
+    }];
+    
+    NSInteger filterCount = 0;
+    if ([self.minRatingFilter integerValue] == 0) {
+        self.minRatingFilter = nil;
+    } else filterCount++;
+    
+    if ([self.spaceTypeFilter integerValue] == -1) {
+        self.spaceTypeFilter = nil;
+    } else filterCount++;
+    
+    if ([self.openDaysFilter isEqual:@[N(0), N(1), N(2), N(3), N(4), N(5), N(6)]] || [self.openDaysFilter isEqual:@[]]) {
+        self.openDaysFilter = nil;
+    } else filterCount++;
+    
+    if ([self.minWifiSpeedFilter integerValue] == WFWifiSpeed0Mbps) {
+        self.minWifiSpeedFilter = nil;
+    } else filterCount++;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.minRatingFilter forKey:kFilterRatings];
+    [[NSUserDefaults standardUserDefaults] setObject:self.openDaysFilter forKey:kFilterOpenDays];
+    [[NSUserDefaults standardUserDefaults] setObject:self.spaceTypeFilter forKey:kFilterSpaceType];
+    [[NSUserDefaults standardUserDefaults] setObject:self.minWifiSpeedFilter forKey:kFilterWifiSpeed];
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self loadObjects];
+    if (filterCount) {
+        [self.filterButton setTitle:[NSString stringWithFormat:@"(%ld)", (long)filterCount] forState:UIControlStateNormal];
+    } else {
+        [self.filterButton setTitle:@"" forState:UIControlStateNormal];
+    }
 }
 
 @end

@@ -76,6 +76,7 @@
     WFPlacesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"placeCell" forIndexPath:indexPath];
 
     [cell configureCellWithObject:object];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -90,6 +91,19 @@
             vc.title = [obj valueForKey:kWFCityNameKey];
         }
     }
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"showLocations"]) {
+        NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
+        if (indexPath.row < self.objects.count) {
+            PFObject* obj = [self.objects objectAtIndex:indexPath.row];
+            if (![[obj objectForKey:kWFCityLocationsCountKey] integerValue]) {
+                return NO;
+            }
+        }
+    }
+    return YES;
 }
 
 #pragma mark - Table view delegate

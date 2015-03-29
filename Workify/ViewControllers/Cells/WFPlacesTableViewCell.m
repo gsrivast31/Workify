@@ -37,7 +37,11 @@
     if (locCount == 0) {
         self.statusLabel.text = @"( COMING SOON )";
     } else {
-        self.statusLabel.text = [NSString stringWithFormat:@"%ld places", (long)locCount];
+        if (locCount == 1) {
+            self.statusLabel.text = [NSString stringWithFormat:@"%ld place", (long)locCount];
+        } else {
+            self.statusLabel.text = [NSString stringWithFormat:@"%ld places", (long)locCount];
+        }
     }
 }
 

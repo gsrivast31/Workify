@@ -36,7 +36,7 @@
     static dispatch_once_t pred;
     static NSArray *wifiSpeedStrings = nil;
     dispatch_once(&pred, ^{
-        wifiSpeedStrings = @[kWifiSpeed256Kbps, kWifiSpeed512Kbps, kWifiSpeed1Mbps, kWifiSpeed2Mbps, kWifiSpeed4Mbps, kWifiSpeed10Mbps];
+        wifiSpeedStrings = @[kWifiSpeed0Mbps, kWifiSpeed256Kbps, kWifiSpeed512Kbps, kWifiSpeed1Mbps, kWifiSpeed2Mbps, kWifiSpeed4Mbps, kWifiSpeed10Mbps];
     });
     
     return wifiSpeedStrings;
@@ -123,124 +123,124 @@
 }
 
 + (NSString*)spaceTypeString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore spaceTypeStrings].count) {
-        return [[WFStringStore spaceTypeStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore spaceTypeStrings].count) {
+        return [[WFStringStore spaceTypeStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSString*)wifiString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore wifiStrings].count) {
-        return [[WFStringStore wifiStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore wifiStrings].count) {
+        return [[WFStringStore wifiStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSString*)wifiSpeedString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore wifiSpeedStrings].count) {
-        return [[WFStringStore wifiSpeedStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore wifiSpeedStrings].count) {
+        return [[WFStringStore wifiSpeedStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSString*)noiseString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore noiseStrings].count) {
-        return [[WFStringStore noiseStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore noiseStrings].count) {
+        return [[WFStringStore noiseStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSString*)foodString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore foodStrings].count) {
-        return [[WFStringStore foodStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore foodStrings].count) {
+        return [[WFStringStore foodStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSString*)seatingString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore seatingStrings].count) {
-        return [[WFStringStore seatingStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore seatingStrings].count) {
+        return [[WFStringStore seatingStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSString*)powerString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore powerStrings].count) {
-        return [[WFStringStore powerStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore powerStrings].count) {
+        return [[WFStringStore powerStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSString*)amenitiesString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore amenitiesStrings].count) {
-        return [[WFStringStore amenitiesStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore amenitiesStrings].count) {
+        return [[WFStringStore amenitiesStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSString*)daysString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore daysStrings].count) {
-        return [[WFStringStore daysStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore daysStrings].count) {
+        return [[WFStringStore daysStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSString*)wifiUnitString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore wifiUnitStrings].count) {
-        return [[WFStringStore wifiUnitStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore wifiUnitStrings].count) {
+        return [[WFStringStore wifiUnitStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSString*)priceUnitString:(NSInteger)type {
-    if (type > 0 && type <= [WFStringStore priceUnitStrings].count) {
-        return [[WFStringStore priceUnitStrings] objectAtIndex:type - 1];
+    if (type >= 0 && type < [WFStringStore priceUnitStrings].count) {
+        return [[WFStringStore priceUnitStrings] objectAtIndex:type];
     }
     return nil;
 }
 
 + (NSInteger)spaceTypeIndex:(NSString*)string {
-    return [[WFStringStore spaceTypeStrings] indexOfObject:string] + 1;
+    return [[WFStringStore spaceTypeStrings] indexOfObject:string];
 }
 
 + (NSInteger)wifiIndex:(NSString*)string {
-    return [[WFStringStore wifiStrings] indexOfObject:string] + 1;
+    return [[WFStringStore wifiStrings] indexOfObject:string];
 }
 
 + (NSInteger)wifiSpeedIndex:(NSString*)string {
-    return [[WFStringStore wifiSpeedStrings] indexOfObject:string] + 1;
+    return [[WFStringStore wifiSpeedStrings] indexOfObject:string];
 }
 
 + (NSInteger)noiseIndex:(NSString*)string {
-    return [[WFStringStore noiseStrings] indexOfObject:string] + 1;
+    return [[WFStringStore noiseStrings] indexOfObject:string];
 }
 
 + (NSInteger)foodIndex:(NSString*)string {
-    return [[WFStringStore foodStrings] indexOfObject:string] + 1;
+    return [[WFStringStore foodStrings] indexOfObject:string];
 }
 
 + (NSInteger)seatingIndex:(NSString*)string {
-    return [[WFStringStore seatingStrings] indexOfObject:string] + 1;
+    return [[WFStringStore seatingStrings] indexOfObject:string];
 }
 
 + (NSInteger)powerIndex:(NSString*)string {
-    return [[WFStringStore powerStrings] indexOfObject:string] + 1;
+    return [[WFStringStore powerStrings] indexOfObject:string];
 }
 
 + (NSInteger)amenitiesIndex:(NSString*)string {
-    return [[WFStringStore amenitiesStrings] indexOfObject:string] + 1;
+    return [[WFStringStore amenitiesStrings] indexOfObject:string];
 }
 
 + (NSInteger)daysIndex:(NSString *)string {
-    return [[WFStringStore daysStrings] indexOfObject:string] + 1;
+    return [[WFStringStore daysStrings] indexOfObject:string];
 }
 
 + (NSInteger)wifiUnitIndex:(NSString *)string {
-    return [[WFStringStore wifiUnitStrings] indexOfObject:string] + 1;
+    return [[WFStringStore wifiUnitStrings] indexOfObject:string];
 }
 
 + (NSInteger)priceUnitIndex:(NSString *)string {
-    return [[WFStringStore priceUnitStrings] indexOfObject:string] + 1;
+    return [[WFStringStore priceUnitStrings] indexOfObject:string];
 }
 
 @end

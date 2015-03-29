@@ -18,10 +18,11 @@
 @interface WFSingleOptionView : UIView
 
 - (id)init;
-- (void)setContent:(NSString*)text;
+- (void)setContent:(NSString*)text andTag:(NSInteger)tag;
 + (CGFloat)heightWithText:(NSString*)text constrainedToWidth:(CGFloat)width;
 
-@property (nonatomic) BOOL value;
+@property (nonatomic) BOOL state;
+@property (nonatomic) NSInteger tag;
 @property (nonatomic, strong) id<WFSingleOptionDelegate> delegate;
 
 @end

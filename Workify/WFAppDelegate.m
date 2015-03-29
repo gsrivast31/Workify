@@ -83,7 +83,7 @@
     [[UISegmentedControl appearance] setTintColor:[UIColor turquoiseColor]];
     [[RETableViewCell appearance] setTintColor:[UIColor turquoiseColor]];
     [[REActionBar appearance] setTintColor:[UIColor turquoiseColor]];
-    [[UITextField appearance] setTextAlignment:NSTextAlignmentRight];
+    //[[UITextField appearance] setTextAlignment:NSTextAlignmentRight];
 }
 
 // ****************************************************************************

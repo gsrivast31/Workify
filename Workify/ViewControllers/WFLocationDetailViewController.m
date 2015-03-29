@@ -137,7 +137,27 @@
 }
 
 - (void)share:(id)sender {
+    NSString* text = [NSString stringWithFormat:@"Look at this space I found out on %@.\n", APP_NAME];
+    NSURL* webURL = [self.locationObject objectForKey:kWFLocationWebsiteKey];
+    NSURL* facebookURL = [NSURL URLWithString:[@"https://www.facebook.com/" stringByAppendingString:[self.locationObject objectForKey:kWFLocationFacebookKey]]];
+    NSURL* twitterURL = [NSURL URLWithString:[@"https://www.twitter.com/" stringByAppendingString:[self.locationObject objectForKey:kWFLocationTwitterKey]]];
     
+    NSString* shareText = [@"\nYou can find more spaces on this app. Download it from " stringByAppendingString:APP_URL];
+    NSArray* objectsToShare = @[text, webURL, facebookURL, twitterURL, shareText];
+
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                   UIActivityTypePrint,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeSaveToCameraRoll,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
 }
 
 - (void)showReviews {
@@ -283,13 +303,17 @@
     __typeof (&*self) __weak weakSelf = self;
     [section addItem:[WFDetailedItem itemWithTitle:@"About" subTitle:[self.locationObject objectForKey:kWFLocationAboutKey] placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"about" selectionHandler:^(RETableViewItem *item) {
         [weakSelf.tableView deselectRowAtIndexPath:item.indexPath animated:NO];
-        [WFFullTextView presentInView:self.view withText:aboutText];
+        WFDetailedItem* _item = (WFDetailedItem*)item;
+        if (_item.value) {
+            [WFFullTextView presentInView:self.view withText:aboutText];
+        }
     }]];
-    
+
     NSString* spaceString = [WFStringStore spaceTypeString:[[self.locationObject objectForKey:kWFLocationTypeKey] integerValue]];
     [section addItem:[WFDetailedItem itemWithTitle:@"Location Type" subTitle:spaceString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"locationtype"]];
     
-    NSString* wifiString = [WFStringStore wifiString:[[self.locationObject objectForKey:kWFLocationWifiTypeKey] integerValue]];
+    NSString* wifiString = @"Condition : ";
+    wifiString = [wifiString stringByAppendingString:[WFStringStore wifiString:[[self.locationObject objectForKey:kWFLocationWifiTypeKey] integerValue]]];
     double wifiDwnldSpeed = [[self.locationObject objectForKey:kWFLocationWifiDownloadSpeedKey] doubleValue];
     double wifiUpldSpeed = [[self.locationObject objectForKey:kWFLocationWifiUploadSpeedKey] doubleValue];
     
@@ -323,9 +347,11 @@
     NSArray* powerOptions = [self.locationObject objectForKey:kWFLocationPowerOptionsKey];
     NSString* powerString = @"";
     for (NSInteger i=0; i<powerOptions.count; i++) {
-        if ([[powerOptions objectAtIndex:i] boolValue] == TRUE) {
+        NSInteger val = [[powerOptions objectAtIndex:i] integerValue];
+        powerString = [powerString stringByAppendingFormat:@"%@, ", [WFStringStore powerString:val]];
+/*        if ([[powerOptions objectAtIndex:i] boolValue] == TRUE) {
             powerString = [powerString stringByAppendingFormat:@"%@, ", [WFStringStore powerString:i + 1]];
-        }
+        }*/
     }
     if ([powerString hasSuffix:@", "]) {
         powerString = [powerString substringToIndex:powerString.length - 2];
@@ -336,9 +362,11 @@
     NSArray* foodOptions = [self.locationObject objectForKey:kWFLocationFoodOptionsKey];
     NSString* foodString = @"";
     for (NSInteger i=0; i<foodOptions.count; i++) {
-        if ([[foodOptions objectAtIndex:i] boolValue] == TRUE) {
+        NSInteger val = [[foodOptions objectAtIndex:i] integerValue];
+        foodString = [foodString stringByAppendingFormat:@"%@, ", [WFStringStore foodString:val]];
+/*        if ([[foodOptions objectAtIndex:i] boolValue] == TRUE) {
             foodString = [foodString stringByAppendingFormat:@"%@, ", [WFStringStore foodString:i + 1]];
-        }
+        }*/
     }
     if ([foodString hasSuffix:@", "]) {
         foodString = [foodString substringToIndex:foodString.length - 2];
@@ -353,9 +381,12 @@
     NSArray* seatingOptions = [self.locationObject objectForKey:kWFLocationSeatingOptionsKey];
     NSString* seatingString = @"";
     for (NSInteger i=0; i<seatingOptions.count; i++) {
-        if ([[seatingOptions objectAtIndex:i] boolValue] == TRUE) {
-            seatingString = [seatingString stringByAppendingFormat:@"%@, ", [WFStringStore seatingString:i + 1]];
-        }
+        NSInteger val = [[seatingOptions objectAtIndex:i] integerValue];
+        seatingString = [seatingString stringByAppendingFormat:@"%@, ", [WFStringStore seatingString:val]];
+
+/*        if ([[seatingOptions objectAtIndex:i] boolValue] == TRUE) {
+            seatingString = [seatingString stringByAppendingFormat:@"%@, ", [WFStringStore seatingString:val]];
+        }*/
     }
     if ([seatingString hasSuffix:@", "]) {
         seatingString = [seatingString substringToIndex:seatingString.length - 2];
@@ -372,9 +403,12 @@
     
     if (hourOptions && hourOptions.count) {
         NSMutableArray* hourArray = [NSMutableArray array];
-        for (NSInteger i=0; i<hourOptions.count; i++) {
-            NSString* stateString = ([[hourOptions objectAtIndex:i] boolValue] == TRUE) ? @"Open" : @"Closed";
-            [hourArray addObject:@{@"title":[[WFStringStore daysString:i + 1] substringToIndex:3], @"value":stateString}];
+        for (NSInteger i=WFMonday; i<=WFSunday; i++) {
+            NSString* state;
+            if ([hourOptions containsObject:[NSNumber numberWithInteger:i]]) state = @"Open";
+            else state = @"Closed";
+            
+            [hourArray addObject:@{@"title":[[WFStringStore daysString:i] substringToIndex:3], @"value":state}];
         }
         
         [section addItem:[WFTwoColumnItem itemWithTitle:@"Hours"
@@ -395,9 +429,12 @@
     
     if (amenitiesOptions && amenitiesOptions.count) {
         for (NSInteger i=0; i<amenitiesOptions.count; i++) {
-            if ([[amenitiesOptions objectAtIndex:i] boolValue] == TRUE) {
+            NSInteger val = [[amenitiesOptions objectAtIndex:i] integerValue];
+            [amenitiesArray addObject:@{@"images":@{@"normal":@"check",@"disabled":@"check-disabled"},@"value":[WFStringStore amenitiesString:val]}];
+            
+/*            if ([[amenitiesOptions objectAtIndex:i] boolValue] == TRUE) {
                 [amenitiesArray addObject:@{@"images":@{@"normal":@"check",@"disabled":@"check-disabled"},@"value":[WFStringStore amenitiesString:i + 1]}];
-            }
+            }*/
         }
         
         [section addItem:[WFTwoColumnItem itemWithTitle:@"Amenities"

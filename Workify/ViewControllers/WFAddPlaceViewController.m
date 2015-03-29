@@ -121,7 +121,7 @@
 
 - (NSNumber*)wifiSpeed:(NSString*)speedString {
     double speed = [speedString doubleValue];
-    WFWifiSpeedUnit unit = self.wifiSpeedUnitItem.value + 1;
+    WFWifiSpeedUnit unit = self.wifiSpeedUnitItem.value;
     if (unit == WFWifiSpeedKbps) {
         speed = speed * 0.001f;
     } else if (unit == WFWifiSpeedGbps) {
@@ -131,6 +131,23 @@
 }
 
 - (void)save:(id)sender {
+    NSArray* managerErrors = self.manager.errors;
+    BOOL bInValid = [WFHelper isEmpty:self.websiteItem.value] && [WFHelper isEmpty:self.facebookItem.value] && [WFHelper isEmpty:self.twitterItem.value] && !self.addressItem.value;
+    if (managerErrors.count > 0 || bInValid) {
+        NSMutableArray *errors = [NSMutableArray array];
+        for (NSError *error in managerErrors) {
+            [errors addObject:error.localizedDescription];
+        }
+        
+        if (bInValid) {
+            [errors addObject:@"Either of them must not be empty:Website, Facebook, Twitter, Address."];
+        }
+        NSString *errorString = [errors componentsJoinedByString:@"\n"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Errors" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     PFObject* locationObj = [PFObject objectWithClassName:kWFLocationClassKey];
     if (self.nameItem.value) {
         locationObj[kWFLocationNameKey] = self.nameItem.value;
@@ -139,20 +156,20 @@
     
     if (self.emailItem.value) locationObj[kWFLocationEmailKey] = self.emailItem.value;
     if (self.phoneItem.value) locationObj[kWFLocationPhoneKey] = self.phoneItem.value;
-    locationObj[kWFLocationTypeKey] = [NSNumber numberWithInteger:self.locationTypeItem.value + 1];
+    locationObj[kWFLocationTypeKey] = [NSNumber numberWithInteger:self.locationTypeItem.value];
     
     NSString* city = nil;
     if (self.addressItem.value) {
         locationObj[kWFLocationAddressKey] = self.addressItem.value;
         city = [self.addressItem.value objectForKey:kAddressCity];
     }
-    
+
     if (self.websiteItem.value) locationObj[kWFLocationWebsiteKey] = self.websiteItem.value;
     if (self.facebookItem.value) locationObj[kWFLocationFacebookKey] = self.facebookItem.value;
     if (self.twitterItem.value) locationObj[kWFLocationTwitterKey] = self.twitterItem.value;
     
     if (self.descItem.value) locationObj[kWFLocationAboutKey] = self.descItem.value;
-    locationObj[kWFLocationWifiTypeKey] = [NSNumber numberWithInteger:self.wifiItem.value + 1] ;
+    locationObj[kWFLocationWifiTypeKey] = [NSNumber numberWithInteger:self.wifiItem.value] ;
 
     if (self.wifiDownloadItem.value) locationObj[kWFLocationWifiDownloadSpeedKey] = [self wifiSpeed:self.wifiDownloadItem.value];
     if (self.wifiUploadItem.value) locationObj[kWFLocationWifiUploadSpeedKey] = [self wifiSpeed:self.wifiUploadItem.value];
@@ -163,9 +180,9 @@
                                                kPriceMonthPassKey : self.monthlyPriceItem.value};
     }
     
-    locationObj[kWFLocationPricingUnitKey] = [NSNumber numberWithInteger:self.priceUnitItem.value + 1];
+    locationObj[kWFLocationPricingUnitKey] = [NSNumber numberWithInteger:self.priceUnitItem.value];
     
-    locationObj[kWFLocationNoiseOptionsKey] = [NSNumber numberWithInteger:self.noiseItem.value + 1];
+    locationObj[kWFLocationNoiseOptionsKey] = [NSNumber numberWithInteger:self.noiseItem.value];
 
     if ([self.openDaysItem.value count]) locationObj[kWFLocationOpenDaysKey] = self.openDaysItem.value;
     if ([self.foodItem.value count]) locationObj[kWFLocationFoodOptionsKey] = self.foodItem.value;
@@ -310,6 +327,64 @@
     });
 }
 
+- (void)saveUnreviewed:(id)sender {
+    NSArray* managerErrors = self.manager.errors;
+    BOOL bInValid = [WFHelper isEmpty:self.websiteItem.value] && [WFHelper isEmpty:self.facebookItem.value] && [WFHelper isEmpty:self.twitterItem.value] && !self.addressItem.value;
+    if (managerErrors.count > 0 || bInValid) {
+        NSMutableArray *errors = [NSMutableArray array];
+        for (NSError *error in managerErrors) {
+            [errors addObject:error.localizedDescription];
+        }
+        
+        if (bInValid) {
+            [errors addObject:@"Either of them must not be empty:Website, Facebook, Twitter, Address."];
+        }
+        NSString *errorString = [errors componentsJoinedByString:@"\n"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Errors" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    PFObject* locationObj = [PFObject objectWithClassName:kWFLocationSuggestionClassKey];
+    if (self.nameItem.value) {
+        locationObj[kWFLocationNameKey] = self.nameItem.value;
+    }
+    
+    if (self.emailItem.value) locationObj[kWFLocationEmailKey] = self.emailItem.value;
+    if (self.phoneItem.value) locationObj[kWFLocationPhoneKey] = self.phoneItem.value;
+    locationObj[kWFLocationTypeKey] = [NSNumber numberWithInteger:self.locationTypeItem.value];
+    
+    NSString* city = nil;
+    if (self.addressItem.value) {
+        locationObj[kWFLocationAddressKey] = self.addressItem.value;
+        city = [self.addressItem.value objectForKey:kAddressCity];
+    }
+    
+    if (self.websiteItem.value) locationObj[kWFLocationWebsiteKey] = self.websiteItem.value;
+    if (self.facebookItem.value) locationObj[kWFLocationFacebookKey] = self.facebookItem.value;
+    if (self.twitterItem.value) locationObj[kWFLocationTwitterKey] = self.twitterItem.value;
+    
+    if (self.notesItem.value) locationObj[kWFLocationNotesKey] = self.notesItem.value;
+    
+    __typeof (&*self) __weak weakSelf = self;
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [locationObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self placeAdded:YES error:error];
+            });
+        } else if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self placeAdded:NO error:error];
+            });
+        }
+    }];
+}
+
 - (void)shouldUploadImage:(UIImage*)anImage withCallback:(photoUploadHandler)callback {
     UIImage *resizedImage = [anImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(560.0f, 560.0f) interpolationQuality:kCGInterpolationHigh];
     UIImage *thumbnailImage = [anImage thumbnailImage:86.0f transparentBorder:0.0f cornerRadius:10.0f interpolationQuality:kCGInterpolationDefault];
@@ -379,8 +454,12 @@
     [self.manager addSection:section];
     
     self.nameItem = [RETextItem itemWithTitle:@"Name" value:nil placeholder:@"E.g. Gaurav Srivastava"];
+    self.nameItem.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    self.nameItem.validators = @[@"presence"];
     self.emailItem = [RETextItem itemWithTitle:@"Email" value:nil placeholder:@"abc@xyz.com"];
-    self.phoneItem = [RENumberItem itemWithTitle:@"Phone" value:nil placeholder:@"(123) 456-7890"];
+    self.emailItem.keyboardType = UIKeyboardTypeEmailAddress;
+    self.emailItem.validators = @[@"email"];
+    self.phoneItem = [RENumberItem itemWithTitle:@"Phone" value:nil placeholder:@"91-1234567890"];
     
     [section addItem:self.nameItem];
     [section addItem:self.emailItem];
@@ -393,6 +472,7 @@
 
     self.locationTypeItem = [RESegmentedItem itemWithTitle:nil segmentedControlTitles:[WFStringStore spaceTypeStrings] value:-1];
     self.locationTypeItem.tintColor = [UIColor turquoiseColor];
+    self.locationTypeItem.validators = @[@"presence"];
     [section addItem:self.locationTypeItem];
 }
 
@@ -407,7 +487,6 @@
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
     self.addressItem.selectionStyle = UITableViewCellSelectionStyleNone;
-
     [section addItem:self.addressItem];
 }
 
@@ -448,7 +527,7 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Wifi"];
     [self.manager addSection:section];
     
-    self.wifiItem = [RESegmentedItem itemWithTitle:@"" segmentedControlTitles:[WFStringStore wifiStrings] value:3 switchValueChangeHandler:^(RESegmentedItem *item) {
+    self.wifiItem = [RESegmentedItem itemWithTitle:@"" segmentedControlTitles:[WFStringStore wifiStrings] value:WFWifiDontKnow switchValueChangeHandler:^(RESegmentedItem *item) {
         
     }];
     self.wifiItem.tintColor = [UIColor turquoiseColor];
@@ -457,10 +536,10 @@
     self.wifiDownloadItem = [RENumberItem itemWithTitle:@"Download Speed" value:nil placeholder:@"4"];
     [section addItem:self.wifiDownloadItem];
 
-    self.wifiUploadItem = [RENumberItem itemWithTitle:@"Upload Speed" value:nil placeholder:@"4"];
+    self.wifiUploadItem = [RENumberItem itemWithTitle:@"Upload Speed" value:nil placeholder:@"2"];
     [section addItem:self.wifiUploadItem];
 
-    self.wifiSpeedUnitItem = [RESegmentedItem itemWithTitle:@"Speed Unit" segmentedControlTitles:[WFStringStore wifiUnitStrings] value:WFWifiSpeedMbps - 1];
+    self.wifiSpeedUnitItem = [RESegmentedItem itemWithTitle:@"Speed Unit" segmentedControlTitles:[WFStringStore wifiUnitStrings] value:WFWifiSpeedMbps];
     [section addItem:self.wifiSpeedUnitItem];
 
     /*self.wifiDownloadItem = [WFInputItem itemWithTitle:@"Download Speed" value:@"4" categories:@[@"Gbps", @"Mbps", @"Kbps"] selectedIndex:[NSNumber numberWithInteger:2]];
@@ -474,7 +553,7 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Pricing"];
     [self.manager addSection:section];
     
-    self.priceUnitItem = [RESegmentedItem itemWithTitle:@"Price Unit" segmentedControlTitles:[WFStringStore priceUnitStrings] value:WFPriceINR - 1];
+    self.priceUnitItem = [RESegmentedItem itemWithTitle:@"Price Unit" segmentedControlTitles:[WFStringStore priceUnitStrings] value:WFPriceINR];
     [section addItem:self.priceUnitItem];
     
     self.dayPriceItem = [RENumberItem itemWithTitle:@"Day Pass" value:nil placeholder:@"0"];

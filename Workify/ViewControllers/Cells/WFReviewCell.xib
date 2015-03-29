@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationCell" rowHeight="85" id="KGk-i7-Jjw" customClass="WFReviewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationCell" id="KGk-i7-Jjw" customClass="WFReviewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7O-Ts-oq0">
-                        <rect key="frame" x="8" y="8" width="304" height="21"/>
+                        <rect key="frame" x="8" y="8" width="304" height="26"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -49,6 +49,7 @@
                 <constraints>
                     <constraint firstItem="u7O-Ts-oq0" firstAttribute="trailing" secondItem="hOl-kx-IQ0" secondAttribute="trailing" id="4MR-Ob-3gQ"/>
                     <constraint firstItem="LHA-yJ-ven" firstAttribute="leading" secondItem="ePk-Uc-sEo" secondAttribute="leading" id="IG3-aV-XSh"/>
+                    <constraint firstItem="gcm-c7-Dmm" firstAttribute="top" secondItem="u7O-Ts-oq0" secondAttribute="bottom" constant="10" id="Mfd-AU-Ozz"/>
                     <constraint firstItem="gcm-c7-Dmm" firstAttribute="bottom" secondItem="ePk-Uc-sEo" secondAttribute="bottom" id="Oia-hY-FQz"/>
                     <constraint firstItem="hOl-kx-IQ0" firstAttribute="top" secondItem="u7O-Ts-oq0" secondAttribute="bottom" constant="46" id="RFe-86-mLh"/>
                     <constraint firstItem="u7O-Ts-oq0" firstAttribute="leading" secondItem="gcm-c7-Dmm" secondAttribute="leading" id="cbN-KT-ljc"/>

@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
 
 @property (nonatomic, strong, readwrite) RETableViewManager *manager;
-//@property (nonatomic, strong) NSMutableArray* spaceTypeItemsArray;
 @property (nonatomic, strong) WFDayItem* dayItem;
 @property (nonatomic, strong) WFRatingItem* ratingItem;
 @property (nonatomic, strong) WFStepperItem* wifiItem;
@@ -37,6 +36,7 @@
     self.manager[@"WFDayItem"] = @"WFDaysTableViewCell";
     self.manager[@"WFStepperItem"] = @"WFStepperTableViewCell";
     self.manager[@"WFRatingItem"] = @"WFRatingCell";
+    self.manager[@"RESegmentedItem"] = @"WFSegmentedCell";
     [self addTableEntries];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconCancel"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
@@ -48,6 +48,7 @@
     [self.clearButton addTarget:self action:@selector(clear:) forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
 }
 
 - (void)cancel:(id)sender {
@@ -66,13 +67,16 @@
     */
     NSNumber* spaceType = [NSNumber numberWithInteger:self.spaceTypeItem.value];
     NSArray* dayValues = self.dayItem.value;
+    if (dayValues == nil) {
+        dayValues = @[];
+    }
     NSNumber* minimumRatings = self.ratingItem.value;
     NSNumber* minimumWifi = [NSNumber numberWithInteger:[WFStringStore wifiSpeedIndex:self.wifiItem.value]];
     
-    NSDictionary* filterDict = @{@"spaceFilters":spaceType,
-                                 @"dayFilters": dayValues,
-                                 @"ratingFilters": minimumRatings,
-                                 @"wifiFilters": minimumWifi};
+    NSDictionary* filterDict = @{kFilterSpaceType:spaceType,
+                                 kFilterOpenDays: dayValues,
+                                 kFilterRatings: minimumRatings,
+                                 kFilterWifiSpeed: minimumWifi};
     if (self.delegate && [self.delegate respondsToSelector:@selector(filtersAdded:)]) {
         [self.delegate filtersAdded:filterDict];
     }
@@ -87,13 +91,13 @@
     self.spaceTypeItem.value = -1;
     [self.spaceTypeItem reloadRowWithAnimation:UITableViewRowAnimationAutomatic];
     
-    self.dayItem.value = @[[NSNumber numberWithInt:0]];
+    self.dayItem.value = nil;
     [self.dayItem reloadRowWithAnimation:UITableViewRowAnimationAutomatic];
     
     self.ratingItem.value = [NSNumber numberWithInt:0];
     [self.ratingItem reloadRowWithAnimation:UITableViewRowAnimationAutomatic];
     
-    self.wifiItem.value = [WFStringStore wifiSpeedString:0];
+    self.wifiItem.value = [WFStringStore wifiSpeedString:WFWifiSpeed0Mbps];
     [self.wifiItem reloadRowWithAnimation:UITableViewRowAnimationAutomatic];
 }
 
@@ -112,27 +116,14 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Space Type"];
     [self.manager addSection:section];
     
-    /*__typeof (&*self) __weak weakSelf = self;
-    void (^changeState)(RETableViewItem *item) = ^(RETableViewItem *item){
-        UITableViewCell* cell = [weakSelf.tableView cellForRowAtIndexPath:item.indexPath];
-        [weakSelf.tableView deselectRowAtIndexPath:item.indexPath animated:NO];
-        
-        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        } else {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-        item.accessoryType = cell.accessoryType;
-    };
-
-    for (NSString* value in [WFStringStore spaceTypeStrings]) {
-        RETableViewItem* item = [RETableViewItem itemWithTitle:value accessoryType:UITableViewCellAccessoryCheckmark selectionHandler:^(RETableViewItem *item) {
-            changeState(item);
-        }];
-        [section addItem:item];
-        [self.spaceTypeItemsArray addObject:item];
-    }*/
-    self.spaceTypeItem = [RESegmentedItem itemWithTitle:nil segmentedControlTitles:[WFStringStore spaceTypeStrings] value:-1];
+    NSInteger index = -1;
+    NSNumber* savedValue = [[NSUserDefaults standardUserDefaults] objectForKey:kFilterSpaceType];
+    
+    if (savedValue) {
+        index = [savedValue integerValue];
+    }
+    
+    self.spaceTypeItem = [RESegmentedItem itemWithTitle:nil segmentedControlTitles:[WFStringStore spaceTypeStrings] value:index];
     self.spaceTypeItem.tintColor = [UIColor turquoiseColor];
     [section addItem:self.spaceTypeItem];
 }
@@ -142,6 +133,13 @@
     [self.manager addSection:section];
     
     self.dayItem = [WFDayItem item];
+    
+    NSArray* savedValue = [[NSUserDefaults standardUserDefaults] objectForKey:kFilterOpenDays];
+    
+    if (savedValue && savedValue.count) {
+        self.dayItem.value = savedValue;
+    }
+
     [section addItem:self.dayItem];
 }
 
@@ -149,7 +147,14 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Minimum Ratings"];
     [self.manager addSection:section];
     
-    self.ratingItem = [WFRatingItem itemWithValue:[NSNumber numberWithInt:3]];
+    NSInteger ratings = 0;
+    NSNumber* savedValue = [[NSUserDefaults standardUserDefaults] objectForKey:kFilterRatings];
+    
+    if (savedValue) {
+        ratings = [savedValue integerValue];
+    }
+
+    self.ratingItem = [WFRatingItem itemWithValue:[NSNumber numberWithInteger:ratings]];
     [section addItem:self.ratingItem];
 }
 
@@ -157,7 +162,14 @@
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Minimum Wifi Speed"];
     [self.manager addSection:section];
     
-    self.wifiItem = [WFStepperItem itemWithValue:[WFStringStore wifiSpeedString:WFWifiSpeed1Mbps] andRange:[WFStringStore wifiSpeedStrings]];
+    NSInteger index = 0;
+    NSNumber* savedValue = [[NSUserDefaults standardUserDefaults] objectForKey:kFilterWifiSpeed];
+    
+    if (savedValue) {
+        index = [savedValue integerValue];
+    }
+
+    self.wifiItem = [WFStepperItem itemWithValue:[WFStringStore wifiSpeedString:index] andRange:[WFStringStore wifiSpeedStrings]];
     [section addItem:self.wifiItem];
 }
 

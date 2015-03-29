@@ -12,6 +12,7 @@
 #import "WFNavigationController.h"
 #import "WFLocationSearchViewController.h"
 #import "WFAddPlaceViewController.h"
+#import "WFLicensesViewController.h"
 
 #import <MessageUI/MessageUI.h>
 #import "UAAppReviewManager.h"
@@ -347,8 +348,11 @@
                 [alertView show];
             }
             
-        } else {
+        } else if (indexPath.row == 2) {
             [UAAppReviewManager rateApp];
+        } else {
+            [(REFrostedViewController*)appDelegate.viewController hideMenuViewController];
+            [navVC pushViewController:[[WFLicensesViewController alloc] init] animated:YES];
         }
     }
 }
@@ -366,7 +370,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
     if (sectionIndex == 0) return 2;
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -382,7 +386,7 @@
         NSArray *titles = @[@"Home", @"Suggest a place"];
         cell.textLabel.text = titles[indexPath.row];
     } else {
-        NSArray *titles = @[@"Give feedback", @"Tell a friend", @"Rate this app"];
+        NSArray *titles = @[@"Give feedback", @"Tell a friend", @"Rate this app", @"Licenses"];
         cell.textLabel.text = titles[indexPath.row];
     }
     

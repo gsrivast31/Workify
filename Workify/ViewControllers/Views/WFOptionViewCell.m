@@ -50,13 +50,14 @@ static const CGFloat kVerticalMargin = 5.0f;
     self.label.frame = CGRectMake(kRowSize + kHorizontalMargin, 0, self.frame.size.width - kRowSize - kHorizontalMargin, self.frame.size.height);
 }
 
-- (void)setContent:(NSString*)text {
+- (void)setContent:(NSString*)text andTag:(NSInteger)tag {
     self.label.text = text;
+    self.tag = tag;
 }
 
 - (void)changeState {
     self.button.selected = !self.button.selected;
-    self.value = self.button.selected;
+    self.state = self.button.selected;
     if (self.delegate && [self.delegate respondsToSelector:@selector(optionToggled)]) {
         [self.delegate optionToggled];
     }
@@ -90,7 +91,7 @@ static const CGFloat kVerticalMargin = 5.0f;
     
     NSUInteger index = 0;
     for (WFSingleOptionView* view in self.viewsArray) {
-        [view setContent:[self.item.options objectAtIndex:index]];
+        [view setContent:[self.item.options objectAtIndex:index] andTag:index];
         index++;
     }
 }
@@ -146,7 +147,7 @@ static const CGFloat kVerticalMargin = 5.0f;
     
     WFOptionItem* columnItem = (WFOptionItem*)item;
     NSInteger count = [columnItem.options count];
-    for (NSInteger i=0; i<count; i++) {
+    for (NSInteger i = 0; i < count; i++) {
         CGFloat leftHeight = [WFSingleOptionView heightWithText:[columnItem.options objectAtIndex:i] constrainedToWidth:width/2.0 - 1.0];
         CGFloat rightHeight = 0.0f;
         if (++i < count) {
@@ -166,12 +167,11 @@ static const CGFloat kVerticalMargin = 5.0f;
 - (void)optionToggled {
     NSMutableArray* array = [NSMutableArray array];
     for (WFSingleOptionView* view in self.viewsArray) {
-        [array addObject:[NSNumber numberWithBool:view.value]];
+        if (view.state == true) {
+            [array addObject:[NSNumber numberWithInteger:view.tag]];
+        }
     }
     self.item.value = [array copy];
-    
-    //BOOL val = ![self.item.value[index] boolValue];
-    //self.item.value[index] =  [NSNumber numberWithBool:val];
 }
 
 @end

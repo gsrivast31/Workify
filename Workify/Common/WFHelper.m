@@ -29,5 +29,8 @@
     return string;
 }
 
++ (BOOL)isEmpty:(NSString*)string {
+    return (!string) || ([string isEqualToString:@""]);
+}
 
 @end

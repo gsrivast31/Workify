@@ -10,5 +10,6 @@
 
 + (BOOL) isLoggedIn;
 + (NSString*) commaSeparatedString:(NSArray*)array;
++ (BOOL)isEmpty:(NSString*)string;
 
 @end

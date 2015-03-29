@@ -20,8 +20,6 @@
 		2D3A162F1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A162E1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.m */; };
 		2D3A16351ABBFFE400D6A0B5 /* WFAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A16341ABBFFE400D6A0B5 /* WFAddressViewController.m */; };
 		2D3A16371ABC407E00D6A0B5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A16361ABC407E00D6A0B5 /* MapKit.framework */; };
-		2D3A163C1ABD75D500D6A0B5 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A16391ABD75D500D6A0B5 /* Parse.framework */; };
-		2D3A163D1ABD75D600D6A0B5 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A163A1ABD75D500D6A0B5 /* ParseFacebookUtils.framework */; };
 		2D3A163F1ABD75F400D6A0B5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A163E1ABD75F400D6A0B5 /* AudioToolbox.framework */; };
 		2D3A16411ABD75FA00D6A0B5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A16401ABD75FA00D6A0B5 /* CFNetwork.framework */; };
 		2D3A16431ABD760000D6A0B5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A16421ABD760000D6A0B5 /* CoreGraphics.framework */; };
@@ -53,9 +51,13 @@
 		2DF6E3CC1AC5486100B51EEC /* UIImage+ResizeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C51AC5486100B51EEC /* UIImage+ResizeAdditions.m */; };
 		2DF6E3CD1AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C71AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m */; };
 		2DF6E3CE1AC5486100B51EEC /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C91AC5486100B51EEC /* UIView+Animation.m */; };
-		2DF6E3D21AC5E0D600B51EEC /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF6E3D11AC5E0D600B51EEC /* ParseUI.framework */; };
 		2DF6E3D61AC7EAA100B51EEC /* WFReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3D41AC7EAA100B51EEC /* WFReviewCell.m */; };
 		2DF6E3D71AC7EAA100B51EEC /* WFReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6E3D51AC7EAA100B51EEC /* WFReviewCell.xib */; };
+		2DF6E3DA1AC85E9C00B51EEC /* WFSegmentedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3D91AC85E9C00B51EEC /* WFSegmentedCell.m */; };
+		2DF6E3E01AC894B000B51EEC /* WFLicensesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3DF1AC894B000B51EEC /* WFLicensesViewController.m */; };
+		2DF6E3E51AC8964100B51EEC /* FXBlurView-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6E3E21AC8964100B51EEC /* FXBlurView-License.txt */; };
+		2DF6E3E61AC8964100B51EEC /* MBProgressHUD-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6E3E31AC8964100B51EEC /* MBProgressHUD-License.txt */; };
+		2DF6E3E71AC8964100B51EEC /* UAAppReviewManager-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6E3E41AC8964100B51EEC /* UAAppReviewManager-License.txt */; };
 		F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DE71A873258000040B5 /* WFTwoColumnItem.m */; };
 		F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DEF1A87654A000040B5 /* WFDetailSingleItemCell.m */; };
 		F4261DF21A87654A000040B5 /* WFDetailSingleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4261DF01A87654A000040B5 /* WFDetailSingleItemCell.xib */; };
@@ -178,8 +180,6 @@
 		2D3A16331ABBFFE400D6A0B5 /* WFAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFAddressViewController.h; path = ViewControllers/WFAddressViewController.h; sourceTree = "<group>"; };
 		2D3A16341ABBFFE400D6A0B5 /* WFAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFAddressViewController.m; path = ViewControllers/WFAddressViewController.m; sourceTree = "<group>"; };
 		2D3A16361ABC407E00D6A0B5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		2D3A16391ABD75D500D6A0B5 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		2D3A163A1ABD75D500D6A0B5 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		2D3A163E1ABD75F400D6A0B5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2D3A16401ABD75FA00D6A0B5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2D3A16421ABD760000D6A0B5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -233,10 +233,16 @@
 		2DF6E3C91AC5486100B51EEC /* UIView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Animation.m"; path = "Categories/UIView+Animation.m"; sourceTree = "<group>"; };
 		2DF6E3CF1AC5487100B51EEC /* WFCredentials.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WFCredentials.h; path = Common/WFCredentials.h; sourceTree = "<group>"; };
 		2DF6E3D01AC5487100B51EEC /* WFParseConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WFParseConstants.h; path = Common/WFParseConstants.h; sourceTree = "<group>"; };
-		2DF6E3D11AC5E0D600B51EEC /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		2DF6E3D31AC7EAA100B51EEC /* WFReviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFReviewCell.h; path = ViewControllers/Cells/WFReviewCell.h; sourceTree = "<group>"; };
 		2DF6E3D41AC7EAA100B51EEC /* WFReviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFReviewCell.m; path = ViewControllers/Cells/WFReviewCell.m; sourceTree = "<group>"; };
 		2DF6E3D51AC7EAA100B51EEC /* WFReviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WFReviewCell.xib; path = ViewControllers/Cells/WFReviewCell.xib; sourceTree = "<group>"; };
+		2DF6E3D81AC85E9C00B51EEC /* WFSegmentedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFSegmentedCell.h; path = ViewControllers/Views/WFSegmentedCell.h; sourceTree = "<group>"; };
+		2DF6E3D91AC85E9C00B51EEC /* WFSegmentedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFSegmentedCell.m; path = ViewControllers/Views/WFSegmentedCell.m; sourceTree = "<group>"; };
+		2DF6E3DE1AC894B000B51EEC /* WFLicensesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFLicensesViewController.h; path = ViewControllers/WFLicensesViewController.h; sourceTree = "<group>"; };
+		2DF6E3DF1AC894B000B51EEC /* WFLicensesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFLicensesViewController.m; path = ViewControllers/WFLicensesViewController.m; sourceTree = "<group>"; };
+		2DF6E3E21AC8964100B51EEC /* FXBlurView-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FXBlurView-License.txt"; sourceTree = "<group>"; };
+		2DF6E3E31AC8964100B51EEC /* MBProgressHUD-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MBProgressHUD-License.txt"; sourceTree = "<group>"; };
+		2DF6E3E41AC8964100B51EEC /* UAAppReviewManager-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UAAppReviewManager-License.txt"; sourceTree = "<group>"; };
 		47422309BA50442679966331 /* Pods-Workify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.debug.xcconfig"; sourceTree = "<group>"; };
 		F4195F47C08CA42427BE3646 /* Pods-Workify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.release.xcconfig"; sourceTree = "<group>"; };
 		F4261DE61A873258000040B5 /* WFTwoColumnItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTwoColumnItem.h; path = ViewControllers/Models/WFTwoColumnItem.h; sourceTree = "<group>"; };
@@ -419,13 +425,10 @@
 				2D3A16491ABD761500D6A0B5 /* QuartzCore.framework in Frameworks */,
 				2D3A16471ABD760E00D6A0B5 /* MobileCoreServices.framework in Frameworks */,
 				2D3A16451ABD760600D6A0B5 /* CoreLocation.framework in Frameworks */,
-				2DF6E3D21AC5E0D600B51EEC /* ParseUI.framework in Frameworks */,
 				2D3A16431ABD760000D6A0B5 /* CoreGraphics.framework in Frameworks */,
 				2D3A16411ABD75FA00D6A0B5 /* CFNetwork.framework in Frameworks */,
 				2D3A163F1ABD75F400D6A0B5 /* AudioToolbox.framework in Frameworks */,
 				2D3A16371ABC407E00D6A0B5 /* MapKit.framework in Frameworks */,
-				2D3A163C1ABD75D500D6A0B5 /* Parse.framework in Frameworks */,
-				2D3A163D1ABD75D600D6A0B5 /* ParseFacebookUtils.framework in Frameworks */,
 				08FFB6E09191661466354047 /* libPods-Workify.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,10 +501,19 @@
 			path = Tooltips;
 			sourceTree = "<group>";
 		};
+		2DF6E3E11AC8964100B51EEC /* Licensing */ = {
+			isa = PBXGroup;
+			children = (
+				2DF6E3E21AC8964100B51EEC /* FXBlurView-License.txt */,
+				2DF6E3E31AC8964100B51EEC /* MBProgressHUD-License.txt */,
+				2DF6E3E41AC8964100B51EEC /* UAAppReviewManager-License.txt */,
+			);
+			path = Licensing;
+			sourceTree = "<group>";
+		};
 		53FA32878600D597530C5080 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2DF6E3D11AC5E0D600B51EEC /* ParseUI.framework */,
 				2D3A18341ABD773600D6A0B5 /* Social.framework */,
 				2D3A16521ABD763900D6A0B5 /* libsqlite3.dylib */,
 				2D3A16501ABD763000D6A0B5 /* libz.dylib */,
@@ -514,8 +526,6 @@
 				2D3A16421ABD760000D6A0B5 /* CoreGraphics.framework */,
 				2D3A16401ABD75FA00D6A0B5 /* CFNetwork.framework */,
 				2D3A163E1ABD75F400D6A0B5 /* AudioToolbox.framework */,
-				2D3A16391ABD75D500D6A0B5 /* Parse.framework */,
-				2D3A163A1ABD75D500D6A0B5 /* ParseFacebookUtils.framework */,
 				2D3A16361ABC407E00D6A0B5 /* MapKit.framework */,
 				FF53158E0BF8C04C7B9D7EEC /* libPods-Workify.a */,
 			);
@@ -696,6 +706,8 @@
 				2D3A18521ABED44D00D6A0B5 /* WFAddReviewController.m */,
 				2D550F251AC03B01004A27AA /* WFAddURLViewController.h */,
 				2D550F261AC03B01004A27AA /* WFAddURLViewController.m */,
+				2DF6E3DE1AC894B000B51EEC /* WFLicensesViewController.h */,
+				2DF6E3DF1AC894B000B51EEC /* WFLicensesViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -719,6 +731,7 @@
 		F45C0BDB1A84791E00E221EE /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				2DF6E3E11AC8964100B51EEC /* Licensing */,
 				2D1853171AB8A34B00404108 /* FXBlurView */,
 				2D1853161AB8A34B00404108 /* FXBlurView */,
 				F4261E541A88CEBA000040B5 /* SGActionView */,
@@ -859,6 +872,8 @@
 				2D3A186B1ABF895500D6A0B5 /* WFSubTitleCell.m */,
 				2D1D828F1AC0C165008F48C5 /* WFReviewViewCell.h */,
 				2D1D82901AC0C165008F48C5 /* WFReviewViewCell.m */,
+				2DF6E3D81AC85E9C00B51EEC /* WFSegmentedCell.h */,
+				2DF6E3D91AC85E9C00B51EEC /* WFSegmentedCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1015,14 +1030,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DF6E3E61AC8964100B51EEC /* MBProgressHUD-License.txt in Resources */,
 				F45C0C8B1A84791F00E221EE /* Lato-Light.ttf in Resources */,
 				F45C0BA11A83D93400E221EE /* Main.storyboard in Resources */,
+				2DF6E3E51AC8964100B51EEC /* FXBlurView-License.txt in Resources */,
 				2DF6E3D71AC7EAA100B51EEC /* WFReviewCell.xib in Resources */,
 				F45C0CAD1A84BC2700E221EE /* WFDaysTableViewCell.xib in Resources */,
 				F45C0BA61A83D93400E221EE /* LaunchScreen.xib in Resources */,
 				F45C0C881A84791F00E221EE /* flat-ui-icons-regular.ttf in Resources */,
 				F45C0C891A84791F00E221EE /* Lato-Bold.ttf in Resources */,
 				F45C0CB21A84C5EF00E221EE /* WFStepperTableViewCell.xib in Resources */,
+				2DF6E3E71AC8964100B51EEC /* UAAppReviewManager-License.txt in Resources */,
 				F45C0BA31A83D93400E221EE /* Images.xcassets in Resources */,
 				F4261DF71A87CE2E000040B5 /* WFTwoColumnViewCell.xib in Resources */,
 				F45C0D401A861C3600E221EE /* WFTagViewCell.xib in Resources */,
@@ -1171,6 +1189,7 @@
 				F45C0C691A84791F00E221EE /* UIToolbar+FlatUI.m in Sources */,
 				2DF6E3CA1AC5486100B51EEC /* UIImage+Alpha.m in Sources */,
 				2D3A18661ABF5E4F00D6A0B5 /* WFStringStore.m in Sources */,
+				2DF6E3DA1AC85E9C00B51EEC /* WFSegmentedCell.m in Sources */,
 				F45C0C611A84791F00E221EE /* UIImage+FlatUI.m in Sources */,
 				F45C0C661A84791F00E221EE /* UIStepper+FlatUI.m in Sources */,
 				F45C0CAC1A84BC2700E221EE /* WFDaysTableViewCell.m in Sources */,
@@ -1182,6 +1201,7 @@
 				2DF6E3CE1AC5486100B51EEC /* UIView+Animation.m in Sources */,
 				F45C0D0B1A85DA0900E221EE /* WFLocationsViewController.m in Sources */,
 				2D3A185E1ABF5E2F00D6A0B5 /* WFMapPin.m in Sources */,
+				2DF6E3E01AC894B000B51EEC /* WFLicensesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

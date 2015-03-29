@@ -41,10 +41,14 @@ static const CGFloat kRatingDim = 32.0;
 
 - (void)cellWillAppear {
     [super cellWillAppear];
-    int starsCount = [self.item.value intValue];
+    NSInteger starsCount = [self.item.value integerValue];
     for (NSInteger i=1; i<=starsCount; i++) {
         [((UIButton*)[stars objectAtIndex:i-1]) setSelected:TRUE];
     }
+    for (NSInteger i=starsCount+1; i<=5; i++) {
+        [((UIButton*)[stars objectAtIndex:i-1]) setSelected:FALSE];
+    }
+
 }
 
 - (void)cellDidDisappear {
@@ -54,6 +58,10 @@ static const CGFloat kRatingDim = 32.0;
 - (void)changeState:(id)sender {
     UIButton* button = (UIButton*)sender;
     NSInteger selectedIndex = button.tag;
+    if (button.tag == [self.item.value integerValue]) { //double tapped the same star
+        selectedIndex --;
+    }
+    
     for (NSInteger i=1; i<=selectedIndex; i++) {
         [((UIButton*)[stars objectAtIndex:i-1]) setSelected:TRUE];
     }

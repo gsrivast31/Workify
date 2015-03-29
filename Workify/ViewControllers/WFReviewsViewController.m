@@ -17,10 +17,8 @@
 #import <Parse/Parse.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
-@interface WFReviewsViewController () <WFAddReviewDelegate, WFLoginDelegate, RETableViewManagerDelegate>
+@interface WFReviewsViewController () <WFAddReviewDelegate, WFLoginDelegate>
 
-@property (nonatomic, strong, readwrite) RETableViewManager *manager;
-@property (nonatomic, strong, readwrite) RETableViewSection *section;
 @end
 
 @implementation WFReviewsViewController
@@ -54,9 +52,6 @@
     
     self.title = @"Reviews";
 
-    self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView delegate:self];
-    self.manager[@"WFReviewItem"] = @"WFReviewViewCell";
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconCancel"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"NavBarIconAdd"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(addReview:)];
 }
@@ -105,12 +100,9 @@
     }
     
     [cell configureCellWithObject:object];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 200.f;
 }
 
 #pragma mark WFAddReviewDelegate

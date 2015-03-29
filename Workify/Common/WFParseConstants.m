@@ -19,6 +19,10 @@ NSString *const kWFCityLocationsKey = @"locations";
 NSString *const kWFCityLocationsCountKey = @"locationCount";
 NSString *const kWFCityDisplayPhotoKey = @"displayPhoto";
 
+#pragma mark - PFObject LocationSuggestion Class
+
+NSString *const kWFLocationSuggestionClassKey = @"LocationSuggestion";
+
 #pragma mark - PFObject Location Class
 // Class key
 NSString *const kWFLocationClassKey = @"Location";
@@ -54,6 +58,7 @@ NSString *const kWFLocationReviewCountKey = @"reviewCnt";
 NSString *const kWFLocationReviewsKey = @"reviews";
 NSString *const kWFLocationPhotoCountKey = @"photoCnt";
 NSString *const kWFLocationPhotosKey = @"photos";
+NSString *const kWFLocationNotesKey = @"notes";
 
 #pragma mark - PFObject User Class
 // Field keys

@@ -21,6 +21,9 @@ extern NSString *const kWFCityLocationsKey;
 extern NSString *const kWFCityLocationsCountKey;
 extern NSString *const kWFCityDisplayPhotoKey;
 
+#pragma mark - PFObject LocationSuggestion Class
+extern NSString *const kWFLocationSuggestionClassKey;
+
 #pragma mark - PFObject Location Class
 // Class key
 extern NSString *const kWFLocationClassKey;
@@ -57,6 +60,7 @@ extern NSString *const kWFLocationReviewCountKey;
 extern NSString *const kWFLocationReviewsKey;
 extern NSString *const kWFLocationPhotoCountKey;
 extern NSString *const kWFLocationPhotosKey;
+extern NSString *const kWFLocationNotesKey;
 
 #pragma mark - PFObject User Class
 // Field keys

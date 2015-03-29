@@ -9,23 +9,88 @@
 #ifndef Workify_WFEnumConstants_h
 #define Workify_WFEnumConstants_h
 
+//Noise
+typedef NS_ENUM(NSInteger, WFNoiseType) {
+    WFNoiseSilence = 0,
+    WFNoiseAverage = 1,
+    WFNoiseNoisy = 2
+};
+
+/*
 //Space Type
 typedef NS_ENUM(NSInteger, WFSpaceType) {
-    WFSpaceCafe = 1,
-    WFSpaceCoWorking = 2,
-    WFSpaceLiving = 3
+    WFSpaceCafe = 0,
+    WFSpaceCoWorking = 1,
+    WFSpaceLiving = 2
+};
+
+//Noise
+typedef NS_ENUM(NSInteger, WFNoiseType) {
+    WFNoiseSilence = 0,
+    WFNoiseAverage = 1,
+    WFNoiseNoisy = 2
+};
+
+//Food
+typedef NS_ENUM(NSInteger, WFFoodType) {
+    WFFoodCoffeeTea = 0,
+    WFFoodAlcohol = 1,
+    WFFoodBreakfast = 2,
+    WFFoodLunch = 3,
+    WFFoodSnacks = 4,
+    WFFoodDinner = 5
+};
+
+//Seating
+typedef NS_ENUM(NSInteger, WFSeatingType) {
+    WFSeatIndoor = 0,
+    WFSeatOutdoor = 1,
+    WFSeatSeparateRoom = 2,
+    WFSeatStandingDesk = 3,
+    WFSeatTableFor1to4 = 4,
+    WFSeatTableForMoreThan5 = 5
+};
+
+//Power
+typedef NS_ENUM(NSInteger, WFPowerType) {
+    WFPowerNone = 0,
+    WFPowerLimited = 1,
+    WFPowerGood = 2,
+    WFPowerEnough = 3
+};
+
+//Amenities
+typedef NS_ENUM(NSInteger, WFAmenitiesType) {
+    WFAmenityAC = 0,
+    WFAmenityTV = 1,
+    WFAmenityKidFriendly = 2,
+    WFAmenityDogFriendly = 3,
+    WFAmenityWashroom = 4,
+    WFAmenityParking = 5
+};*/
+
+//Days
+typedef NS_ENUM(NSInteger, WFDay) {
+    WFMonday = 0,
+    WFTuesday = 1,
+    WFWednesday = 2,
+    WFThursday = 3,
+    WFFriday = 4,
+    WFSaturday = 5,
+    WFSunday = 6
 };
 
 //Wifi
 typedef NS_ENUM(NSInteger, WFWifiType) {
-    WFWifiReliable = 1,
-    WFWifiShaky = 2,
-    WFWifiAbsent = 3,
-    WFWifiDontKnow = 4
+    WFWifiReliable = 0,
+    WFWifiShaky = 1,
+    WFWifiAbsent = 2,
+    WFWifiDontKnow = 3
 };
 
 //Wifi Speed
 typedef NS_ENUM(NSInteger, WFWifiSpeedType) {
+    WFWifiSpeed0Mbps = 0,
     WFWifiSpeed256Kbps = 1,
     WFWifiSpeed512Kbps = 2,
     WFWifiSpeed1Mbps = 3,
@@ -34,75 +99,19 @@ typedef NS_ENUM(NSInteger, WFWifiSpeedType) {
     WFWifiSpeed10Mbps = 6
 };
 
-//Noise
-typedef NS_ENUM(NSInteger, WFNoiseType) {
-    WFNoiseSilence = 1,
-    WFNoiseAverage = 2,
-    WFNoiseNoisy = 3
-};
-
-//Food
-typedef NS_ENUM(NSInteger, WFFoodType) {
-    WFFoodCoffeeTea = 1,
-    WFFoodAlcohol = 2,
-    WFFoodBreakfast = 3,
-    WFFoodLunch = 4,
-    WFFoodSnacks = 5,
-    WFFoodDinner = 6
-};
-
-//Seating
-typedef NS_ENUM(NSInteger, WFSeatingType) {
-    WFSeatIndoor = 1,
-    WFSeatOutdoor = 2,
-    WFSeatSeparateRoom = 3,
-    WFSeatStandingDesk = 4,
-    WFSeatTableFor1to4 = 5,
-    WFSeatTableForMoreThan5 = 6
-};
-
-//Power
-typedef NS_ENUM(NSInteger, WFPowerType) {
-    WFPowerNone = 1,
-    WFPowerLimited = 2,
-    WFPowerGood = 3,
-    WFPowerEnough = 4
-};
-
-//Amenities
-typedef NS_ENUM(NSInteger, WFAmenitiesType) {
-    WFAmenityAC = 1,
-    WFAmenityTV = 2,
-    WFAmenityKidFriendly = 3,
-    WFAmenityDogFriendly = 4,
-    WFAmenityWashroom = 5,
-    WFAmenityParking = 6
-};
-
-//Days
-typedef NS_ENUM(NSInteger, WFDay) {
-    WFMonday = 1,
-    WFTuesday = 2,
-    WFWednesday = 3,
-    WFThursday = 4,
-    WFFriday = 5,
-    WFSaturday = 6,
-    WFSunday = 7
-};
-
 //Wifi Speed Units
 typedef NS_ENUM(NSInteger, WFWifiSpeedUnit) {
-    WFWifiSpeedKbps = 1,
-    WFWifiSpeedMbps = 2,
-    WFWifiSpeedGbps = 3,
+    WFWifiSpeedKbps = 0,
+    WFWifiSpeedMbps = 1,
+    WFWifiSpeedGbps = 2,
 };
 
 //Price Units
 typedef NS_ENUM(NSInteger, WFWifiPriceUnit) {
-    WFPriceINR = 1,
-    WFPriceDollar = 2,
-    WFPricePound = 3,
-    WFPriceEuro = 4,
+    WFPriceINR = 0,
+    WFPriceDollar = 1,
+    WFPricePound = 2,
+    WFPriceEuro = 3,
 };
 
 #endif

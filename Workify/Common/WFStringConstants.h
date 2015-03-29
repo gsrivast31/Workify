@@ -21,6 +21,7 @@ static NSString* const kWifiAbsent = @"Absent";
 static NSString* const kWifiDontKnow = @"Don't know";
 
 //Wifi Speed
+static NSString* const kWifiSpeed0Mbps = @"0";
 static NSString* const kWifiSpeed256Kbps = @"256 Kbps";
 static NSString* const kWifiSpeed512Kbps = @"512 Kbps";
 static NSString* const kWifiSpeed1Mbps = @"1 Mbps";
@@ -109,5 +110,11 @@ static NSString * const kPriceEuros = @"Euros";
 
 //Notifications
 static NSString * const kReviewAddedNotification = @"kReviewAddedNotification";
+
+//Filters
+static NSString * const kFilterOpenDays = @"kFilterOpenDays";
+static NSString * const kFilterRatings = @"kFilterRatings";
+static NSString * const kFilterWifiSpeed = @"kFilterWifiSpeed";
+static NSString * const kFilterSpaceType = @"kFilterSpaceType";
 
 #endif
