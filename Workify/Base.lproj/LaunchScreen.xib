@@ -12,11 +12,11 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="Zcd-o2-Kql">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="Zcd-o2-Kql">
                     <rect key="frame" x="8" y="8" width="464" height="464"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </imageView>
-                <view alpha="0.75" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="brE-0c-gYP">
+                <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brE-0c-gYP">
                     <rect key="frame" x="3" y="3" width="474" height="474"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -29,16 +29,17 @@
             </subviews>
             <color key="backgroundColor" red="0.079887427389621735" green="0.79034280776977539" blue="0.60733050107955933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Zcd-o2-Kql" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="1hT-Ys-isQ"/>
-                <constraint firstItem="brE-0c-gYP" firstAttribute="bottom" secondItem="Zcd-o2-Kql" secondAttribute="bottom" constant="5" id="2IX-kC-Pv0"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" constant="1" id="5cJ-9S-tgC"/>
-                <constraint firstItem="brE-0c-gYP" firstAttribute="trailing" secondItem="Zcd-o2-Kql" secondAttribute="trailing" constant="5" id="8Y5-7G-SWn"/>
+                <constraint firstItem="Zcd-o2-Kql" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottomMargin" id="9kg-hm-w61"/>
+                <constraint firstItem="Zcd-o2-Kql" firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="JKJ-dY-TOr"/>
                 <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="Koa-jz-hwk"/>
-                <constraint firstItem="Zcd-o2-Kql" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottomMargin" id="MpH-Gt-nRt"/>
+                <constraint firstItem="Zcd-o2-Kql" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="Mb2-hm-Zrk"/>
+                <constraint firstItem="Zcd-o2-Kql" firstAttribute="centerY" secondItem="brE-0c-gYP" secondAttribute="centerY" id="enH-Na-tPk"/>
+                <constraint firstItem="brE-0c-gYP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="3" id="fJu-FX-QB7"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g"/>
-                <constraint firstItem="brE-0c-gYP" firstAttribute="top" secondItem="Zcd-o2-Kql" secondAttribute="top" constant="-5" id="qph-RY-ClS"/>
-                <constraint firstItem="brE-0c-gYP" firstAttribute="leading" secondItem="Zcd-o2-Kql" secondAttribute="leading" constant="-5" id="rFM-QJ-wrr"/>
-                <constraint firstItem="Zcd-o2-Kql" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="w89-3z-gUj"/>
+                <constraint firstItem="Zcd-o2-Kql" firstAttribute="centerX" secondItem="brE-0c-gYP" secondAttribute="centerX" id="oh3-b3-M6j"/>
+                <constraint firstItem="Zcd-o2-Kql" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="sb7-ge-3x2"/>
+                <constraint firstItem="brE-0c-gYP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="3" id="xFI-Rc-ynH"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

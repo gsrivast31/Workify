@@ -670,7 +670,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != alertView.cancelButtonIndex) {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
-            NSURL* phoneURL = [NSURL URLWithString:[@"tel://" stringByAppendingString:@"+91-9717961964"]];
+            NSURL* phoneURL = [NSURL URLWithString:[@"tel://" stringByAppendingString:[self.locationObject objectForKey:kWFLocationPhoneKey]]];
             if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
                 [[UIApplication sharedApplication] openURL:phoneURL];
             }
