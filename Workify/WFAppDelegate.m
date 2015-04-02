@@ -37,7 +37,7 @@
     [PFFacebookUtils initializeFacebook];
 
     // Initialise Appirater
-    [UAAppReviewManager setAppID:@""];
+    [UAAppReviewManager setAppID:APP_ID];
     [UAAppReviewManager setDaysUntilPrompt:2];
     [UAAppReviewManager setUsesUntilPrompt:5];
     [UAAppReviewManager setSignificantEventsUntilPrompt:-1];
