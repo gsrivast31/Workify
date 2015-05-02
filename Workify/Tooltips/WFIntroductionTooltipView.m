@@ -102,17 +102,17 @@
     if(index == 0)
     {
         header.text = NSLocalizedString(@"Hi there!", nil);
-        content.text = NSLocalizedString(@"Diabetik is a new kind of diabetic journal that lets you track your blood glucose, medication, food and personal activities.\n\nTo learn more swipe your finger to the left.", nil);
+        content.text = NSLocalizedString(@"WorkOnGo is a crowdsourced listing of best places to work remotely all over the world. Find best cafes, bars, restaurants and co-working spaces to work from while you travel.\n\nTo learn more swipe your finger to the left.", nil);
     }
     else if(index == 1)
     {
-        header.text = NSLocalizedString(@"Nice to meet you", nil);
-        content.text = NSLocalizedString(@"Diabetik makes keeping your journal up-to-date as easy as possible by analysing your habits.\n\nIt may take a few days to really get to know you, so please be patient!", nil);
+        header.text = NSLocalizedString(@"Best listings", nil);
+        content.text = NSLocalizedString(@"Find all details for a space - wifi speeds, amenities, seating options, power options etc.", nil);
     }
     else if(index == 2)
     {
-        header.text = NSLocalizedString(@"Stay safe", nil);
-        content.text = NSLocalizedString(@"Diabetik cannot and will not advise you with regards to medical care.\n\nIf you have questions or concerns regarding the state of your health please see a medical professional.", nil);
+        header.text = NSLocalizedString(@"Any suggestions?", nil);
+        content.text = NSLocalizedString(@"If you have a place to suggest, tap 'Suggest a place' in the left menu to add your suggestion. We will get back to you after verifying your suggestion.", nil);
     }
     [containerView addSubview:header];
     [containerView addSubview:content];

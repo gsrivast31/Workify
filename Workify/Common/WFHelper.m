@@ -33,4 +33,15 @@
     return (!string) || ([string isEqualToString:@""]);
 }
 
++ (NSNumber*)wifiSpeedInMbps:(NSString*)speedString fromUnit:(WFWifiSpeedUnit)unit {
+    double speed = [speedString doubleValue];
+    if (unit == WFWifiSpeedKbps) {
+        speed = speed * 0.001f;
+    } else if (unit == WFWifiSpeedGbps) {
+        speed = speed * 1000.0f;
+    }
+    return [NSNumber numberWithDouble:speed];
+}
+
+
 @end

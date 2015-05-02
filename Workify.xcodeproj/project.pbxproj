@@ -17,6 +17,7 @@
 		2D1853301ABAF6F800404108 /* WFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D18532F1ABAF6F800404108 /* WFNavigationController.m */; };
 		2D1D82921AC0C165008F48C5 /* WFReviewViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1D82901AC0C165008F48C5 /* WFReviewViewCell.m */; };
 		2D1D82961AC0C18E008F48C5 /* WFReviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D1D82951AC0C18E008F48C5 /* WFReviewItem.m */; };
+		2D352ECA1ACFCEF0001164D6 /* Licensing in Resources */ = {isa = PBXBuildFile; fileRef = 2D352EC91ACFCEF0001164D6 /* Licensing */; };
 		2D3A162F1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A162E1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.m */; };
 		2D3A16351ABBFFE400D6A0B5 /* WFAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D3A16341ABBFFE400D6A0B5 /* WFAddressViewController.m */; };
 		2D3A16371ABC407E00D6A0B5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A16361ABC407E00D6A0B5 /* MapKit.framework */; };
@@ -27,7 +28,6 @@
 		2D3A16471ABD760E00D6A0B5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A16461ABD760E00D6A0B5 /* MobileCoreServices.framework */; };
 		2D3A16491ABD761500D6A0B5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A16481ABD761500D6A0B5 /* QuartzCore.framework */; };
 		2D3A164B1ABD761B00D6A0B5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A164A1ABD761B00D6A0B5 /* Security.framework */; };
-		2D3A164D1ABD762200D6A0B5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A164C1ABD762200D6A0B5 /* StoreKit.framework */; };
 		2D3A164F1ABD762900D6A0B5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A164E1ABD762900D6A0B5 /* SystemConfiguration.framework */; };
 		2D3A16511ABD763000D6A0B5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A16501ABD763000D6A0B5 /* libz.dylib */; };
 		2D3A16531ABD763900D6A0B5 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3A16521ABD763900D6A0B5 /* libsqlite3.dylib */; };
@@ -50,14 +50,10 @@
 		2DF6E3CB1AC5486100B51EEC /* UIImage+AlphaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C31AC5486100B51EEC /* UIImage+AlphaAdditions.m */; };
 		2DF6E3CC1AC5486100B51EEC /* UIImage+ResizeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C51AC5486100B51EEC /* UIImage+ResizeAdditions.m */; };
 		2DF6E3CD1AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C71AC5486100B51EEC /* UIImage+RoundedCornerAdditions.m */; };
-		2DF6E3CE1AC5486100B51EEC /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3C91AC5486100B51EEC /* UIView+Animation.m */; };
 		2DF6E3D61AC7EAA100B51EEC /* WFReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3D41AC7EAA100B51EEC /* WFReviewCell.m */; };
 		2DF6E3D71AC7EAA100B51EEC /* WFReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6E3D51AC7EAA100B51EEC /* WFReviewCell.xib */; };
 		2DF6E3DA1AC85E9C00B51EEC /* WFSegmentedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3D91AC85E9C00B51EEC /* WFSegmentedCell.m */; };
 		2DF6E3E01AC894B000B51EEC /* WFLicensesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6E3DF1AC894B000B51EEC /* WFLicensesViewController.m */; };
-		2DF6E3E51AC8964100B51EEC /* FXBlurView-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6E3E21AC8964100B51EEC /* FXBlurView-License.txt */; };
-		2DF6E3E61AC8964100B51EEC /* MBProgressHUD-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6E3E31AC8964100B51EEC /* MBProgressHUD-License.txt */; };
-		2DF6E3E71AC8964100B51EEC /* UAAppReviewManager-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6E3E41AC8964100B51EEC /* UAAppReviewManager-License.txt */; };
 		F4261DE81A873258000040B5 /* WFTwoColumnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DE71A873258000040B5 /* WFTwoColumnItem.m */; };
 		F4261DF11A87654A000040B5 /* WFDetailSingleItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4261DEF1A87654A000040B5 /* WFDetailSingleItemCell.m */; };
 		F4261DF21A87654A000040B5 /* WFDetailSingleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4261DF01A87654A000040B5 /* WFDetailSingleItemCell.xib */; };
@@ -175,6 +171,7 @@
 		2D1D82901AC0C165008F48C5 /* WFReviewViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFReviewViewCell.m; path = ViewControllers/Views/WFReviewViewCell.m; sourceTree = "<group>"; };
 		2D1D82941AC0C18E008F48C5 /* WFReviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFReviewItem.h; path = ViewControllers/Models/WFReviewItem.h; sourceTree = "<group>"; };
 		2D1D82951AC0C18E008F48C5 /* WFReviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFReviewItem.m; path = ViewControllers/Models/WFReviewItem.m; sourceTree = "<group>"; };
+		2D352EC91ACFCEF0001164D6 /* Licensing */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Licensing; sourceTree = "<group>"; };
 		2D3A162D1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFLocationSearchViewController.h; path = ViewControllers/WFLocationSearchViewController.h; sourceTree = "<group>"; };
 		2D3A162E1ABBFFBF00D6A0B5 /* WFLocationSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFLocationSearchViewController.m; path = ViewControllers/WFLocationSearchViewController.m; sourceTree = "<group>"; };
 		2D3A16331ABBFFE400D6A0B5 /* WFAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFAddressViewController.h; path = ViewControllers/WFAddressViewController.h; sourceTree = "<group>"; };
@@ -187,7 +184,6 @@
 		2D3A16461ABD760E00D6A0B5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		2D3A16481ABD761500D6A0B5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2D3A164A1ABD761B00D6A0B5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		2D3A164C1ABD762200D6A0B5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2D3A164E1ABD762900D6A0B5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2D3A16501ABD763000D6A0B5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		2D3A16521ABD763900D6A0B5 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -240,9 +236,6 @@
 		2DF6E3D91AC85E9C00B51EEC /* WFSegmentedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFSegmentedCell.m; path = ViewControllers/Views/WFSegmentedCell.m; sourceTree = "<group>"; };
 		2DF6E3DE1AC894B000B51EEC /* WFLicensesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFLicensesViewController.h; path = ViewControllers/WFLicensesViewController.h; sourceTree = "<group>"; };
 		2DF6E3DF1AC894B000B51EEC /* WFLicensesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFLicensesViewController.m; path = ViewControllers/WFLicensesViewController.m; sourceTree = "<group>"; };
-		2DF6E3E21AC8964100B51EEC /* FXBlurView-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FXBlurView-License.txt"; sourceTree = "<group>"; };
-		2DF6E3E31AC8964100B51EEC /* MBProgressHUD-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MBProgressHUD-License.txt"; sourceTree = "<group>"; };
-		2DF6E3E41AC8964100B51EEC /* UAAppReviewManager-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UAAppReviewManager-License.txt"; sourceTree = "<group>"; };
 		47422309BA50442679966331 /* Pods-Workify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.debug.xcconfig"; sourceTree = "<group>"; };
 		F4195F47C08CA42427BE3646 /* Pods-Workify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Workify/Pods-Workify.release.xcconfig"; sourceTree = "<group>"; };
 		F4261DE61A873258000040B5 /* WFTwoColumnItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFTwoColumnItem.h; path = ViewControllers/Models/WFTwoColumnItem.h; sourceTree = "<group>"; };
@@ -305,7 +298,7 @@
 		F446F75F1A8651AE0020EEA4 /* WFDetailedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFDetailedItem.m; path = ViewControllers/Models/WFDetailedItem.m; sourceTree = "<group>"; };
 		F446F7641A86889B0020EEA4 /* WFDetailedViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WFDetailedViewItem.h; path = ViewControllers/Models/WFDetailedViewItem.h; sourceTree = "<group>"; };
 		F446F7651A86889B0020EEA4 /* WFDetailedViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WFDetailedViewItem.m; path = ViewControllers/Models/WFDetailedViewItem.m; sourceTree = "<group>"; };
-		F45C0B921A83D93400E221EE /* Workfrom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workfrom.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F45C0B921A83D93400E221EE /* WorkOnGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkOnGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F45C0B961A83D93400E221EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F45C0B971A83D93400E221EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F45C0B991A83D93400E221EE /* WFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WFAppDelegate.h; sourceTree = "<group>"; };
@@ -420,7 +413,6 @@
 				2D3A16531ABD763900D6A0B5 /* libsqlite3.dylib in Frameworks */,
 				2D3A16511ABD763000D6A0B5 /* libz.dylib in Frameworks */,
 				2D3A164F1ABD762900D6A0B5 /* SystemConfiguration.framework in Frameworks */,
-				2D3A164D1ABD762200D6A0B5 /* StoreKit.framework in Frameworks */,
 				2D3A164B1ABD761B00D6A0B5 /* Security.framework in Frameworks */,
 				2D3A16491ABD761500D6A0B5 /* QuartzCore.framework in Frameworks */,
 				2D3A16471ABD760E00D6A0B5 /* MobileCoreServices.framework in Frameworks */,
@@ -501,16 +493,6 @@
 			path = Tooltips;
 			sourceTree = "<group>";
 		};
-		2DF6E3E11AC8964100B51EEC /* Licensing */ = {
-			isa = PBXGroup;
-			children = (
-				2DF6E3E21AC8964100B51EEC /* FXBlurView-License.txt */,
-				2DF6E3E31AC8964100B51EEC /* MBProgressHUD-License.txt */,
-				2DF6E3E41AC8964100B51EEC /* UAAppReviewManager-License.txt */,
-			);
-			path = Licensing;
-			sourceTree = "<group>";
-		};
 		53FA32878600D597530C5080 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,7 +500,6 @@
 				2D3A16521ABD763900D6A0B5 /* libsqlite3.dylib */,
 				2D3A16501ABD763000D6A0B5 /* libz.dylib */,
 				2D3A164E1ABD762900D6A0B5 /* SystemConfiguration.framework */,
-				2D3A164C1ABD762200D6A0B5 /* StoreKit.framework */,
 				2D3A164A1ABD761B00D6A0B5 /* Security.framework */,
 				2D3A16481ABD761500D6A0B5 /* QuartzCore.framework */,
 				2D3A16461ABD760E00D6A0B5 /* MobileCoreServices.framework */,
@@ -591,7 +572,7 @@
 		F45C0B931A83D93400E221EE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F45C0B921A83D93400E221EE /* Workfrom.app */,
+				F45C0B921A83D93400E221EE /* WorkOnGo.app */,
 				F45C0BAB1A83D93400E221EE /* WorkifyTests.xctest */,
 			);
 			name = Products;
@@ -731,7 +712,7 @@
 		F45C0BDB1A84791E00E221EE /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				2DF6E3E11AC8964100B51EEC /* Licensing */,
+				2D352EC91ACFCEF0001164D6 /* Licensing */,
 				2D1853171AB8A34B00404108 /* FXBlurView */,
 				2D1853161AB8A34B00404108 /* FXBlurView */,
 				F4261E541A88CEBA000040B5 /* SGActionView */,
@@ -961,7 +942,7 @@
 			);
 			name = Workify;
 			productName = Workify;
-			productReference = F45C0B921A83D93400E221EE /* Workfrom.app */;
+			productReference = F45C0B921A83D93400E221EE /* WorkOnGo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F45C0BAA1A83D93400E221EE /* WorkifyTests */ = {
@@ -988,12 +969,16 @@
 		F45C0B8A1A83D93400E221EE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "GAURAV SRIVASTAVA";
 				TargetAttributes = {
 					F45C0B911A83D93400E221EE = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = BRNDE8W3RV;
 						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -1030,17 +1015,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DF6E3E61AC8964100B51EEC /* MBProgressHUD-License.txt in Resources */,
 				F45C0C8B1A84791F00E221EE /* Lato-Light.ttf in Resources */,
 				F45C0BA11A83D93400E221EE /* Main.storyboard in Resources */,
-				2DF6E3E51AC8964100B51EEC /* FXBlurView-License.txt in Resources */,
 				2DF6E3D71AC7EAA100B51EEC /* WFReviewCell.xib in Resources */,
 				F45C0CAD1A84BC2700E221EE /* WFDaysTableViewCell.xib in Resources */,
 				F45C0BA61A83D93400E221EE /* LaunchScreen.xib in Resources */,
+				2D352ECA1ACFCEF0001164D6 /* Licensing in Resources */,
 				F45C0C881A84791F00E221EE /* flat-ui-icons-regular.ttf in Resources */,
 				F45C0C891A84791F00E221EE /* Lato-Bold.ttf in Resources */,
 				F45C0CB21A84C5EF00E221EE /* WFStepperTableViewCell.xib in Resources */,
-				2DF6E3E71AC8964100B51EEC /* UAAppReviewManager-License.txt in Resources */,
 				F45C0BA31A83D93400E221EE /* Images.xcassets in Resources */,
 				F4261DF71A87CE2E000040B5 /* WFTwoColumnViewCell.xib in Resources */,
 				F45C0D401A861C3600E221EE /* WFTagViewCell.xib in Resources */,
@@ -1198,7 +1181,6 @@
 				F4261DF61A87CE2E000040B5 /* WFTwoColumnViewCell.m in Sources */,
 				2D3A184E1ABDF8C000D6A0B5 /* WFIntroductionTooltipView.m in Sources */,
 				F4261E751A892C30000040B5 /* WFHourViewCell.m in Sources */,
-				2DF6E3CE1AC5486100B51EEC /* UIView+Animation.m in Sources */,
 				F45C0D0B1A85DA0900E221EE /* WFLocationsViewController.m in Sources */,
 				2D3A185E1ABF5E2F00D6A0B5 /* WFMapPin.m in Sources */,
 				2DF6E3E01AC894B000B51EEC /* WFLicensesViewController.m in Sources */,
@@ -1277,7 +1259,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1312,7 +1294,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1328,13 +1310,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/Users/ranjeet/Documents/FacebookSDK,
+					"/Users/ranjeet/Downloads/parse-library-1.7.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Workify/Workify_Prefix.pch;
 				INFOPLIST_FILE = Workify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = Workfrom;
+				PRODUCT_NAME = WorkOnGo;
 			};
 			name = Debug;
 		};
@@ -1347,13 +1330,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/Users/ranjeet/Documents/FacebookSDK,
+					"/Users/ranjeet/Downloads/parse-library-1.7.2",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Workify/Workify_Prefix.pch;
 				INFOPLIST_FILE = Workify/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = Workfrom;
+				PRODUCT_NAME = WorkOnGo;
 			};
 			name = Release;
 		};
@@ -1372,7 +1356,7 @@
 				INFOPLIST_FILE = WorkifyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfrom.app/Workfrom";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WorkOnGo.app/WorkOnGo";
 			};
 			name = Debug;
 		};
@@ -1387,7 +1371,7 @@
 				INFOPLIST_FILE = WorkifyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workfrom.app/Workfrom";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WorkOnGo.app/WorkOnGo";
 			};
 			name = Release;
 		};

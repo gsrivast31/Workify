@@ -25,6 +25,8 @@
 #import <MBProgressHUD.h>
 #import "UIImage+ResizeAdditions.h"
 
+#define INCLUDE_ALL_FIELDS 0
+
 @interface WFAddPlaceViewController () <RETableViewManagerDelegate, WFAddAddressDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, WFAddURLDelegate, MWPhotoBrowserDelegate, MBProgressHUDDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
@@ -41,6 +43,11 @@
 @property (strong, readwrite, nonatomic) RETextItem *websiteItem;
 @property (strong, readwrite, nonatomic) RETextItem *facebookItem;
 @property (strong, readwrite, nonatomic) RETextItem *twitterItem;
+
+@property (strong, readwrite, nonatomic) RESegmentedItem* locationTypeItem;
+@property (strong, readwrite, nonatomic) RELongTextItem *notesItem;
+
+#if INCLUDE_ALL_FIELDS
 
 @property (strong, readwrite, nonatomic) RELongTextItem *descItem;
 
@@ -63,7 +70,6 @@
 
 @property (strong, readwrite, nonatomic) RESegmentedItem *noiseItem;
 
-@property (strong, readwrite, nonatomic) RESegmentedItem* locationTypeItem;
 @property (strong, readwrite, nonatomic) WFOptionItem* openDaysItem;
 
 @property (strong, readwrite, nonatomic) WFOptionItem* foodItem;
@@ -73,11 +79,11 @@
 
 @property (strong, readwrite, nonatomic) RETableViewItem *photosCountItem;
 
-@property (strong, readwrite, nonatomic) RELongTextItem *notesItem;
-
 @property (strong, readwrite, nonatomic) NSMutableArray *photosArray;
 @property (strong, readwrite, nonatomic) NSMutableArray *photoUrlsArray;
 @property (strong, readwrite, nonatomic) NSMutableArray *allPhotosArray;
+
+#endif
 
 @end
 
@@ -88,9 +94,11 @@
     
     self.title = @"Suggest a place";
     
+#if INCLUDE_ALL_FIELDS
     self.photosArray = [[NSMutableArray alloc] init];
     self.photoUrlsArray = [[NSMutableArray alloc] init];
     self.allPhotosArray = [[NSMutableArray alloc] init];
+#endif
     
     self.manager = [[RETableViewManager alloc] initWithTableView:self.tableView delegate:self];
     self.manager[@"WFInputItem"] = @"WFInputViewCell";
@@ -102,7 +110,11 @@
     self.saveButton.backgroundColor = [UIColor colorWithRed:26.0/255.0 green:188.0/255.0 blue:156.0/255.0 alpha:0.8];
     [self.saveButton.titleLabel setFont:[UIFont iconFontWithSize:17]];
     [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+#if INCLUDE_ALL_FIELDS
     [self.saveButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+#else
+    [self.saveButton addTarget:self action:@selector(saveUnreviewed:) forControlEvents:UIControlEventTouchUpInside];
+#endif
     
     if(!self.navigationItem.leftBarButtonItem) {
         UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -119,17 +131,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
-- (NSNumber*)wifiSpeed:(NSString*)speedString {
-    double speed = [speedString doubleValue];
-    WFWifiSpeedUnit unit = self.wifiSpeedUnitItem.value;
-    if (unit == WFWifiSpeedKbps) {
-        speed = speed * 0.001f;
-    } else if (unit == WFWifiSpeedGbps) {
-        speed = speed * 1000.0f;
-    }
-    return [NSNumber numberWithDouble:speed];
-}
-
+#if INCLUDE_ALL_FIELDS
 - (void)save:(id)sender {
     NSArray* managerErrors = self.manager.errors;
     BOOL bInValid = [WFHelper isEmpty:self.websiteItem.value] && [WFHelper isEmpty:self.facebookItem.value] && [WFHelper isEmpty:self.twitterItem.value] && !self.addressItem.value;
@@ -171,8 +173,8 @@
     if (self.descItem.value) locationObj[kWFLocationAboutKey] = self.descItem.value;
     locationObj[kWFLocationWifiTypeKey] = [NSNumber numberWithInteger:self.wifiItem.value] ;
 
-    if (self.wifiDownloadItem.value) locationObj[kWFLocationWifiDownloadSpeedKey] = [self wifiSpeed:self.wifiDownloadItem.value];
-    if (self.wifiUploadItem.value) locationObj[kWFLocationWifiUploadSpeedKey] = [self wifiSpeed:self.wifiUploadItem.value];
+    if (self.wifiDownloadItem.value) locationObj[kWFLocationWifiDownloadSpeedKey] = [WFHelper wifiSpeedInMbps:self.wifiDownloadItem.value fromUnit:self.wifiItem.value];
+    if (self.wifiUploadItem.value) locationObj[kWFLocationWifiUploadSpeedKey] = [WFHelper wifiSpeedInMbps:self.wifiUploadItem.value fromUnit:self.wifiItem.value];
     
     if (self.dayPriceItem.value && self.weeklyPriceItem.value && self.monthlyPriceItem.value) {
         locationObj[kWFLocationPricingKey] = @{kPriceDayPassKey : self.dayPriceItem.value,
@@ -326,6 +328,7 @@
         }];
     });
 }
+#endif
 
 - (void)saveUnreviewed:(id)sender {
     NSArray* managerErrors = self.manager.errors;
@@ -354,17 +357,13 @@
     if (self.phoneItem.value) locationObj[kWFLocationPhoneKey] = self.phoneItem.value;
     locationObj[kWFLocationTypeKey] = [NSNumber numberWithInteger:self.locationTypeItem.value];
     
-    NSString* city = nil;
-    if (self.addressItem.value) {
-        locationObj[kWFLocationAddressKey] = self.addressItem.value;
-        city = [self.addressItem.value objectForKey:kAddressCity];
-    }
-    
     if (self.websiteItem.value) locationObj[kWFLocationWebsiteKey] = self.websiteItem.value;
     if (self.facebookItem.value) locationObj[kWFLocationFacebookKey] = self.facebookItem.value;
     if (self.twitterItem.value) locationObj[kWFLocationTwitterKey] = self.twitterItem.value;
     
     if (self.notesItem.value) locationObj[kWFLocationNotesKey] = self.notesItem.value;
+    
+    locationObj[kWFLocationUserKey] = [PFUser currentUser];
     
     __typeof (&*self) __weak weakSelf = self;
     
@@ -373,13 +372,13 @@
     [locationObj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self placeAdded:YES error:error];
+                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                [weakSelf placeAdded:YES error:error];
             });
         } else if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self placeAdded:NO error:error];
+                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                [weakSelf placeAdded:NO error:error];
             });
         }
     }];
@@ -436,6 +435,8 @@
     [self addAddressSection];
     [self addSocialWebSection];
     [self addLocationTypeSection];
+    
+#if INCLUDE_ALL_FIELDS
     [self addDescriptionSection];
     [self addWifiSection];
     [self addPricingSection];
@@ -446,6 +447,7 @@
     [self addSeatingSection];
     [self addAmenitiesSection];
     [self addPhotosButton];
+#endif
     [self addNotesSection];
 }
 
@@ -503,6 +505,7 @@
     [section addItem:self.twitterItem];
 }
 
+#if INCLUDE_ALL_FIELDS
 - (void)addDescriptionSection {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Description"];
     [self.manager addSection:section];
@@ -643,6 +646,7 @@
         [weakSelf viewPhotos];
     }]];
 }
+#endif
 
 - (void)addNotesSection {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@"Notes"];
@@ -653,6 +657,7 @@
     [section addItem:self.notesItem];
 }
 
+#if INCLUDE_ALL_FIELDS
 - (void)addPhotos {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Image Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Roll", @"URL", nil];
     
@@ -662,14 +667,6 @@
 - (void)viewPhotos {
     
     for (NSInteger i=0; i<_photosArray.count; i++) {
-        /*NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        if([paths count]) {
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            NSString *imagePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"/Images/%@.jpg", [_photosArray objectAtIndex:i]]];
-
-            MWPhoto* photo = [MWPhoto photoWithURL:[NSURL fileURLWithPath:imagePath]];
-            [_allPhotosArray addObject:photo];
-        }*/
         MWPhoto* photo = [MWPhoto photoWithImage:[_photosArray objectAtIndex:i]];
         [_allPhotosArray addObject:photo];
     }
@@ -698,6 +695,7 @@
     nc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:nc animated:YES completion:nil];
 }
+#endif
 
 #pragma mark - UITableViewDelegate
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -706,6 +704,8 @@
     }
     return NO;
 }
+
+#if INCLUDE_ALL_FIELDS
 
 #pragma mark Helpers
 - (void)updatePhotoCount {
@@ -720,6 +720,8 @@
     self.photosCountItem.title = countText;
     [cell.textLabel setText:countText];
 }
+
+#endif
 
 #pragma mark WFAddAddressDelegate
 
@@ -752,6 +754,8 @@
     }
 }
 
+#if INCLUDE_ALL_FIELDS
+
 #pragma mark UIImagePickerControllerDelegate
 
 - (void)promptForCamera {
@@ -779,21 +783,6 @@
     
     UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:navVC animated:YES completion:nil];
-}
-
-- (void) saveImage:(UIImage*)image {
-    
-    /*NSString * timeStamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-    NSString* filePath = [NSString stringWithFormat:@"image_%@", timeStamp];
-    
-    __weak typeof(self) weakSelf = self;
-    
-    [[WFMediaController sharedInstance] saveImage:image withFilename:filePath success:^{
-        [weakSelf.photosArray addObject:filePath];
-        [weakSelf updatePhotoCount];
-    } failure:^(NSError *error) {
-        
-    }];*/
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -865,6 +854,8 @@
     [_allPhotosArray removeAllObjects];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#endif
 
 #pragma mark Helper
 

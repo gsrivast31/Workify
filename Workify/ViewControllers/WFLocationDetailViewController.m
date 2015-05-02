@@ -246,6 +246,7 @@
     [self addHoursSection];
     [self addAmenitiesSection];
     [self addReportEditSection];
+    [self addLicenseSection];
     
     [self setPhotoCount];
     [self setReviewCount];
@@ -294,13 +295,33 @@
     [section addItem:self.generalItem];
 }
 
+- (NSString*)stringValueForKey:(NSString*)key{
+    NSArray* valueOptions = [self.locationObject objectForKey:key];
+    NSString* valueString = @"";
+    for (NSInteger i=0; i<valueOptions.count; i++) {
+        NSInteger val = [[valueOptions objectAtIndex:i] integerValue];
+        if([key isEqualToString:kWFLocationSeatingOptionsKey])
+            valueString = [valueString stringByAppendingFormat:@"%@, ", [WFStringStore seatingString:val]];
+        else if ([key isEqualToString:kWFLocationPowerOptionsKey])
+            valueString = [valueString stringByAppendingFormat:@"%@, ", [WFStringStore powerString:val]];
+        else if ([key isEqualToString:kWFLocationFoodOptionsKey])
+            valueString = [valueString stringByAppendingFormat:@"%@, ", [WFStringStore foodString:val]];
+    }
+    if ([valueString hasSuffix:@", "]) {
+        valueString = [valueString substringToIndex:valueString.length - 2];
+    }
+    return valueString;
+}
+
 - (void)addInfoSection {
     RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:@""];
     [self.manager addSection:section];
-    
-    NSString* aboutText = @"";
-    
+
     __typeof (&*self) __weak weakSelf = self;
+
+    /***********************************************************************************************************************/
+    //About
+    NSString* aboutText = @"";
     [section addItem:[WFDetailedItem itemWithTitle:@"About" subTitle:[self.locationObject objectForKey:kWFLocationAboutKey] placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"about" selectionHandler:^(RETableViewItem *item) {
         [weakSelf.tableView deselectRowAtIndexPath:item.indexPath animated:NO];
         WFDetailedItem* _item = (WFDetailedItem*)item;
@@ -309,9 +330,13 @@
         }
     }]];
 
+    /***********************************************************************************************************************/
+    //Location Type
     NSString* spaceString = [WFStringStore spaceTypeString:[[self.locationObject objectForKey:kWFLocationTypeKey] integerValue]];
     [section addItem:[WFDetailedItem itemWithTitle:@"Location Type" subTitle:spaceString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"locationtype"]];
     
+    /***********************************************************************************************************************/
+    //Wifi
     NSString* wifiString = @"Condition : ";
     wifiString = [wifiString stringByAppendingString:[WFStringStore wifiString:[[self.locationObject objectForKey:kWFLocationWifiTypeKey] integerValue]]];
     double wifiDwnldSpeed = [[self.locationObject objectForKey:kWFLocationWifiDownloadSpeedKey] doubleValue];
@@ -336,63 +361,38 @@
     } else {
         wifiString = [wifiString stringByAppendingFormat:@", %0.1f Mbps upload speed", wifiUpldSpeed];
     }
-
+    
     [section addItem:[WFDetailedItem itemWithTitle:@"WiFi" subTitle:wifiString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"wifi"]];
     
+    /***********************************************************************************************************************/
+    //Pricing
     NSString* priceUnit = [WFStringStore priceUnitString:[[self.locationObject objectForKey:kWFLocationPricingUnitKey] integerValue]];
     NSDictionary* priceDict = [self.locationObject objectForKey:kWFLocationPricingKey];
-    NSString* priceString = [NSString stringWithFormat:@"Day Pass - %@ %@, Weekly Pass - %@ %@, Monthly Pass - %@ %@", [priceDict objectForKey:kPriceDayPassKey], priceUnit, [priceDict objectForKey:kPriceWeekPassKey], priceUnit, [priceDict objectForKey:kPriceMonthPassKey], priceUnit];
+    
+    NSString* priceString = @"";
+    for (NSString* key in [priceDict allKeys]) {
+        priceString = [priceString stringByAppendingString:[NSString stringWithFormat:@"%@ - %@ %@\n", key, [priceDict objectForKey:key], priceUnit]];
+    }
+    
     [section addItem:[WFDetailedItem itemWithTitle:@"Pricing" subTitle:priceString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"pricing"]];
     
-    NSArray* powerOptions = [self.locationObject objectForKey:kWFLocationPowerOptionsKey];
-    NSString* powerString = @"";
-    for (NSInteger i=0; i<powerOptions.count; i++) {
-        NSInteger val = [[powerOptions objectAtIndex:i] integerValue];
-        powerString = [powerString stringByAppendingFormat:@"%@, ", [WFStringStore powerString:val]];
-/*        if ([[powerOptions objectAtIndex:i] boolValue] == TRUE) {
-            powerString = [powerString stringByAppendingFormat:@"%@, ", [WFStringStore powerString:i + 1]];
-        }*/
-    }
-    if ([powerString hasSuffix:@", "]) {
-        powerString = [powerString substringToIndex:powerString.length - 2];
-    }
+    /***********************************************************************************************************************/
+    //Power
+    [section addItem:[WFDetailedItem itemWithTitle:@"Power" subTitle:[self stringValueForKey:kWFLocationPowerOptionsKey] placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"power"]];
+
+    /***********************************************************************************************************************/
+    //Food
+    [section addItem:[WFDetailedItem itemWithTitle:@"Food" subTitle:[self stringValueForKey:kWFLocationFoodOptionsKey] placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"food"]];
     
-    [section addItem:[WFDetailedItem itemWithTitle:@"Power" subTitle:powerString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"power"]];
-    
-    NSArray* foodOptions = [self.locationObject objectForKey:kWFLocationFoodOptionsKey];
-    NSString* foodString = @"";
-    for (NSInteger i=0; i<foodOptions.count; i++) {
-        NSInteger val = [[foodOptions objectAtIndex:i] integerValue];
-        foodString = [foodString stringByAppendingFormat:@"%@, ", [WFStringStore foodString:val]];
-/*        if ([[foodOptions objectAtIndex:i] boolValue] == TRUE) {
-            foodString = [foodString stringByAppendingFormat:@"%@, ", [WFStringStore foodString:i + 1]];
-        }*/
-    }
-    if ([foodString hasSuffix:@", "]) {
-        foodString = [foodString substringToIndex:foodString.length - 2];
-    }
-    
-    [section addItem:[WFDetailedItem itemWithTitle:@"Food" subTitle:foodString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"food"]];
-    
+    /***********************************************************************************************************************/
+    //Noise
     NSString* noiseString = [WFStringStore noiseString:[[self.locationObject objectForKey:kWFLocationNoiseOptionsKey] integerValue]];
 
     [section addItem:[WFDetailedItem itemWithTitle:@"Noise" subTitle:noiseString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"noise"]];
     
-    NSArray* seatingOptions = [self.locationObject objectForKey:kWFLocationSeatingOptionsKey];
-    NSString* seatingString = @"";
-    for (NSInteger i=0; i<seatingOptions.count; i++) {
-        NSInteger val = [[seatingOptions objectAtIndex:i] integerValue];
-        seatingString = [seatingString stringByAppendingFormat:@"%@, ", [WFStringStore seatingString:val]];
-
-/*        if ([[seatingOptions objectAtIndex:i] boolValue] == TRUE) {
-            seatingString = [seatingString stringByAppendingFormat:@"%@, ", [WFStringStore seatingString:val]];
-        }*/
-    }
-    if ([seatingString hasSuffix:@", "]) {
-        seatingString = [seatingString substringToIndex:seatingString.length - 2];
-    }
-    
-    [section addItem:[WFDetailedItem itemWithTitle:@"Seating" subTitle:seatingString placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"seat"]];
+    /***********************************************************************************************************************/
+    //Seating
+    [section addItem:[WFDetailedItem itemWithTitle:@"Seating" subTitle:[self stringValueForKey:kWFLocationSeatingOptionsKey] placeHolder:@"No information has been added here. Please tap \"Report Edits\" below to send us information." imageName:@"seat"]];
 }
 
 - (void)addHoursSection {
@@ -431,10 +431,6 @@
         for (NSInteger i=0; i<amenitiesOptions.count; i++) {
             NSInteger val = [[amenitiesOptions objectAtIndex:i] integerValue];
             [amenitiesArray addObject:@{@"images":@{@"normal":@"check",@"disabled":@"check-disabled"},@"value":[WFStringStore amenitiesString:val]}];
-            
-/*            if ([[amenitiesOptions objectAtIndex:i] boolValue] == TRUE) {
-                [amenitiesArray addObject:@{@"images":@{@"normal":@"check",@"disabled":@"check-disabled"},@"value":[WFStringStore amenitiesString:i + 1]}];
-            }*/
         }
         
         [section addItem:[WFTwoColumnItem itemWithTitle:@"Amenities"
@@ -492,6 +488,11 @@
         navVC.navigationBarHidden = YES;
         [self presentViewController:controller animated:YES completion:nil];
     }
+}
+
+- (void)addLicenseSection {
+    RETableViewSection* section = [RETableViewSection sectionWithHeaderTitle:nil];
+    [section addItem:[WFDetailedItem itemWithTitle:nil subTitle:nil placeHolder:@"All images are copyright of the space owner." imageName:nil]];
 }
 
 #pragma mark RETableViewManagerDelegate

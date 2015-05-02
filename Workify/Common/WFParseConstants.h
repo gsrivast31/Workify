@@ -32,6 +32,7 @@ extern NSString *const kWFLocationClassKey;
 extern NSString *const kWFLocationIDKey;
 extern NSString *const kWFLocationCityKey;
 extern NSString *const kWFLocationNameKey;
+extern NSString *const kWFLocationUserKey;
 extern NSString *const kWFLocationCanonicalNameKey;
 extern NSString *const kWFLocationRatingsKey;
 extern NSString *const kWFLocationDisplayPhotoKey;

@@ -45,15 +45,19 @@
     webView.frame = self.view.frame;
     
     NSString *licenseText = @"";
-    NSArray *licenses = @[@"MBProgressHUD-License", @"UAAppReviewManager-License", @"Reachability-License", @"FXBlurView-License"];
-    for(NSString *license in licenses) {
-        NSString *bundlePath = [[NSBundle mainBundle] pathForResource:license ofType:@"txt"];
+    NSArray* licensePaths = [[NSBundle mainBundle] pathsForResourcesOfType:@"txt" inDirectory:@"Licensing"];
+//    NSArray *licenses = @[@"MBProgressHUD-License", @"UAAppReviewManager-License", @"Reachability-License", @"FXBlurView-License"];
+    for(NSString *bundlePath in licensePaths) {
+        //NSString *bundlePath = [[NSBundle mainBundle] pathForResource:license ofType:@"txt"];
         if(bundlePath) {
-            NSError *error = nil;
-            NSString *contents = [NSString stringWithContentsOfFile:bundlePath encoding:NSUTF8StringEncoding error:&error];
-            if(!error) {
-                licenseText = [licenseText stringByAppendingFormat:@"<h2>%@</h2>", [license stringByReplacingOccurrencesOfString:@"-License" withString:@""]];
-                licenseText = [licenseText stringByAppendingFormat:@"<p>%@</p>", contents];
+            NSString* fileName = [[bundlePath componentsSeparatedByString:@"/"] lastObject];
+            if (fileName) {
+                NSError *error = nil;
+                NSString *contents = [NSString stringWithContentsOfFile:bundlePath encoding:NSUTF8StringEncoding error:&error];
+                if(!error) {
+                    licenseText = [licenseText stringByAppendingFormat:@"<h2>%@</h2>", [fileName stringByReplacingOccurrencesOfString:@"-License.txt" withString:@""]];
+                    licenseText = [licenseText stringByAppendingFormat:@"<p>%@</p>", contents];
+                }
             }
         }
     }

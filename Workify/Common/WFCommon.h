@@ -14,11 +14,11 @@
 #import "WFEnumConstants.h"
 #import "WFCredentials.h"
 
-static NSString* const APP_NAME = @"Workfrom";
+static NSString* const APP_NAME = @"WorkOnGo";
 static NSString* const APP_ID = @"979220877";
 static NSString* const APP_URL = @"https://itunes.apple.com/app/id/id979220877";
 
-static NSString* const kErrorDomain = @"com.memoir.workfrom";
+static NSString* const kErrorDomain = @"com.memoir.workongo";
 
 static NSString * const kHasSeenStarterTooltip = @"kHasSeenStarterTooltip";
 

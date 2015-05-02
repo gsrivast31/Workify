@@ -16,16 +16,17 @@ PODS:
     - MZFormSheetController/Core (= 3.0.2)
   - MZFormSheetController/Core (3.0.2):
     - MZAppearance (~> 1.1.3)
-  - Parse (1.7.0):
+  - Parse (1.7.2):
     - Bolts (~> 1.1)
-  - ParseCrashReporting (1.7.0):
-    - Parse (~> 1.7.0)
-  - ParseFacebookUtils (1.7.0):
+  - ParseCrashReporting (1.7.2):
+    - Bolts (~> 1.1)
+    - Parse (~> 1.7.2)
+  - ParseFacebookUtils (1.7.2):
+    - Bolts (~> 1.1)
     - Facebook-iOS-SDK (~> 3.23)
-    - Parse (~> 1.7.0)
-  - ParseUI (1.1.1):
-    - Parse (~> 1.6)
-    - ParseFacebookUtils (~> 1.6)
+    - Parse (~> 1.7.2)
+  - ParseUI (1.1.3):
+    - Parse (~> 1.7)
   - PSTCollectionView (1.2.3)
   - REFormattedNumberField (1.1.5)
   - REFrostedViewController (2.4.7)
@@ -55,25 +56,25 @@ DEPENDENCIES:
   - UAAppReviewManager (~> 0.2.1)
 
 SPEC CHECKSUMS:
-  Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
-  DACircularProgress: 3b41941891a56dc6aa17971f5322a9a38a6f446e
-  Facebook-iOS-SDK: 89dae50e975ebab95a01b0962d27277fc9cf08fd
-  Masonry: 2cb49fd14d203d2db5ca6bb017135b235dde9980
-  MBProgressHUD: f3747dcbd45a9e855a6b0674550651e0b7ed250c
-  MWPhotoBrowser: be05b3b7521e961382a4ba5579685bf5a00b93d8
-  MZAppearance: c88502c0c2345120630c34e09d5ff09e2969ba30
-  MZFormSheetController: 45415dc22445f3adeb093e0ad654c9eacab6ba06
-  Parse: 3c2d4e6ade7b59d31c0bc8106340c6b81b31bc0f
-  ParseCrashReporting: 9118391db9867e693bb6a8fb45000a95fab09681
-  ParseFacebookUtils: f0c954253a65e945d7cb73400c33bc661f516b85
-  ParseUI: f7e9e0e5271f75a19c74ead8fdd95d36160e268e
-  PSTCollectionView: d9f466e4554cc83260ca9bde7beb27f308e8fd76
-  REFormattedNumberField: 86318c549b60130a6d7a05abebb142f08f671319
-  REFrostedViewController: 08870a24788191339608b80b2bd4fce549858f0d
-  RETableViewManager: 62cab967dd2d24545283cf4751e94c222268533a
-  REValidation: a0033a582415848854e875dfcbe69c107de19f81
+  Bolts: f8e2f94edbf9fec7bb8de5ecaaa3aa6b7de6f64e
+  DACircularProgress: 0f92b77239d5f3c612fc66185e2998391ac8e054
+  Facebook-iOS-SDK: d5a50d5ac6b1da948fd98c18dd8beeae854f2b3e
+  Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MWPhotoBrowser: 2531e682860d62b8a7ba8659de02eb9040e431e5
+  MZAppearance: c2937318234fd782e900fb178942278881ac5490
+  MZFormSheetController: 0cfda6f341a7c6d9054d596efad735a9fc0e7a1b
+  Parse: e1959adb9fe2fcd4736dac20b3ac691d47a4f06c
+  ParseCrashReporting: 794a166ff1ce4d7c671ffb7fd86f381b806bddb7
+  ParseFacebookUtils: 26f436ad7da9fc39acb4784c01cfcef0ea3a9709
+  ParseUI: 1a68e9cebc3bd458eed9605ce7b33d7cc082f473
+  PSTCollectionView: 6749df92885353521f55279a7ce2b293762e2be4
+  REFormattedNumberField: be3d55dd709f65541fb26b7e1709da07903147f8
+  REFrostedViewController: 0adda479a71c0e603faa801282994bee23362504
+  RETableViewManager: 317f43f31c0a5818c6257cb7544167819a8ae170
+  REValidation: 38c4de1be58455f8b00aab208ac80db316a66b7f
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
-  SKTagView: cceb704dc8cbc131217cbdfe9397c359c8403046
-  UAAppReviewManager: f23428de9c9cd242c2ffd899e218ba3620bd0683
+  SKTagView: 9e3d624e911f43d6c19054bfbfcac05568330358
+  UAAppReviewManager: 334bdb0085c3f80c7b696f33edc53667eda548e6
 
 COCOAPODS: 0.35.0

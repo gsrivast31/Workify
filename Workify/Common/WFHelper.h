@@ -11,5 +11,6 @@
 + (BOOL) isLoggedIn;
 + (NSString*) commaSeparatedString:(NSArray*)array;
 + (BOOL)isEmpty:(NSString*)string;
++ (NSNumber*)wifiSpeedInMbps:(NSString*)speedString fromUnit:(WFWifiSpeedUnit)unit;
 
 @end

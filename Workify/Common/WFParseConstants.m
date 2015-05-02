@@ -30,6 +30,7 @@ NSString *const kWFLocationClassKey = @"Location";
 // Field keys
 NSString *const kWFLocationCityKey = @"city";
 NSString *const kWFLocationNameKey = @"name";
+NSString *const kWFLocationUserKey = @"user";
 NSString *const kWFLocationCanonicalNameKey = @"canonicalName";
 NSString *const kWFLocationRatingsKey = @"ratings";
 NSString *const kWFLocationDisplayPhotoKey = @"displayPhoto";
